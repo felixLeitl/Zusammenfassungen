@@ -207,6 +207,25 @@
 		Ein einfacher Graph $G=(V,E)$ heißt bipartit, falls sich seine Knoten in zwei disjunkten Teilmengen $A$ und $B$ aufteilen lassen, sodass zwischen den Knoten innerhalb beider Teilmengen keine Kanten verlaufen
 	\subsubsection{Zusammenhängende Digraphen}
 		Digraph $G=(V,E)$ heißt stark zusammenhängend, falls für je zwei Knoten $u,v\in V$ gilt: Es gibt einen einfachen Weg von $u$ nach $v$ und von $v$ nach $u$. Falls $G$ ungerichtet zusammenhängend ist, ist G schwach zusammenhängend
+	\subsubsection{Netzwerke}
+		Ein gerichtetes Netzwerk $N=(V,E,c)$ besteht aus einem gerichtetem Graphen $G=(V,E)$ und einer Kapazitätsfunktion $c:E\to \R^+$ so wie zwei dedizierten Knoten $s,t\in V$, genannt die Quelle $s$ und die Senke $t$
+	\subsubsection{Fluss}
+		Es sei $G=(V,E)$ ein gerichteter Graph, $c:E\to \R^+$ eine Kapazitätsfunktion, $s\in V$ die Quelle und $t\in V$ die Senke. Ein Fluss $F$ in $G$ ist eine Funktion $f:VxV\to \R$ die folgende Eigenschaften erfüllt:
+			\begin{enumerate}
+			  \item Kapazitätsbegränzung 
+			  	$$
+			  		\forall u,v\in V \text{ gilt } 0\leq f(u,v)\leq c(u,v)
+			  	$$
+			  	Fluss positiv und höchstens so groß wie die Kapazität
+			  	\item Flusserhaltung
+			  	$$
+			  		\forall u\in V-\{s,t\}, \text{ gilt } \displaystyle\sum_{v \in V}f(v,u)=\displaystyle\sum_{v\in V}f(u,v)
+			  	$$
+			  	Der gesamte Fluss in einem Knoten (ohne $s,t$) muss genauso groß sein wie der gesamte Fluss aus diesem Knoten ''Flow in = Flow out'' 
+			\end{enumerate}
+			\subsubsection{Größe des Flusses}
+			Die Größe des ist definiert als die Summe aller Flüsse von der Quelle in den Knoten $v$ minus die Summe aller Flüsse von dem Knoten $v$ zur Quelle
+
 	\subsection{Algorithmen}
 	\subsubsection{Breitensuche}
 		Idee: 
@@ -235,7 +254,35 @@
 		\end{itemize}
 		Laufzeit: $\Theta(|V|^3)$
 	\subsubsection{Page Rank}
-	
+	Idee: 
+	\begin{itemize}
+	  \item Initial ist $r=[\frac{1}{n},...,\frac{1}{n}]^T$
+	  \item Wir multiplizieren $r$ nun solange mit $M^T$ bis wir das Ergebnis gut genug approximiert haben
+	\end{itemize}
+	$$
+		r_j=\displaystyle\sum_{i\to j}\beta\frac{r_i}{d_i}+(1-\beta)\frac{1}{n}+(\displaystyle\sum_{i\in D}\beta\frac{r_i}{n})
+	$$
+	Wobei $r$ der Pagrank, $d$ der Ausgangsgrad, $\beta$ die Sprungwahrscheinlichkeit, $n$ die Anzahl der Knoten und $D$ die Menge der dead ends ist
+	\subsubsection{Kruskal}
+	Idee: Wähle $n-1$ Kanten mit minimalem Gewicht aus, sodass kein Kreis entsteht:
+	\begin{itemize}
+	  \item Beginne mit leerer Kantenmenge
+	  \item Füge die günstigste Kante hinzu, die keinen Kreis verursacht
+	\end{itemize}
+	\subsubsection{Prim}
+	Idee: Wähle $n-1$ Kanten mit minimalem Gewicht aus, sodass alle Knoten zusammenhängend sind:
+	\begin{itemize}
+	  \item Wähle eine beliebigen Startknoten $s$
+	  \item Füge die günstigste Kante hinzu, die einen neuen Knoten zur Zusammenhangskomponente von $s$ hinzu
+	\end{itemize}
+	\subsubsection{Rückwärts Kruskal}
+	Idee: Entferne $m-n+1$ Kanten mit maximalem Gewicht, sodass alle Knoten zusammenhängen bleiben:
+	\begin{itemize}
+	  \item Zu Beginn alle Kanten im Graph
+	  \item Entferne teuerste Kante, sodass alle Knoten zusammenhängend bleiben
+	\end{itemize}
+
+
 \end{document}
 
 

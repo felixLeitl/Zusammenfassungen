@@ -1,0 +1,84 @@
+	\section{Sortieren}
+	\subsection{Definitionen}
+	Damit die Elemente sortiert werden können muss eine Ordungsrelation vorhanden sein: \newline \newline
+	Es sei $R\subseteq AxA$ eine binäre Relation auf der Menge A.
+	\begin{itemize}
+		\item $R$ heißt Quasiordnung auf $A$ genau dann wenn $R$ reflexiv und transitiv ist
+		\item $R$ heißt partielle Ordnung auf $A$ genau dann, wenn $R$ transitiv, reflexiv und antisymmetrisch ist
+		\item $R$ auf $A$ heißt lineare Ordnung oder Totalordnung genau dann, wenn zusätzlich gilt: $\forall a, b\in A:R(a, b)\lor R(b, a)$
+	\end{itemize}
+	Ist $R$ eine Relation des Typs 1-3, schreibt man meist $a\leq_Rb$ oder $a\leq b$ \newline
+	Wir betrachten ebenfalls sogenannte strikte Ordnungen bei denen ein Element niemals mit sich selbst in Relation  stehen darf. \newline \newline
+	Es sei $R\subseteq AxA$ eine binäre Relation auf der Menge $A$.
+	\begin{itemize}
+	  \item $R$ heißt partielle Ordnung auf $A$ wenn $R$ irreflexiv und transitiv ist
+	  \item $R$ auf $A$ heißt strikte Ordnung genau dann, wenn zusätzlich gilt: \newline
+	  		$\forall a\not= b\in A:R(a,b)\lor R(b,a)$
+	\end{itemize} 
+	Für Sortierverfahren braucht es eine strenge schwache Ordnung: \newline \newline
+	Es sei $R\subseteq AxA$ eine binäre Relation auf der Menge $A$. $R$ ist eine strenge schwache Ordnung wenn $R$ eine strikte Ordnung und diese zusätzlich negativ transitiv ist.
+	\newpage
+	\subsection{Vergleichsbasierte Algorithmen}
+	Brauchen im worst-case immer mindestens $\log(n!)=\Theta(n\log(n))$ Vergleiche
+	\subsubsection{Insertionsort}
+	Idee: Füge das aktuelle Element an die richtige Position im sortierten Teil ein \newline \newline
+	Best case: $\BigO(n)$ \newline
+	Worst case: $\BigO(n^2)$
+	\subsubsection{Bogosort}
+	Idee: wähle eine zufällige Permutation und überprüfe, ob diese sortiert ist \newline \newline
+	Best case: $\BigO(n)$ \newline
+	Average case: $\BigO(e-1)n!$ \newline
+	Worst case: $\BigO(n\cdot n!)$
+	\subsubsection{Slowsort}
+	Idee: Verzögere die Sortierung so lange es geht \newline \newline
+	Best case: $\BigO(n\frac{\log(n)}{2+e})$ \newline
+	Average case: $\BigO(n\frac{\log(n)}{2+e})$ \newline
+	Worst case:$\BigO(n\frac{\log(n)}{2+e})$
+	\subsubsection{Bubblesort}
+	Idee: Das kleinste Element steigt wie eine Blase auf, dabei werden die Elemente paarweise verglichen \newline \newline
+	Best case: $\BigO(n)$ \newline
+	Worst case: $\BigO(n^2)$
+	\subsubsection{Mergesort}
+	Idee: Slowsort ist so langsam, weil es brauchbare Zwischenergebnisse ignoriert. Anstatt nur die beiden  letzten Elemente der über Rekursion erhaltenen sortierten Teile zu vergleichen, fügt man die Teile zusammen, wobei man die Sortierung erhält \newline \newline
+	Rekurrenzgleichung: $T(n)=2\cdot T(\frac{n}{2}+\Theta(n))$ \newline
+	Daraus folgt mit dem Mastertheorem (2. Fall): $T(n)=\Theta(n\log n)$
+	\subsubsection{Selectionsort}
+	Idee: Selectionsort sucht für die aktuelle Position das geeignete Element, nämlich  das kleinste (bzw. größte) im unsortierten Teil \newline \newline
+	Laufzeit: $\Theta(n^2)$
+	\subsubsection{Heapsort}
+	Idee: Nutzte max-heap.Eigenschaft eines Heaps, da Maximum an erster Stelle \newline \newline
+	Laufzeit: $\BigO(n\log n$ 
+	\subsubsection{Quicksort}
+	Idee: 
+	\begin{itemize}
+	  \item Divide: teile an Pivotelement in linke Hälfte, rechte Hälfte und Pivotelement, nach Partitionsschritt
+	  \item Conquer: rekursiv auf Hälften anwenden
+	  \item Combine: Zusammenfügen der einzelnen Elemente
+	\end{itemize}
+	Worst case: $\Theta(n^2)$ \newline
+	Best case: $\Theta(n\log n)$
+	\subsection{Nicht vergleichsbasierte Algorithmen}
+	Durch lösen von der Beschränkung auf Vergleiche schneller werden
+	\subsubsection{Bucketsort}
+	Idee: 
+	\begin{enumerate}
+	  \item Bucketsort nimmt an, dass die Elemente des zu sortierenden Arrays A im Intervall $[0,1)$ gleich verteilt sind
+	  \item Bucketsort teilt das Intervall $[0,1)$ in $n$ (Länge von A) gleich große Teilintervalle ("Buckets")
+	  \item Anschließend werden die $n$ Elemente von $A$ in die Buckets verteilt
+	  \item Nichtleere Buckets werden sortiert
+	  \item Anschließend wird das Ergebnis aus den Buckets zusammengestzt
+	\end{enumerate}
+	Best case: $\Theta(n)$ \newline
+	Average case: $\Theta(n)$ \newline
+	Worst case: $\Theta(n^2)$
+	\subsubsection{Countingsort}
+	Idee: 
+	\begin{itemize}
+	  \item Nimmt an, dass jedes der $n$ Elemente des zu sortierenden Arrays $A$ eine Ganzzahl zwischen $0$ und $k$ ist
+	  \item Für jedes Element $x$ aus dem Array $A$ wird zunächst die Anzahl an Elementen bestimmt, die $\leq x$ sind
+	  \item Diese Information wird dann genutzt um das Element $x$ direkt an seine richtige Position im sortierten Array zu plazieren
+	\end{itemize}
+	Laufzeit: $\Theta(n+k)$
+	\subsubsection{Radixsort}
+	Idee: Sortiere die Elemente im sortierenden Array $A$ Ziffer für Ziffer, beginne bei Least Significant Digit \newline \newline
+	Laufzeit: $\Theta(d\cdot(n+k))$ für $n$ $d$-stellige Zahlen

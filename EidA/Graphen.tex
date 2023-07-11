@@ -1,0 +1,103 @@
+\section{Graphen}
+	\subsection{Definitionen}
+	\subsubsection{Graph}
+		Sei $V=\{v_1,...,v_n\}$ eine endliche Menge und $E\subseteq P_2(V)=\{\{u,v\}|u,v\in V,u\not = v\}$. Dann heißt das geordnete Paar $G=(V,E)$ (endlicher, schlichter, ungerichteter) Graph, wobei $V$ die Knotenmenge und $E$ die Kantenmenge von $G$ ist. Ist $e=\{u,v\}\in E$ so sind $u$ und $v$ benachbart (adjazent). $e=\{u,v\}$ oder auch $u-v$ ist dabei eine Kante 
+	\subsubsection{Vollständiger Graph}
+		Ein Graph heißt vollständig, wenn jede Ecke mit jeder anderen Ecke durch genau eine Kante verbunden ist. $K_n$ bezeichnet den vollständigen Graphen mit $n$ Ecken
+	\subsubsection{Grad}
+		Der Grad eines Knoten in $G=(V,E)$ ist die Anzahl an benachbarten Knoten. Der Grad eines Graphen entspricht dem maximalen Grad eines enthaltenen Knotens
+	\subsubsection{Regulärer Grad}
+		Ein Graph heißt regulär, wenn alle Knoten des Graphen den gleichen Grund haben
+	\subsubsection{Teilgraph}
+		Seien $G$ und $H$ Graphen. $H$ heißt Teilgraph $A$ von $G$, falls $V(H)\subseteq V(G)$ und $E(H)\subseteq E(G)$ gilt
+	\subsubsection{Wege und Kreise}
+		Ein Weg (auch Pfad genannt) ist eine Folge von Kanten. Ein einfacher Weg besucht keine Knoten doppelt. Ein Kreis ist ein einfacher Weg, wobei Anfangs- und Endknoten äquivalent sind. Ein einfacher Kreis besucht keine Knoten mehrfach
+		\newpage
+	\subsubsection{Kürzeste Distanz}
+		Sei $G=(V,E)$ ein Graph und seien $u,v\in V$ Knoten. Die kürzeste Distanz $\delta(u,v)$ von Knoten $u$ nach Knoten $v$ ist die minimale Anzahl an Knoten in einem Pfad von $u$ nach $v$. Wenn kein Pfad von $u$ nach $v$ existiert, so ist $\delta(u,v)=\infty$. Ein Pfad $\delta(u,v)$ vom $u$ nach $v$ wird als kürzester Pfad bezeichnet
+	\subsubsection{Zusammenhängend}
+		Graph $G=(V,E)$ heißt zusammenhängend, falls zwischen je zwei Knoten $u,v\in V$ ein Weg existiert
+	\subsubsection{Wald}
+		Graph $G=(V,E)$ ist ein Wald, falls $G$ keine einfachen Kreise enthält
+	\subsubsection{Baum}
+		Graph $G=(V,E)$ ist ein Wald, falls G ein zusammenhängender Wald ist
+	\subsubsection{Disjunktionen}
+		Zwei Graphen sind disjunkt, wenn es keine Weg von dem einen in den anderen gibt. Zwei Wege sind disjunkt, wenn es keinen Knoten gibt, der in beiden enthalten ist
+	\subsubsection{Bipartierter Graph}
+		Ein einfacher Graph $G=(V,E)$ heißt bipartit, falls sich seine Knoten in zwei disjunkten Teilmengen $A$ und $B$ aufteilen lassen, sodass zwischen den Knoten innerhalb beider Teilmengen keine Kanten verlaufen
+	\subsubsection{Zusammenhängende Digraphen}
+		Digraph $G=(V,E)$ heißt stark zusammenhängend, falls für je zwei Knoten $u,v\in V$ gilt: Es gibt einen einfachen Weg von $u$ nach $v$ und von $v$ nach $u$. Falls $G$ ungerichtet zusammenhängend ist, ist G schwach zusammenhängend
+	\subsubsection{Netzwerke}
+		Ein gerichtetes Netzwerk $N=(V,E,c)$ besteht aus einem gerichtetem Graphen $G=(V,E)$ und einer Kapazitätsfunktion $c:E\to \R^+$ so wie zwei dedizierten Knoten $s,t\in V$, genannt die Quelle $s$ und die Senke $t$
+	\subsubsection{Fluss}
+		Es sei $G=(V,E)$ ein gerichteter Graph, $c:E\to \R^+$ eine Kapazitätsfunktion, $s\in V$ die Quelle und $t\in V$ die Senke. Ein Fluss $F$ in $G$ ist eine Funktion $f:VxV\to \R$ die folgende Eigenschaften erfüllt:
+			\begin{enumerate}
+			  \item Kapazitätsbegränzung 
+			  	$$
+			  		\forall u,v\in V \text{ gilt } 0\leq f(u,v)\leq c(u,v)
+			  	$$
+			  	Fluss positiv und höchstens so groß wie die Kapazität
+			  	\item Flusserhaltung
+			  	$$
+			  		\forall u\in V-\{s,t\}, \text{ gilt } \displaystyle\sum_{v \in V}f(v,u)=\displaystyle\sum_{v\in V}f(u,v)
+			  	$$
+			  	Der gesamte Fluss in einem Knoten (ohne $s,t$) muss genauso groß sein wie der gesamte Fluss aus diesem Knoten ''Flow in = Flow out'' 
+			\end{enumerate}
+			\subsubsection{Größe des Flusses}
+			Die Größe des ist definiert als die Summe aller Flüsse von der Quelle in den Knoten $v$ minus die Summe aller Flüsse von dem Knoten $v$ zur Quelle
+
+	\subsection{Algorithmen}
+	\subsubsection{Breitensuche}
+		Idee: 
+		\begin{itemize}
+		  \item Breitensuche arbeitet iterativ und läuft Level für Level durch den Graphen
+		  \item Level für Level bedeutet intuitiv, dass, gegeben ein Startknoten, sich der Algorithmus erst alle Nachbarn des Startknoten anschaut, bevor er die Nachbarn der Nachbarn anschaut, usw.
+		\end{itemize}
+		Laufzeit: $\BigO(|V|+|E|)$
+	\subsubsection{Tiefensuche}
+		Idee: Tiefensuche arbeitet im Gegensatz zur Breitensuche nicht Level für Level, sondern steigt immer so weit es geht in die Tiefe
+	\subsubsection{Dijkstra}
+		Idee:
+		\begin{itemize}
+		  \item Generalisiert BFS für gewichtete Graphen
+		  \item Relaxierugn: Die Pfadlänge zu einem Knoten wird geschätzt und während des Durchlaufs aktualisiert 
+		  \item Initial werden die Kosten der nicht zu erreichenden Knoten auf sehr hohe Werte gesetzt (für den Startknoten auf 0) 
+		  \item Die Relaxoerung wird so lange. durchgeführt, bis keine Aktualisierung mehr möglich ist
+		\end{itemize}
+		Laufzeit: $\BigO(|V|^2+|E|)$
+	\subsubsection{Floyd-Warshall}
+		Idee:
+		\begin{itemize}
+		  \item Dynamische Programierung
+		  \item Wähle einen Knoten $v$ aus und betrachte ob es über $v$ einen kürzeren Weg zwischen allen andern Knotenpaaren gibt: Aktualisiere gegebenenfalls 
+		  \item Wiederhole dies für alle Knoten
+		\end{itemize}
+		Laufzeit: $\Theta(|V|^3)$
+	\subsubsection{Page Rank}
+	Idee: 
+	\begin{itemize}
+	  \item Initial ist $r=[\frac{1}{n},...,\frac{1}{n}]^T$
+	  \item Wir multiplizieren $r$ nun solange mit $M^T$ bis wir das Ergebnis gut genug approximiert haben
+	\end{itemize}
+	$$
+		r_j=\displaystyle\sum_{i\to j}\beta\frac{r_i}{d_i}+(1-\beta)\frac{1}{n}+(\displaystyle\sum_{i\in D}\beta\frac{r_i}{n})
+	$$
+	Wobei $r$ der Pagrank, $d$ der Ausgangsgrad, $\beta$ die Sprungwahrscheinlichkeit, $n$ die Anzahl der Knoten und $D$ die Menge der dead ends ist
+	\subsubsection{Kruskal}
+	Idee: Wähle $n-1$ Kanten mit minimalem Gewicht aus, sodass kein Kreis entsteht:
+	\begin{itemize}
+	  \item Beginne mit leerer Kantenmenge
+	  \item Füge die günstigste Kante hinzu, die keinen Kreis verursacht
+	\end{itemize}
+	\subsubsection{Prim}
+	Idee: Wähle $n-1$ Kanten mit minimalem Gewicht aus, sodass alle Knoten zusammenhängend sind:
+	\begin{itemize}
+	  \item Wähle eine beliebigen Startknoten $s$
+	  \item Füge die günstigste Kante hinzu, die einen neuen Knoten zur Zusammenhangskomponente von $s$ hinzu
+	\end{itemize}
+	\subsubsection{Rückwärts Kruskal}
+	Idee: Entferne $m-n+1$ Kanten mit maximalem Gewicht, sodass alle Knoten zusammenhängen bleiben:
+	\begin{itemize}
+	  \item Zu Beginn alle Kanten im Graph
+	  \item Entferne teuerste Kante, sodass alle Knoten zusammenhängend bleiben
+	\end{itemize}

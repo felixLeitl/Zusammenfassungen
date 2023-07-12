@@ -45,8 +45,35 @@
 			\end{enumerate}
 			\subsubsection{Größe des Flusses}
 			Die Größe des ist definiert als die Summe aller Flüsse von der Quelle in den Knoten $v$ minus die Summe aller Flüsse von dem Knoten $v$ zur Quelle
-
-	\subsection{Algorithmen}
+			\subsubsection{Residual-Kapazität}
+			Gegebne sei ein Flussnetzwerk $N=(V,E,c)$ mit Quelle $s$, Senke $t$ und Fluss $f$. Betrachte zwei Knoten $u,v\in V$, für diese definieren wir die Restkapazität (auch Residual-Kapazität): \newline
+				$$
+					c_f(u,v)=\begin{cases}
+						c(u,v)-f(u,v) & \text{ falls } (u,v)\in E \\
+						f(u,v) & \text{ falls } (v,u) \in E \\
+						0 & \text{ sonst }
+					\end{cases}
+				$$
+				\subsubsection{Residual-Netzwerk}
+				Gegeben sei ein Flussnetzwerk $N=(V,E,c)$ und ein Fluss $f$. Das Residual-Netzwerk $N_f=(V,E_f,c_f)$ von $N$, welches durch Fluss $f$ aufgespannt wird, ist definiert als:
+				$$
+					E_F=\{(u,v)\in VxV:c_f(u,v)>0\}
+				$$
+				\subsubsection{Flusserweiterung}
+				Es sei $f$ ein Fluss in $N$ und $N_f$ das zugehörige Residual-Netzwerk. Mit $f\uparrow f'$ bezeichnen wir die Erweiterung des Flusses $f$ um $f'$ als Funktion $VxV\to \R$, definiert durch:
+				$$
+					(f\uparrow f')(u,v)\begin{cases}
+							f(u,v)+f'(u,v')-f'(v,u), & \text{ falls } (u,v)\in E \\
+							0 & \text{ sonst}
+						\end{cases}
+				$$
+				\subsubsection{Erweiternder Pfad}
+				Es sei $N=(V,E,c)$ ein Flussnetzwerk mit Quelle $s$, Senke $t$ und $f$ ein Fluss in $N$. Ein erweiternder Pfad ist ein Fluss von $s$ zu $t$ in $N_f$
+				\subsubsection{Cut}
+					Ein Cut$(S,T)$ eines Flussnetzwerks $N=(V,E,c)$ ist eine Partition von $V$ in $S$ und $T$, sodass $s\in S$ und $t\in T$
+				\subsubsection{Minimaler Cut}
+				Es sei $N=(V,E,c)$ ein Flussnetzwerk und $(S,T)$ ein Cut. Falls $f$ ein Fluss ist, dann ist der Netzfluss $f(S,T)$ durch den Cut $(S,T)$ definiert als $f(S,T)=\displaystyle\sum_{u\in S}\displaystyle\sum_{v\in T}f(u,v)-displaystyle\sum_{u\in S}\displaystyle\sum_{v\in T}f(v,u)$. Mit $c(S,T)=displaystyle\sum_{u\in S}\displaystyle\sum_{v\in T}c(u,v)$ bezeichnen wir die Kapazität des Cuts $(S,T)$. Ein Minimum-Cut eines Netzwerks ist ein Cut mit minimalerKapazität über alle Cuts im Netzwerk
+				\subsection{Algorithmen}
 	\subsubsection{Breitensuche}
 		Idee: 
 		\begin{itemize}
@@ -101,3 +128,6 @@
 	  \item Zu Beginn alle Kanten im Graph
 	  \item Entferne teuerste Kante, sodass alle Knoten zusammenhängend bleiben
 	\end{itemize}
+	\subsubsection{Ford-Fulkerson}
+	Idee: Der maximale Fluss kann gefunden werden, wen der Fluss im Flussnetzwerk immer wieder durch erweiternde Pfade in $N_f$ erweitert wird
+

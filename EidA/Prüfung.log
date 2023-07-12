@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.7.8)  12 JUL 2023 00:15
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.7.8)  12 JUL 2023 14:54
  system commands enabled.
  file:line:error style messages enabled.
 **Prüfung.tex
@@ -697,25 +697,35 @@ Underfull \hbox (badness 10000) in paragraph at lines 83--1
 
  []
 
-[7] [8] [9] [10]) [11] (./Prüfung.aux)
+[7] [8] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 49--50
+
+ []
+
+
+Overfull \hbox (38.76894pt too wide) in paragraph at lines 75--76
+[] [] \OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 u; v\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 displaystyle [] [] f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 v; u\OT1/cmr/m/n/10 )$\TU/lmr/m/n/10 . Mit $\OML/cmm/m/it/10 c\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 S; T\OT1/cmr/m/n/10 ) = \OML/cmm/m/it/10 displaystyle [][] [] c\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 u; v\OT1/cmr/m/n/10 )$
+ []
+
+[10] [11]) [12] (./Prüfung.aux)
 Package rerunfilecheck Info: File `Prüfung.out' has not changed.
-(rerunfilecheck)             Checksum: CA98F8875ECD6565DE676BE42FA6DE5C;7240.
+(rerunfilecheck)             Checksum: 2B81940B6BA997722BB193A568890809;8138.
 )
 
 Here is how much of LuaTeX's memory you used:
- 16220 strings out of 478285
+ 16235 strings out of 478285
  100000,1977958 words of node,token memory allocated
- 600 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 31 attribute, 59 glue_spec, 17 attribute_list, 1 write nodes
-   avail lists: 2:1218,3:545,4:209,5:535,6:149,7:4255,8:67,9:786,10:6,11:352
- 35667 multiletter control sequences out of 65536+600000
+ 618 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 37 attribute, 59 glue_spec, 20 attribute_list, 1 write nodes
+   avail lists: 2:1209,3:545,4:209,5:535,6:149,7:4332,8:67,9:786,10:6,11:352
+ 35674 multiletter control sequences out of 65536+600000
  59 fonts using 4009975 bytes
- 90i,10n,90p,421b,520s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,10n,90p,553b,520s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></usr/local/texlive/2023/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf></usr/local/texlive/2023/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf></usr/local/texlive/2023/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf></usr/local/texlive/2023/texmf-dist/fonts/opentype/public/lm/lmroman17-regular.otf></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Prüfung.pdf (11 pages, 148986 bytes).
+Output written on Prüfung.pdf (12 pages, 157097 bytes).
 
-PDF statistics: 453 PDF objects out of 1000 (max. 8388607)
- 410 compressed objects within 5 object streams
- 89 named destinations out of 1000 (max. 131072)
- 473 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 493 PDF objects out of 1000 (max. 8388607)
+ 449 compressed objects within 5 object streams
+ 97 named destinations out of 1000 (max. 131072)
+ 529 words of extra memory for PDF output out of 10000 (max. 100000000)
 

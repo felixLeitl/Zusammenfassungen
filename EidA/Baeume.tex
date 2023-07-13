@@ -1,0 +1,116 @@
+\section{Bäume}
+\subsection{Definitionen}
+\subsubsection{Baum}
+	Ein Baum besteht aus Knoten, die mit Kanten miteinander Verbunden sind, wobei jeder Knoten, außer der Wurzel genau einen Vorgänger hat
+\subsubsection{Wurzelknoten}
+	EinWurzelknoten ist ein Knoten auf den keine Kante zeigt
+\subsubsection{Blätter}
+	Knoten ohne Nachfolger heißen Blätter
+\subsubsection{Tiefe}
+	Die Tiefe eines Knotens ist die Anzahl der Schritte, die benötigt werden, um von dem Knoten die Wurzel zu erreichen. Die Tiefe eines Baums ist max Tiefe aller Knoten
+\subsubsection{Binärbaum}
+	Jeder Knoten hat max zwei Nachfolger
+\subsubsection{Laufzeit}
+	\begin{tabular} {c | c | c | c}
+		& Arrays & Listen & Binärbäume \\
+		\hline
+		Zugriff & $\BigO(1)$ & $\BigO(n)$ & $\BigO(\log n)$ \\
+		Einfügen & $\BigO(n)$ & $\BigO(1)$ & $\BigO(\log n)$
+	\end{tabular}
+\subsubsection{Vollständiger Binärbaum}
+	Hat $2^h-1$ innere Knoten und $2^h$ Blätter
+	$$
+		h=\lceil\log_2(n+1)\rceil-1
+	$$
+	Höhe:
+	$$
+		n=2^{h+1}-1
+	$$
+\subsubsection{Sucheigenschaft}
+	Es sei $X$ ein Knoten im binären Suchbaum. Ist $y$ ein Knoten im linken Teilbaum von $x$, dann gilt $y$.Key $\leq$ $x$.Key. Ist $y$ ein Knoten im rechten Teilbaum von $X$ dann gilt: $y$.Key $\leq$ $x$.Key. Dank dieser Eigenschaft lässt sich der Baum inorder durchlaufen
+\subsubsection{Heap}
+	Ein heap ist ein Binärbaum, der Elemente mit Schlüsseln enthält und in einem Array eingebettet ist. Die Heapbedingung für Max-Heaps fordert:
+	\begin{itemize}
+	  \item Der Schlüssel eines Knotens ist mindestens so groß wie die Schlüssel seiner Kinder
+	  \item Alle Ebenen (bis auf die letzte) sind vollständig gefüllt
+	  \item Blätter befinden sich auf einer (max. 2) Ebenen
+	  \item Blätter sind linksbündig
+	\end{itemize}
+	Einbettung ins Array:
+	\begin{itemize}
+	  \item Wurzel ist a[0]
+	  \item linkes Kind von a[i] in a[2$\cdot$i+1]
+	  \item rechtes Kind von a[i] in a[2$\cdot$i+2]
+	\end{itemize}
+\subsubsection{Bruder-Baume}
+	Ein binärer Bau, heißt Bruder-Baum, wenn jeder innere Knoten einen oder zwei Nachfolger hat, jeder unäre Knoten einen binären Bruder hat und alle Blätter die selbe Tiefe haben. Ausschließlich binäre Knoten enthalten Schlüssel
+\subsubsection{a-b-Baum}
+	Jeder innere Knoten hat mindestens a und höchstens b Nachfolger, alle Blätter haben die gleiche Tiefe und jeder Knoten mit $i$ Nachfolgern enthält genau $i-1$ Schlüssel
+\subsubsection{B-Baum}
+	Ein Baum heißt B-Baum der Ordnung $m$, wenn die folgenden Eigenschaften erfüllt sind:
+	\begin{itemize}
+	  \item Jeder Knoten außer der Wurzel und der Blätter enthält mindestens [m/2]-1 Daten. Jeder Knoten enthält höchstens m-1 Daten. Die Daten sind sortiert
+	  \item Knoten mit $k$ Daten $x_1,...,x_k$ haben $k+1$ Referenzen auf Teilbäume mit Schlüsseln aus den Mengen $\{-\infty,...,x_1-1\},\{x_1+1,...,x_2-1\},...,\{x_{k-1}+1,...,x_{k}-1\},\{x_k+1,...,\infty\}$
+	  \item Die Referenzen, die einen Knoten verlassen, sind entweder alle null-Referenzen oder alle Referenzen auf Knoten
+	  \item Alle Blätter haben die gleiche Tiefe 
+	\end{itemize}
+\subsubsection{AVL-Baum}
+	Ein binärer Suchbaum heißt AVL-Baum, wenn für jeden Knoten $v$ gilt, dass sich die Höhe des rechten Teilbaums $h(T_r)$ von $v$ und die Höhe des linken Teilbaums $h(T_l)$ von $v$ um maximal 1 unterscheiden:
+	\begin{itemize}
+	  \item $bal(v)=h(T_r)-h(T_l)\in\{-1,0,+1\}$
+	  \item $bal(v)$ gibt den Balancierungsgrad an
+	\end{itemize}
+
+\subsection{Binärbaum Operationen}
+\subsubsection{Search}
+	Vergleicht Knoten mit gesuchtem, wenn größer, dann rechter Teilbaum, wenn kleiner linker Teilbaum
+\subsubsection{Min/Max}
+	Gibt linkesten Knoten bei Min und rechtesten Knoten bei Max aus
+\subsubsection{Vorgänger/Nachfolger}
+	Der Nachfolger eines Knoten $x$ in einem binären Suchbaum ist der kleinste Knoten, der größer ist als $x$. 
+\subsubsection{Einfügen}
+	Finde die Position im Baum und speichere das Element durch Erweiterung des Baums 
+\subsubsection{Löschen}
+	Fall 1: $z$ hat keine Kinder: \newline
+	Entferne den Knoten und setze den Elternknoten auf $\bot$ \newline \newline
+	Fall 2: $z$ hat nur ein Kindknoten: \newline
+	Entferne $z$ und setzte den Pointer des Elternknoten auf den des Kindknotens von $z$: \newline \newline
+	\begin{center}
+		\tikz\graph [tree layout, sibling distance=1cm, nodes={circle, draw}]{q--{z--{, r}}};
+	\tikz\graph [tree layout, sibling distance=1cm, nodes={circle, draw}]{q--{r}};
+	\end{center}
+	Fall 3: 
+	\begin{center}
+		\tikz\graph [tree layout, sibling distance=1cm, nodes={circle, draw}]{z--{l, r--{y--{,x},}}};
+		\tikz\graph [tree layout, sibling distance=1cm, nodes={circle, draw}]{z--{l, r--{x,}}};
+		\tikz\graph [tree layout, sibling distance=1cm, nodes={circle, draw}]{y--{l, r--{x,}}};
+	\end{center}
+	Oder
+	\begin{center}
+		\tikz\graph [tree layout, sibling distance=1cm, nodes={circle, draw}]{z--{l, r--{,x}}};
+		\tikz\graph [tree layout, sibling distance=1cm, nodes={circle, draw}]{r--{l, x}};
+	\end{center}
+\subsection{Heap Operationen}
+\subsubsection{Einfügen}
+	Füge das Element als Blatt an der ersten freien Stelle ein, ggf. Heap-Eigenschaft, durch aufsteigen wieder herstellen	
+	\begin{center}
+		\tikz\graph [tree layout, sibling distance=1cm, nodes={circle, draw}]{30--{25--{13--{3,5},16--{27,}},18--{12,8}}};
+		\tikz\graph [tree layout, sibling distance=1cm, nodes={circle, draw}]{30--{27--{13--{3,5},25--{16,}},18--{12,8}}};
+	\end{center}
+\subsubsection{Löschen}
+	Knoten entfernen, der größere der Kinder nimmt den Platz ein, ggf. Heap-Eigenschaft wieder herstellen
+	
+\subsection{a-b-Baum Operationen}
+\subsection{Einfügen}
+	\begin{itemize}
+	  \item Man versucht unäre Knoten in binäre Knoten umzuwandeln 
+	  \item Gelingt dies nicht muss man einen neuen Knoten zur Wurzel machen
+	\end{itemize}
+\subsubsection{Löschen}
+	Bei dem Löschen geht man vor wie bei den Binärbäumen und stellt anschließend von den Blättern aufsteigend die Baum-Eigenschaften wieder her
+
+	
+		
+	
+	
+	

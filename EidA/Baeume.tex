@@ -101,16 +101,44 @@
 	Knoten entfernen, der größere der Kinder nimmt den Platz ein, ggf. Heap-Eigenschaft wieder herstellen
 	
 \subsection{a-b-Baum Operationen}
-\subsection{Einfügen}
+\subsubsection{Einfügen}
 	\begin{itemize}
 	  \item Man versucht unäre Knoten in binäre Knoten umzuwandeln 
 	  \item Gelingt dies nicht muss man einen neuen Knoten zur Wurzel machen
 	\end{itemize}
 \subsubsection{Löschen}
 	Bei dem Löschen geht man vor wie bei den Binärbäumen und stellt anschließend von den Blättern aufsteigend die Baum-Eigenschaften wieder her
-
-	
+\subsection{B-Baum Operationen}
+\subsubsection{Einfügen}
+	Fall 1: Knoten, in welchem der Schlüssel eingefügt wird wird nicht zu groß: \newline \newline
+	Knoten linear durchgehen und an richtiger Stelle Schlüssel mit Nachfolgereferenz auf Null einfügen \newline\newline
+	Fall 2: Overflow: \newline \newline
+	Knoten spalten und mittleres Element aufsteigen lassen
+	\subsubsection{Löschen}
+	Fall 1: Schlüssel ist in Blatt und es entsteht kein Underflow\newline \newline
+	Schlüssel und Nullpointer löschen \newline \newline
+	Fall 2: Schlüssel ist in Blatt aber es entsteht ein Underflow \newline \newline
+	Brudertausch: größtes Element an Vorgängerknoten geben und dessen kleinstes an Bruderknoten vererben \newline \newline
+	Fall 3: Underflow bei beiden Brüdern \newline \newline
+	Verschmelzen: Vorgängerschlüssel, der zwischen den Pointern liegt wird nach unten gezogen und zusammen mit den Brüdern verschmolzen \newline \newline
+	\subsection{AVL-Baum Operationen}
+	\subsubsection{Einfügen}
+		Einfügen wie bei Binärbaum, dann überprüfen, ob der |Balancierungsgrad|>1 \newline \newline
+		Fall (-2, -1): Rotation nach rechts \newline \newline
+		\tikz\graph [tree layout, sibling distance=1cm, nodes={circle, draw}]{8--{5--{3--{1,4},7},9}};
+		\tikz\graph [tree layout, sibling distance=1cm, nodes={circle, draw}]{5--{3--{1,4},8--{7,9}}};
+		\newline \newline
+		Fall (-2,1): Rotation nach Links-Rechts\newline \newline
+		\tikz\graph [tree layout, sibling distance=1cm, nodes={circle, draw}]{15--{5--{3,9--{8,10}},16}};
+		\tikz\graph [tree layout, sibling distance=1cm, nodes={circle, draw}]{9--{5--{3,8},15--{10,16}}};
+	\subsubsection{Löschen}
+		Äquivalent zum Einfügen
 		
-	
+		
+		
+		
+		
+		
+		
 	
 	

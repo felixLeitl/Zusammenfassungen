@@ -10,7 +10,7 @@ def is_sorted(list: List[int]) -> bool:
 
 
 def bogosort(list: List[int]) -> List[int]:
-    while not isSorted(list):
+    while not is_sorted(list):
         random.shuffle(list)
     return list
 

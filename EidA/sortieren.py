@@ -2,6 +2,19 @@ import random
 from typing import List, Tuple
 
 
+def is_sorted(list: List[int]) -> bool:
+    for i in range(len(list) - 1):
+        if list[i] > list[i + 1]:
+            return False
+    return True
+
+
+def bogosort(list: List[int]) -> List[int]:
+    while not isSorted(list):
+        random.shuffle(list)
+    return list
+
+
 def bubblesort(list: List[int], n) -> List[int]:
     for i in range(n - 1):
         for j in range(n, i, -1):
@@ -68,4 +81,5 @@ if __name__ == '__main__':
     print(list)
     print(bubblesort(list, len(list) - 1))
     print(selectionsort(list, len(list) - 1))
+    print(bogosort(list))
     print("sortieren")

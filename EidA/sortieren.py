@@ -56,10 +56,29 @@ def heapsort(list: List[int], n) -> List[int]:
     pass
 
 
-# TODO: quick sort
-def quicksort(list: List[int], p, r) -> List[int]:
-    pass
+# TODO: pivot functions
+def quicksort(list: List[int], p) -> List[int]:
+    l, p, r = partition(list, p)
+    if len(l) > 1:
+        l = quicksort(l, p)
+    if len(r) > 1:
+        r = quicksort(r, p)
 
+    # join lists
+    return l + p + r
+
+
+def partition(list: List[int], pivot) -> tuple[list[int], list[int], list[int]]:
+    list_right, list_left = [], []
+
+    for i in range(len(list)):
+        if list[i] == pivot:
+            continue
+        if list[i] < pivot:
+            list_left.append(list[i])
+        else:
+            list_right.append(list[i])
+    return list_left, [pivot], list_right
 
 # TODO: bucket sort
 def bucketsort(list: List[int], n) -> List[int]:

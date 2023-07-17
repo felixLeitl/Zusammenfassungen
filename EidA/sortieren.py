@@ -25,7 +25,6 @@ def bubblesort(list: List[int], n) -> List[int]:
     return list
 
 
-# TODO: merge sort
 def mergesort(list: List[int], p, r):
     if p >= r:
         return
@@ -64,9 +63,18 @@ def merge(list: List[int], p, q, r):
     return list
 
 
-# TODO: slow sort
 def slowsort(list: List[int], p, r) -> List[int]:
-    pass
+    if p >= r:
+        return
+    q = (p + r) // 2
+    slowsort(list, p, q)  # sort left half
+    slowsort(list, q + 1, r)  # sort right half
+    if list[q] > list[r]:
+        tmp = list[q]
+        list[q] = list[r]
+        list[r] = tmp
+    slowsort(list, p, r - 1)
+    return list
 
 
 def selectionsort(list: List[int], n) -> List[int]:
@@ -139,3 +147,4 @@ if __name__ == '__main__':
     print('Bogo Sort', bogosort(list))
     print('Quick Sort', quicksort(list, pivot_first))
     print('Merge Sort', mergesort(list, 0, len(list) - 1))
+    print('Slow Sort', slowsort(list, 0, len(list) - 1))

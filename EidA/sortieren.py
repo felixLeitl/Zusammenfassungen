@@ -9,6 +9,13 @@ def is_sorted(list: List[int]) -> bool:
     return True
 
 
+def check_sorted(list: List[int]) -> tuple[bool, List[int]]:
+    for i in range(len(list) - 1):
+        if list[i] > list[i + 1]:
+            return False, list
+    return True, list
+
+
 def bogosort(list: List[int]) -> List[int]:
     while not is_sorted(list):
         random.shuffle(list)
@@ -63,7 +70,7 @@ def merge(list: List[int], p, q, r):
     return list
 
 
-def slowsort(list: List[int], p, r) -> List[int]:
+def slowsort(list: List[int], p, r) -> list[int] | None:
     if p >= r:
         return
     q = (p + r) // 2
@@ -141,10 +148,10 @@ def countingSort(list: List[int], n, k) -> List[int]:
 
 if __name__ == '__main__':
     list = [random.randint(0, 100) for i in range(10)]
-    print('Unsorted:', list)
-    print('Bubble Sort:', bubblesort(list, len(list) - 1))
-    print('Selection Sort', selectionsort(list, len(list) - 1))
-    print('Bogo Sort', bogosort(list))
-    print('Quick Sort', quicksort(list, pivot_first))
-    print('Merge Sort', mergesort(list, 0, len(list) - 1))
-    print('Slow Sort', slowsort(list, 0, len(list) - 1))
+    print('Unsorted:', check_sorted(list))
+    print('Bubble Sort:', check_sorted(bubblesort(list, len(list) - 1)))
+    print('Selection Sort', check_sorted(selectionsort(list, len(list) - 1)))
+    print('Bogo Sort', check_sorted(bogosort(list)))
+    print('Quick Sort', check_sorted(quicksort(list, pivot_first)))
+    print('Merge Sort', check_sorted(mergesort(list, 0, len(list) - 1)))
+    print('Slow Sort', check_sorted(slowsort(list, 0, len(list) - 1)))

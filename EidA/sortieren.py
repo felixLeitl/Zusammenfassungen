@@ -26,12 +26,42 @@ def bubblesort(list: List[int], n) -> List[int]:
 
 
 # TODO: merge sort
-def mergesort(list: List[int], p, r) -> List[int]:
-    pass
+def mergesort(list: List[int], p, r):
+    if p >= r:
+        return
+    q = (p + r) // 2
+    mergesort(list, p, q)  # sort left half
+    mergesort(list, q + 1, r)  # sort right half
+    return merge(list, p, q, r)  # merge both halves
 
 
-def merge():
-    pass
+def merge(list: List[int], p, q, r):
+    n_left = q - p + 1
+    n_right = r - q
+    left_list, right_list = [], []
+    for i in range(n_left):
+        left_list.append(list[p + i])
+    for j in range(n_right):
+        right_list.append(list[q + j + 1])
+    i = 0
+    j = 0
+    k = p
+    while i < n_left and j < n_right:
+        if left_list[i] <= right_list[j]:
+            list[k] = left_list[i]
+            i += 1
+        else:
+            j += 1
+        k += 1
+    while i < n_left:
+        list[k] = left_list[i]
+        i += 1
+        k += 1
+    while j < n_right:
+        list[k] = right_list[j]
+        j += 1
+        k += 1
+    return list
 
 
 # TODO: slow sort
@@ -103,9 +133,9 @@ def countingSort(list: List[int], n, k) -> List[int]:
 
 if __name__ == '__main__':
     list = [random.randint(0, 100) for i in range(10)]
-    print(list)
-    print(bubblesort(list, len(list) - 1))
-    print(selectionsort(list, len(list) - 1))
-    print(bogosort(list))
-    print(quicksort(list, pivot_first))
-    print("sortieren")
+    print('Unsorted:', list)
+    print('Bubble Sort:', bubblesort(list, len(list) - 1))
+    print('Selection Sort', selectionsort(list, len(list) - 1))
+    print('Bogo Sort', bogosort(list))
+    print('Quick Sort', quicksort(list, pivot_first))
+    print('Merge Sort', mergesort(list, 0, len(list) - 1))

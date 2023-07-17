@@ -154,21 +154,21 @@ def countingSort(list: List[int], n, k) -> List[int]:
 
 
 if __name__ == '__main__':
-    list = [random.randint(0, 100) for i in range(10)]
+    list = [random.randint(0, 100) for i in range(100)]
     n = 10
     without = True
-    bubble, selection, bogo, quick, merge, slow = 0, 0, 0, 0, 0, 0
+    bubble, selection, bogo, quick, merger, slow = 0, 0, 0, 0, 0, 0
 
     print('Unsorted:', check_sorted(list, False))
     bubble = timeit.timeit(stmt='bubblesort(list, len(list) - 1)', globals=globals(), number=n)
-    print('Bubble Sort:', check_sorted(bubblesort(list, len(list) - 1), without), bubble)
+    print('Bubble Sort:', check_sorted(bubblesort(list, len(list) - 1), without), bubble/n)
     selection = timeit.timeit(stmt='selectionsort(list, len(list) - 1)', globals=globals(), number=n)
-    print('Selection Sort', check_sorted(selectionsort(list, len(list) - 1), without), selection)
+    print('Selection Sort', check_sorted(selectionsort(list, len(list) - 1), without), selection/n)
     bogo = timeit.timeit(stmt='bogosort(list)', globals=globals(), number=n)
-    print('Bogo Sort', check_sorted(bogosort(list), without), bogo)
+    print('Bogo Sort', check_sorted(bogosort(list), without), bogo/n)
     quick = timeit.timeit(stmt='quicksort(list, pivot_first)', globals=globals(), number=n)
-    print('Quick Sort', check_sorted(quicksort(list, pivot_first), without), quick)
-    merge = timeit.timeit(stmt='mergesort(list, 0, len(list) - 1)', globals=globals(), number=n)
-    print('Merge Sort', check_sorted(mergesort(list, 0, len(list) - 1), without), merge)
+    print('Quick Sort', check_sorted(quicksort(list, pivot_first), without), quick/n)
+    merger = timeit.timeit(stmt='mergesort(list, 0, len(list) - 1)', globals=globals(), number=n)
+    print('Merge Sort', check_sorted(mergesort(list, 0, len(list) - 1), without), merger/n)
     slow = timeit.timeit(stmt='slowsort(list, 0, len(list) - 1)', globals=globals(), number=n)
-    print('Slow Sort', check_sorted(slowsort(list, 0, len(list) - 1), without), slow)
+    print('Slow Sort', check_sorted(slowsort(list, 0, len(list) - 1), without), slow/n)

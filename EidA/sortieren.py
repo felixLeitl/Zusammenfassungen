@@ -31,7 +31,7 @@ def bogo_sort(list: List[int]) -> List[int]:
 
 
 def bubble_sort(list: List[int], n) -> List[int]:
-    for i in range(n - 1):
+    for i in range(n):
         for j in range(n, i, -1):
             if list[j] < list[j - 1]:
                 tmp = list[j]
@@ -94,12 +94,12 @@ def slow_sort(list: List[int], p, r) -> list[int] | None:
 
 
 def selection_sort(list: List[int], n) -> List[int]:
-    for i in range(n + 1):
-        min = i
-        for j in range(i, n + 1):
-            if list[j] < list[min] and j != min:
-                min = j
-            list[i], list[min] = list[min], list[i]
+    for sorted in range(n - 1):
+        min = sorted
+        for i in range(sorted + 1, n):
+            if list[i] < list[min]:
+                min = i
+        list[sorted], list[min] = list[min], list[sorted]
     return list
 
 
@@ -161,19 +161,19 @@ if __name__ == '__main__':
 
     print('Unsorted:', check_sorted(list[:], False))
     bubble_time = timeit.timeit(stmt='bubble_sort(list[:], len(list) - 1)', globals=globals(), number=n)
-    print('Bubble Sort:', check_sorted(bubble_sort(list[:], len(list) - 1), False), bubble_time / n)
+    print('Bubble Sort:', check_sorted(bubble_sort(list[:], len(list) - 1), False), bubble_time / n, 'seconds')
     list = [random.randint(0, n_e) for i in range(n_e)]
     selection_time = timeit.timeit(stmt='selection_sort(list[:], len(list) - 1)', globals=globals(), number=n)
-    print('Selection Sort', check_sorted(selection_sort(list[:], len(list) - 1), False), selection_time / n)
+    print('Selection Sort', check_sorted(selection_sort(list[:], len(list)), False), selection_time / n, 'seconds')
     list = [random.randint(0, n_e) for i in range(n_e)]
     bogo_time = timeit.timeit(stmt='bogo_sort(list[:])', globals=globals(), number=n)
-    print('Bogo Sort', check_sorted(bogo_sort(list[:]), False), bogo_time / n)
+    print('Bogo Sort', check_sorted(bogo_sort(list[:]), False), bogo_time / n, 'seconds')
     list = [random.randint(0, n_e) for i in range(n_e)]
     quick_time = timeit.timeit(stmt='quick_sort(list[:], pivot_first)', globals=globals(), number=n)
-    print('Quick Sort', check_sorted(quick_sort(list[:], pivot_first), False), quick_time / n)
+    print('Quick Sort', check_sorted(quick_sort(list[:], pivot_first), False), quick_time / n, 'seconds')
     list = [random.randint(0, n_e) for i in range(n_e)]
     merge_time = timeit.timeit(stmt='merge_sort(list[:], 0, len(list) - 1)', globals=globals(), number=n)
-    print('Merge Sort', check_sorted(merge_sort(list[:], 0, len(list) - 1), False), merge_time / n)
+    print('Merge Sort', check_sorted(merge_sort(list[:], 0, len(list) - 1), False), merge_time / n, 'seconds')
     list = [random.randint(0, n_e) for i in range(n_e)]
     slow_time = timeit.timeit(stmt='slow_sort(list[:], 0, len(list) - 1)', globals=globals(), number=n)
-    print('Slow Sort', check_sorted(slow_sort(list[:], 0, len(list) - 1), False), slow_time / n)
+    print('Slow Sort', check_sorted(slow_sort(list[:], 0, len(list) - 1), False), slow_time / n, 'seconds')

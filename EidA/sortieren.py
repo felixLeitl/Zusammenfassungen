@@ -1,5 +1,6 @@
 import random
 from typing import List, Tuple
+import timeit
 
 
 def is_sorted(list: List[int]) -> bool:
@@ -9,11 +10,17 @@ def is_sorted(list: List[int]) -> bool:
     return True
 
 
-def check_sorted(list: List[int]) -> tuple[bool, List[int]]:
+def check_sorted(list: List[int], without: bool) -> tuple[bool, List[int]]:
     for i in range(len(list) - 1):
         if list[i] > list[i + 1]:
-            return False, list
-    return True, list
+            if without:
+                return False
+            else:
+                return False, list
+    if without:
+        return True
+    else:
+        return True, list
 
 
 def bogosort(list: List[int]) -> List[int]:
@@ -148,10 +155,20 @@ def countingSort(list: List[int], n, k) -> List[int]:
 
 if __name__ == '__main__':
     list = [random.randint(0, 100) for i in range(10)]
-    print('Unsorted:', check_sorted(list))
-    print('Bubble Sort:', check_sorted(bubblesort(list, len(list) - 1)))
-    print('Selection Sort', check_sorted(selectionsort(list, len(list) - 1)))
-    print('Bogo Sort', check_sorted(bogosort(list)))
-    print('Quick Sort', check_sorted(quicksort(list, pivot_first)))
-    print('Merge Sort', check_sorted(mergesort(list, 0, len(list) - 1)))
-    print('Slow Sort', check_sorted(slowsort(list, 0, len(list) - 1)))
+    n = 10
+    without = True
+    bubble, selection, bogo, quick, merge, slow = 0, 0, 0, 0, 0, 0
+
+    print('Unsorted:', check_sorted(list, False))
+    bubble = timeit.timeit(stmt='bubblesort(list, len(list) - 1)', globals=globals(), number=n)
+    print('Bubble Sort:', check_sorted(bubblesort(list, len(list) - 1), without), bubble)
+    selection = timeit.timeit(stmt='selectionsort(list, len(list) - 1)', globals=globals(), number=n)
+    print('Selection Sort', check_sorted(selectionsort(list, len(list) - 1), without), selection)
+    bogo = timeit.timeit(stmt='bogosort(list)', globals=globals(), number=n)
+    print('Bogo Sort', check_sorted(bogosort(list), without), bogo)
+    quick = timeit.timeit(stmt='quicksort(list, pivot_first)', globals=globals(), number=n)
+    print('Quick Sort', check_sorted(quicksort(list, pivot_first), without), quick)
+    merge = timeit.timeit(stmt='mergesort(list, 0, len(list) - 1)', globals=globals(), number=n)
+    print('Merge Sort', check_sorted(mergesort(list, 0, len(list) - 1), without), merge)
+    slow = timeit.timeit(stmt='slowsort(list, 0, len(list) - 1)', globals=globals(), number=n)
+    print('Slow Sort', check_sorted(slowsort(list, 0, len(list) - 1), without), slow)

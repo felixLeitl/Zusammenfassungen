@@ -10,7 +10,7 @@ def is_sorted(list: List[int]) -> bool:
     return True
 
 
-def check_sorted(list: List[int], without: bool) -> tuple[bool, List[int]]:
+def check_sorted(list: List[int], without: bool) -> tuple[bool, List[int]] | bool:
     for i in range(len(list) - 1):
         if list[i] > list[i + 1]:
             if without:
@@ -23,13 +23,13 @@ def check_sorted(list: List[int], without: bool) -> tuple[bool, List[int]]:
         return True, list
 
 
-def bogosort(list: List[int]) -> List[int]:
+def bogo_sort(list: List[int]) -> List[int]:
     while not is_sorted(list):
         random.shuffle(list)
     return list
 
 
-def bubblesort(list: List[int], n) -> List[int]:
+def bubble_sort(list: List[int], n) -> List[int]:
     for i in range(n - 1):
         for j in range(n, i, -1):
             if list[j] < list[j - 1]:
@@ -39,16 +39,16 @@ def bubblesort(list: List[int], n) -> List[int]:
     return list
 
 
-def mergesort(list: List[int], p, r):
+def merge_sort(list: List[int], p, r):
     if p >= r:
         return
     q = (p + r) // 2
-    mergesort(list, p, q)  # sort left half
-    mergesort(list, q + 1, r)  # sort right half
+    merge_sort(list, p, q)  # sort left half
+    merge_sort(list, q + 1, r)  # sort right half
     return merge(list, p, q, r)  # merge both halves
 
 
-def merge(list: List[int], p, q, r):
+def merge(list: List[int], p, q, r) -> List[int]:
     n_left = q - p + 1
     n_right = r - q
     left_list, right_list = [], []
@@ -77,21 +77,21 @@ def merge(list: List[int], p, q, r):
     return list
 
 
-def slowsort(list: List[int], p, r) -> list[int] | None:
+def slow_sort(list: List[int], p, r) -> list[int] | None:
     if p >= r:
         return
     q = (p + r) // 2
-    slowsort(list, p, q)  # sort left half
-    slowsort(list, q + 1, r)  # sort right half
+    slow_sort(list, p, q)  # sort left half
+    slow_sort(list, q + 1, r)  # sort right half
     if list[q] > list[r]:
         tmp = list[q]
         list[q] = list[r]
         list[r] = tmp
-    slowsort(list, p, r - 1)
+    slow_sort(list, p, r - 1)
     return list
 
 
-def selectionsort(list: List[int], n) -> List[int]:
+def selection_sort(list: List[int], n) -> List[int]:
     for i in range(n):
         min = i
         for j in range(i + 1, n):
@@ -104,18 +104,18 @@ def selectionsort(list: List[int], n) -> List[int]:
 
 
 # TODO: heap sort
-def heapsort(list: List[int], n) -> List[int]:
+def heap_sort(list: List[int], n) -> List[int]:
     pass
 
 
 # TODO: pivot functions
-def quicksort(list: List[int], pivot_func):
+def quick_sort(list: List[int], pivot_func):
     l, p, r = partition(list, pivot_func(list))
 
     if len(l) > 1:
-        l = quicksort(l, pivot_func)
+        l = quick_sort(l, pivot_func)
     if len(r) > 1:
-        r = quicksort(r, pivot_func)
+        r = quick_sort(r, pivot_func)
 
     # join lists
     return l + p + r
@@ -139,36 +139,35 @@ def pivot_first(list: List[int]) -> int:
 
 
 # TODO: bucket sort
-def bucketsort(list: List[int], n) -> List[int]:
+def bucket_sort(list: List[int], n) -> List[int]:
     pass
 
 
 # TODO: radix sort
-def radixsort(list: List[int], n) -> List[int]:
+def radix_sort(list: List[int], n) -> List[int]:
     pass
 
 
 # TODO: counting sort
-def countingSort(list: List[int], n, k) -> List[int]:
+def counting_sort(list: List[int], n, k) -> List[int]:
     pass
 
 
 if __name__ == '__main__':
     list = [random.randint(0, 100) for i in range(100)]
-    n = 10
-    without = True
-    bubble, selection, bogo, quick, merger, slow = 0, 0, 0, 0, 0, 0
+    n = 10 # number of timeit iterations
+    without = True # True if you want the list NOT printed with check_sorted()
 
     print('Unsorted:', check_sorted(list, False))
-    bubble = timeit.timeit(stmt='bubblesort(list, len(list) - 1)', globals=globals(), number=n)
-    print('Bubble Sort:', check_sorted(bubblesort(list, len(list) - 1), without), bubble/n)
-    selection = timeit.timeit(stmt='selectionsort(list, len(list) - 1)', globals=globals(), number=n)
-    print('Selection Sort', check_sorted(selectionsort(list, len(list) - 1), without), selection/n)
-    bogo = timeit.timeit(stmt='bogosort(list)', globals=globals(), number=n)
-    print('Bogo Sort', check_sorted(bogosort(list), without), bogo/n)
-    quick = timeit.timeit(stmt='quicksort(list, pivot_first)', globals=globals(), number=n)
-    print('Quick Sort', check_sorted(quicksort(list, pivot_first), without), quick/n)
-    merger = timeit.timeit(stmt='mergesort(list, 0, len(list) - 1)', globals=globals(), number=n)
-    print('Merge Sort', check_sorted(mergesort(list, 0, len(list) - 1), without), merger/n)
-    slow = timeit.timeit(stmt='slowsort(list, 0, len(list) - 1)', globals=globals(), number=n)
-    print('Slow Sort', check_sorted(slowsort(list, 0, len(list) - 1), without), slow/n)
+    bubble_time = timeit.timeit(stmt='bubble_sort(list, len(list) - 1)', globals=globals(), number=n)
+    print('Bubble Sort:', check_sorted(bubble_sort(list, len(list) - 1), without), bubble_time / n)
+    selection_time = timeit.timeit(stmt='selection_sort(list, len(list) - 1)', globals=globals(), number=n)
+    print('Selection Sort', check_sorted(selection_sort(list, len(list) - 1), without), selection_time / n)
+    bogo_time = timeit.timeit(stmt='bogo_sort(list)', globals=globals(), number=n)
+    print('Bogo Sort', check_sorted(bogo_sort(list), without), bogo_time / n)
+    quick_time = timeit.timeit(stmt='quick_sort(list, pivot_first)', globals=globals(), number=n)
+    print('Quick Sort', check_sorted(quick_sort(list, pivot_first), without), quick_time / n)
+    merge_time = timeit.timeit(stmt='merge_sort(list, 0, len(list) - 1)', globals=globals(), number=n)
+    print('Merge Sort', check_sorted(merge_sort(list, 0, len(list) - 1), without), merge_time / n)
+    slow_time = timeit.timeit(stmt='slow_sort(list, 0, len(list) - 1)', globals=globals(), number=n)
+    print('Slow Sort', check_sorted(slow_sort(list, 0, len(list) - 1), without), slow_time / n)

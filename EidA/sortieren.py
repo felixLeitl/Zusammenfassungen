@@ -57,28 +57,34 @@ def heapsort(list: List[int], n) -> List[int]:
 
 
 # TODO: pivot functions
-def quicksort(list: List[int], p) -> List[int]:
-    l, p, r = partition(list, p)
+def quicksort(list: List[int], pivot_func):
+    l, p, r = partition(list, pivot_func(list))
+
     if len(l) > 1:
-        l = quicksort(l, p)
+        l = quicksort(l, pivot_func)
     if len(r) > 1:
-        r = quicksort(r, p)
+        r = quicksort(r, pivot_func)
 
     # join lists
     return l + p + r
 
 
-def partition(list: List[int], pivot) -> tuple[list[int], list[int], list[int]]:
-    list_right, list_left = [], []
-
+def partition(list: List[int], pivot):
+    arr_left, arr_right = [], []
     for i in range(len(list)):
-        if list[i] == pivot:
+        if i == pivot:
             continue
-        if list[i] < pivot:
-            list_left.append(list[i])
+        if list[i] < list[pivot]:
+            arr_left.append(list[i])
         else:
-            list_right.append(list[i])
-    return list_left, [pivot], list_right
+            arr_right.append(list[i])
+
+    return arr_left, [list[pivot]], arr_right
+
+
+def pivot_first(list: List[int]) -> int:
+    return 0
+
 
 # TODO: bucket sort
 def bucketsort(list: List[int], n) -> List[int]:
@@ -101,4 +107,5 @@ if __name__ == '__main__':
     print(bubblesort(list, len(list) - 1))
     print(selectionsort(list, len(list) - 1))
     print(bogosort(list))
+    print(quicksort(list, pivot_first))
     print("sortieren")

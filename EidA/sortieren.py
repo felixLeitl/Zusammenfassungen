@@ -140,7 +140,20 @@ def pivot_first(list: List[int]) -> int:
 
 # TODO: bucket sort
 def bucket_sort(list: List[int], n) -> List[int]:
-    pass
+    bucket = []
+    for i in range(len(list)):
+        bucket.append([])
+    for j in list:
+        index_b = int(n * j) - 1
+        bucket[index_b].append(j)
+    for i in range(len(list)):
+        bucket[i] = selection_sort(bucket[i], len(bucket[i]))
+    k = 0
+    for i in range(len(list)):
+        for j in range(len(bucket[i])):
+            list[k] = bucket[i][j]
+            k += 1
+    return list
 
 
 # TODO: radix sort
@@ -177,3 +190,6 @@ if __name__ == '__main__':
     list = [random.randint(0, n_e) for i in range(n_e)]
     slow_time = timeit.timeit(stmt='slow_sort(list[:], 0, len(list) - 1)', globals=globals(), number=n)
     print('Slow Sort', check_sorted(slow_sort(list[:], 0, len(list) - 1), False), slow_time / n, 'seconds')
+    list = [random.randint(1, n_e) for i in range(n_e)]
+    bucket_time = timeit.timeit(stmt='bucket_sort(list[:], 1)', globals=globals(), number=n)
+    print('Bucket Sort', check_sorted(bucket_sort(list[:], 1), False), bucket_time / n, 'seconds')

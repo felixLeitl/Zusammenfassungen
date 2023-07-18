@@ -138,7 +138,6 @@ def pivot_first(list: List[int]) -> int:
     return 0
 
 
-# TODO: bucket sort
 def bucket_sort(list: List[int], n) -> List[int]:
     bucket = []
     for i in range(len(list)):
@@ -156,7 +155,6 @@ def bucket_sort(list: List[int], n) -> List[int]:
     return list
 
 
-# TODO: counting sort
 def counting_sort(list: List[int], len_list, highest_element) -> List[int]:
     B, C = [], []
     for i in range(highest_element + 1):

@@ -156,13 +156,25 @@ def bucket_sort(list: List[int], n) -> List[int]:
     return list
 
 
+# TODO: counting sort
+def counting_sort(list: List[int], len_list, highest_element) -> List[int]:
+    B, C = [], []
+    for i in range(highest_element + 1):
+        C.append(0)
+        if i < len_list:
+            B.append(0)
+    for j in range(len_list):
+        C[list[j]] += 1
+    for k in range(1, highest_element + 1):
+        C[k] += C[k - 1]
+    for l in range(len_list - 1, -1, -1):
+        B[C[list[l]] - 1] = list[l]
+        C[list[l]] -= 1
+    return B
+
+
 # TODO: radix sort
 def radix_sort(list: List[int], n) -> List[int]:
-    pass
-
-
-# TODO: counting sort
-def counting_sort(list: List[int], n, k) -> List[int]:
     pass
 
 
@@ -178,9 +190,9 @@ if __name__ == '__main__':
     list = [random.randint(0, n_e) for i in range(n_e)]
     selection_time = timeit.timeit(stmt='selection_sort(list[:], len(list) - 1)', globals=globals(), number=n)
     print('Selection Sort', check_sorted(selection_sort(list[:], len(list)), False), selection_time / n, 'seconds')
-    list = [random.randint(0, n_e) for i in range(n_e)]
-    bogo_time = timeit.timeit(stmt='bogo_sort(list[:])', globals=globals(), number=n)
-    print('Bogo Sort', check_sorted(bogo_sort(list[:]), False), bogo_time / n, 'seconds')
+    # list = [random.randint(0, n_e) for i in range(n_e)]
+    # bogo_time = timeit.timeit(stmt='bogo_sort(list[:])', globals=globals(), number=n)
+    # print('Bogo Sort', check_sorted(bogo_sort(list[:]), False), bogo_time / n, 'seconds')
     list = [random.randint(0, n_e) for i in range(n_e)]
     quick_time = timeit.timeit(stmt='quick_sort(list[:], pivot_first)', globals=globals(), number=n)
     print('Quick Sort', check_sorted(quick_sort(list[:], pivot_first), False), quick_time / n, 'seconds')
@@ -193,3 +205,6 @@ if __name__ == '__main__':
     list = [random.randint(1, n_e) for i in range(n_e)]
     bucket_time = timeit.timeit(stmt='bucket_sort(list[:], 1)', globals=globals(), number=n)
     print('Bucket Sort', check_sorted(bucket_sort(list[:], 1), False), bucket_time / n, 'seconds')
+    list = [random.randint(1, n_e) for i in range(n_e)]
+    counting_time = timeit.timeit(stmt='counting_sort(list[:], len(list), n_e)', globals=globals(), number=n)
+    print('Counting Sort', check_sorted(counting_sort(list[:], len(list), n_e), False), counting_time / n, 'seconds')

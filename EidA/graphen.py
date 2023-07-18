@@ -50,7 +50,80 @@ def dfs(graph: list[list[int]], start: int) -> list[bool]:
     return visited
 
 
+# TODO: implement dijkstra
 def dijkstra(graph: list[list[int]], start: int, final: int) -> list[int]:
+    pass
+
+
+# TODO: implement floyd_warshall
+def floyd_warshall(graph: list[list[int]]) -> list[list[int]]:
+    pass
+
+
+# TODO: implement ford_fulkerson
+def ford_fulkerson(graph: list[list[int]], start: int, final: int) -> list[list[int]]:
+    pass
+
+
+def page_rank(graph: list[list[int]], probability: float, iterations: int) -> list[list[int]]:
+    M = []
+    # Calculate M from graph
+    for i in range(len(graph)):
+        row_count = 0
+        row = []
+        for j in range(len(graph)):
+            if graph[i][j] == 1:
+                row_count += 1
+        for j in range(len(graph)):
+            if graph[i][j] == 1:
+                row.append(1 / row_count)
+            else:
+                row.append(0)
+        M.append(row)
+
+    # Calculate M' = probability * M + ...
+    for i in range(len(M)):
+        for j in range(len(M)):
+            M[i][j] = probability * M[i][j] + (1 - probability) / len(M)
+
+    M_transposed = []
+
+    for i in range(len(M)):
+        row = []
+        for j in range(len(M)):
+            row.append(M[j][i])
+        M_transposed.append(row)
+
+    # Initialize PR
+
+    PR = list(1 / len(M) for i in range(len(M)))
+    # Power Iteration
+
+    for i in range(iterations):
+        result = []
+        for i in range(len(M)):
+            row = 0
+            for j in range(len(M)):
+                row += M_transposed[i][j] * PR[j]
+            result.append(row)
+        sum = 0  # Norm result
+        for i in range(len(result)):
+            sum += result[i]
+        if sum != 1:
+            for i in range(len(result)):
+                result[i] = result[i] / sum
+        PR = result
+
+    return PR
+
+
+# TODO: implement kruskal
+def kruskal(graph: list[list[int]]) -> list[list[int]]:
+    pass
+
+
+# TODO: implement prim
+def prim(graph: list[list[int]]) -> list[list[int]]:
     pass
 
 
@@ -84,10 +157,11 @@ if __name__ == '__main__':
     ran_graph = random_graph(size=5, numbers=1)
 
     plot_graph(ran_graph)
-    plot_graph(null_graph)
+    # plot_graph(null_graph)
 
     print(ran_graph[:])
     print(bfs(ran_graph[:], 0))
     print(bfs(null_graph, 0))
     print(dfs(ran_graph[:], 0))
     print(dfs(null_graph, 0))
+    print(page_rank(graph=ran_graph[:], probability=0.85, iterations=100))

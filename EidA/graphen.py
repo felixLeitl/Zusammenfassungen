@@ -52,7 +52,24 @@ def dfs(graph: list[list[int]], start: int) -> list[bool]:
 
 # TODO: implement dijkstra
 def dijkstra(graph: list[list[int]], start: int, final: int) -> list[int]:
+    queue = [start]
+    visited = []
+    shortest_path = []
+    for i in range(len(graph)):
+        visited.append(False)
+        shortest_path.append(-1)
+
+    while len(queue) > 0:
+        u = queue.pop()
+        visited[u] = True
+        for i in range(len(graph)):
+            if graph[u][i] > 0 & graph[u][i] + shortest_path[u] < shortest_path[i]:
+                shortest_path[i] = graph[u][i] + shortest_path[u]
     pass
+
+
+
+
 
 
 # TODO: implement floyd_warshall
@@ -66,7 +83,7 @@ def ford_fulkerson(graph: list[list[int]], start: int, final: int) -> list[list[
 
 
 def page_rank(graph: list[list[int]], probability: float, iterations: int) -> list[list[int]]:
-    M = []
+    m = []
     # Calculate M from graph
     for i in range(len(graph)):
         row_count = 0
@@ -79,32 +96,32 @@ def page_rank(graph: list[list[int]], probability: float, iterations: int) -> li
                 row.append(1 / row_count)
             else:
                 row.append(0)
-        M.append(row)
+        m.append(row)
 
     # Calculate M' = probability * M + ...
-    for i in range(len(M)):
-        for j in range(len(M)):
-            M[i][j] = probability * M[i][j] + (1 - probability) / len(M)
+    for i in range(len(m)):
+        for j in range(len(m)):
+            m[i][j] = probability * m[i][j] + (1 - probability) / len(m)
 
     M_transposed = []
 
-    for i in range(len(M)):
+    for i in range(len(m)):
         row = []
-        for j in range(len(M)):
-            row.append(M[j][i])
+        for j in range(len(m)):
+            row.append(m[j][i])
         M_transposed.append(row)
 
-    # Initialize PR
+    # Initialize rank
 
-    PR = list(1 / len(M) for i in range(len(M)))
+    rank = list(1 / len(m) for i in range(len(m)))
     # Power Iteration
 
     for i in range(iterations):
         result = []
-        for i in range(len(M)):
+        for i in range(len(m)):
             row = 0
-            for j in range(len(M)):
-                row += M_transposed[i][j] * PR[j]
+            for j in range(len(m)):
+                row += M_transposed[i][j] * rank[j]
             result.append(row)
         sum = 0  # Norm result
         for i in range(len(result)):
@@ -112,9 +129,9 @@ def page_rank(graph: list[list[int]], probability: float, iterations: int) -> li
         if sum != 1:
             for i in range(len(result)):
                 result[i] = result[i] / sum
-        PR = result
+        rank = result
 
-    return PR
+    return rank
 
 
 # TODO: implement kruskal

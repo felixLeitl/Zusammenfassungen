@@ -85,3 +85,32 @@
 				\item Falls $f(n)=\Theta(n^{\log_b(a)})$, dann gilt $T(n)=\Theta (n^{\log_ba}\log n)$
 				\item Falls $f(n)=\Omega(n^{\log_b(a)+\epsilon})$, für eine Konstante $\epsilon$ und falls $af(\frac{n}{b})\leq c\cdot f(n)$ für eine Konstante $c<1$ und ab einem $n_0>0$ für alle $n>n_0$, dann gilt $T(n)=\Theta(f(n)$
 			\end{enumerate}
+	\subsection{Laufzeiten}
+	\begin{center}
+		\begin{tabular} {c|c|c|c}
+			Laufzeiten & best case & average case & worst case \\
+			\hline
+			Insertionsort & $\BigO(n)$ & & $\BigO(n^2$ \\
+			\hline
+			Bogosort & $\BigO(n)$ & $\BigO(e-1)n!$ & $\BigO(n\cdot n!)$ \\
+			\hline
+			Slowsort & $\BigO(n\frac{\log(n)}{2+e}$ & $\BigO(n\frac{\log(n)}{2+e}$ & $\BigO(n\frac{\log(n)}{2+e}$ \\
+			\hline
+			Bubblesort & $\BigO(n)$ & & $\BigO(n^2)$ \\
+			\hline
+			Mergesort &  & $\Theta(n\log n)$ &  \\
+			\hline
+			Selectionsort &  & $\Theta(n^2)$ &  \\
+			\hline
+			Heapsort & & $\BigO(n \log n$ & \\
+			\hline
+			Quicksort & $\Theta(n^2)$ & & $\Theta(n\log n)$ \\
+			\hline
+			Bucketsort & $\Theta(n)$ & $\Theta(n)$ & $\Theta(n^2)$ \\
+			\hline
+			Countingsort & & $\Theta(n+k)$ & \\
+			\hline
+			Radixsort & & $\Theta(d\cdot(n+k))$ & \\
+			
+		\end{tabular}
+	\end{center}

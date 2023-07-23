@@ -51,21 +51,23 @@ def dfs(graph: list[list[int]], start: int) -> list[bool]:
 
 
 # TODO: implement dijkstra
-def dijkstra(graph: list[list[int]], start: int, final: int) -> list[int]:
-    queue = [start]
+def dijkstra(graph: list[list[int]], start: int) -> list[int]:
+    queue = []
+    for i in range(len(graph)):
+        queue.append(i)
     visited = []
     shortest_path = []
     for i in range(len(graph)):
         visited.append(False)
-        shortest_path.append(-1)
-
+        shortest_path.append(0)
     while len(queue) > 0:
         u = queue.pop()
         visited[u] = True
         for i in range(len(graph)):
-            if graph[u][i] > 0 & graph[u][i] + shortest_path[u] < shortest_path[i]:
-                shortest_path[i] = graph[u][i] + shortest_path[u]
+            if graph[u][i] > 0 and graph[u][i] and not visited[i]:
+                print('fuck')
     pass
+
 
 
 

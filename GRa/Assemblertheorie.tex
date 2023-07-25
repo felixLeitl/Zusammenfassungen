@@ -1,0 +1,62 @@
+\section{Assemblertheorie}
+	\subsection{RiscV-Befehlssatz}
+		\begin{center}
+			\begin{tabular}{c|ccc|c}
+			add[i] & x1 & x2 & x3 \\
+			and[i] & x1 & x2 & x3 \\
+			or[i] & x1 & x2 & x3 \\
+			xor[i] & x1 & x2 & x3 \\
+			sll[i] & x1 & x2 & x3 & \text{shift left}\\
+			srl[i] & x1 & x2 & x3 & \text{shift right}\\
+			mv & x1 & x2 & &\text{move}\\ 
+			neg & x1 & x2 & &\text{logical negation}\\
+			not & x1 & x2 & &\text{bitwise negation}\\
+			sub & x1 & x2 & x3 \\
+			mul & x1 & x2 & x3 \\
+			div & x1 & x2 & x3 \\
+			rem & x1 & x2 & x3 &\text{remainder}\\
+			li & x1 & \text{Imm} &\\
+			la & x1 & \text{lable} &\\
+			lb & x1 & \text{Imm}(x2) & & \text{load byte}\\
+			lh & x1 & \text{Imm}(x2) &\\
+			lw & x1 & \text{Imm}(x2) &\\
+			sb & x1 & \text{Imm}(x2) & &\text{store byte}\\
+			sh & x1 & \text{Imm}(x2) &\\
+			sw & x1 & \text{Imm}(x2) &\\
+			call & \text{lable} & &\\
+			ret & & &
+			\end{tabular}
+		\end{center}
+	\subsection{Speicherbereiche}
+		\begin{center}
+			\begin{tabular}{c|c|c|c|c}
+				& & Schreibbar & Ausführbar & Dynamisch wachsend \\
+				\hline
+				Textsegment & Programmcode & Nein & Ja & Nein \\
+				\hline
+				Datensegment & Globale Variablen & Ja & Nein & Nein \\
+				\hline
+				Stack & Lokale Variablen & Ja & Nein & Ja \\
+				\hline
+				Heap & langlebige Variablen & Ja & Nein & ja
+				
+			\end{tabular}
+		\end{center}
+	\subsection{Stack}
+		In RiscV wächst der Stack von oben nach unten. RiscV bietet ein spezielles Stackpointer-Register(sp Register), welches immer auf die Adresse des zuletzt hinzugefügten Elements zeigt
+		\subsubsection{Lesen vom Stack}
+			Letztes Element des Stacks lesen: \verb|lw t0, (sp)| \newline
+			Vorletztes Element des Stacks lesen: \verb|lw t0, 4(sp)| (hier ein Integer (word))
+		\subsubsection{Schreiben auf den Stack}
+			Ein Element auf den Stack legen: \newline
+			\verb|li t0, 10|\newline
+			\verb|addi sp, sp, -4|\newline
+			\verb|sw, t0, (sp)|
+			\newline \newline
+			Mehrere Elemente auf den Stack legen: \newline
+			\verb|addi sp, sp,  -12|\newline
+			\verb|sw, t0, 8(sp)|\newline
+			\verb|sw, t1, 4(sp)|\newline
+			\verb|sw, t2, (sp)|
+		\subsection{Speicher freigeben}
+			\verb|addi sp, sp, 4|

@@ -1,0 +1,31 @@
+\section{Rechnerarchitektur}
+	\subsection{Endo- vs. Befehlsarchitektur}
+		Exteren Sicht(Befehlsarchitektur): Was muss nach außen hin sichtbar sein, damit man den Computer programmieren kann? \newline \newline
+		Interne Sicht(Endoarchitektur): Wie werden die Funktionalitäten intern realisiert?
+	\subsection{Von-Neumann, URA und ISA}
+		7 Eigenschaften des URAs/von-Neumann Architektur:
+		\begin{enumerate}
+			\item Rechner besteht aus 4 Werken:
+				\begin{enumerate}
+					\item Rechenwerk
+					\item Speicherwerk
+					\item Ein-/Ausgabewerk
+					\item Leitwerk
+				\end{enumerate}
+			\item Rechner ist programmgestuerert
+			\item Programme und Daten im selben Speicher
+			\item Hauptspeicher ist in Zellen gleicher Größe aufgeteilt, jede Zelle hat eine Adresse
+			\item Programm ist eine Sequenz an Befehlen
+			\item Abweichung von sequentieller Ausführung durch Sprünge möglich
+			\item Rechner verwendet Binärdarstellung
+		\end{enumerate}
+	\subsection{Befehlszyklus}
+		von-Neumann-Befehlszyklus:
+		\begin{enumerate}
+			\item Befehl holen
+			\item Befehl dekodieren
+			\item Operanden holen
+			\item Befehl ausführen
+			\item Ergebnis zurückschreiben
+			\item Nächsten Befehl addresieren
+		\end{enumerate}

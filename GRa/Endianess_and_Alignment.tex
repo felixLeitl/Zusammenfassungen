@@ -1,1 +1,16 @@
 \section{Endianess and Alignment}
+	\subsection{Endianess}
+		Die Endianess beschreibt, in welcher Reihenfolge die Bytes innerhalb zusammenhängender Datums abgespeichert werden\newline
+		\textbf{Little Endian}: Least Significant Byte first \newline
+		\textbf{Big Endian}: Most Significant Byte first 
+	\subsection{Alignment}
+		Um sicherzustellen, dass der Zugriff auf ein Datum möglichst wenig Speicherzugriffe benötigt, ist richtiges Alignment nötig. Ein Datum ist korrekt alignd, wenn gilt: 
+		$$
+			\text{Adresse(Datum)}\%\text{Größe(Datum)}=0
+		$$
+		Um Daten korrekt auszurichten muss man unter Umständen Padding einfügen, also freien Platz. \newline \newline
+		Für \textbf{structs} gilt zusätzlich:
+		$$
+			\text{Adresse(struct Anfang)}\%\text{max(Größe(DatumInStruct))}=0
+		$$
+		und am Ende eines structs muss so vile Padding eingefügt werden, sodass, würde das gleiche struct noch einmal abgelegt werden, es automatisch aligned wäre

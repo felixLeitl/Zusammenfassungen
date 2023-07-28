@@ -1,1 +1,26 @@
 \section{Befehlssatzarchitektur}
+	\subsection{Register-Register}
+		Alle Operanden eines Assemblerbefehls müssen in einem Register stehen \newline \newline
+		\verb|load R1, A|\newline
+		\verb|load R2, B|\newline
+		\verb|add R3, R1, R2|\newline
+		\verb|store R3, C|
+	\subsection{Register-Memory}
+		Operanden können sowohl in den Registern, als auch in Speicherzellen liegen
+		\newline \newline
+		\verb|load R1, A|\newline
+		\verb|add R1, B|\newline
+		\verb|store R1, C|
+	\subsection{Akkumulator}
+		Der erste Operand wird mittels load in den Akkumulator geladen, der zweite kommt aus dem Speicher
+		\newline \newline
+		\verb|load A|\newline
+		\verb|add B|\newline
+		\verb|store C|
+	\subsection{Stack}
+		Operanden werden zuerst auf den Stack gepushed. Assemblerbefehle nimmt dann die obersten Werte vom Stack und rechnet damit. Ergebnis landet ebenfalls auf dem Stack
+		\newline \newline
+		\verb|push A|\newline
+		\verb|push B|\newline
+		\verb|add|\newline
+		\verb|pop C|

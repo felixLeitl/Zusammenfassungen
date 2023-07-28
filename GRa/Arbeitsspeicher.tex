@@ -1,1 +1,61 @@
 \section{Arbeitsspeicher}
+	\subsection{Taktraten und DDR}
+		\subsubsection{Speichertakt}
+			Der Arbeitsspeicher hat intern einen eigenen Takt. Dieser ist per se unabhängig vom CPU-Takt
+		\subsubsection{Bustakt}
+			Bei SDRAM sind Speicher- und Bustakt synchron, also ein Vielfaches voneinander 
+		\subsubsection{Busbreite}
+			Beschreibt, wie viele Datenleitungen der Bus besitzt (typischer Weise zwischen 16 und 256 Bit)
+		\subsubsection{Datenrate}
+			Die Datenrate beschreibt, wie viele Daten theoretisch pro Sekunde an die CPU gesendet werden könnten
+			$$
+				\texttt{Datenrate}=2 \cdot \texttt{Busbreite} \cdot \texttt{Bustaktrate}
+			$$
+		\subsubsection{DDR-SRAM}
+			DDR (Double Data Rate) überträgt bei steigender und fallender Flanke
+		\subsubsection{Prefetch}
+			Der Prefetch beschreibt, wie viele Datenpakete der Arbeitsspeicher pro Speichertakt theoretisch liefern kann.
+		\subsubsection{DDR 1-5}
+			\begin{center}
+				\begin{tabular}{|c|c|c|}
+					\hline
+					& Prefetch & Bustaktrate \\
+					\hline
+					DDR1 & 2 & $1\cdot$ Speichertaktrate \\
+					\hline
+					DDR2 & 4 & $2\cdot$ Speichertaktrate \\
+					\hline
+					DDR3 & 8 & $4\cdot$ Speichertaktrate \\
+					\hline
+					DDR4 & 8 & $4\cdot$ Speichertaktrate \\
+					\hline
+					DDR5 & 16 & $8\cdot$ Speichertaktrate \\
+					\hline
+				\end{tabular}
+			\end{center}
+		\subsection{DRAM vs. SRAM}
+			\subsubsection{DRAM (Dynamic Random Access Memory)}
+				Speichert Bits als Kondensatorenladung \newline
+					\begin{itemize}
+						\item Vorteil: Sehr wenig Platz wird benötigt (billig)
+						\item Beim lesen der Speicherzelle und nach einiger Zeit geht der Wert verloren und muss gesetzte werden (Refresh)
+					\end{itemize}
+			\subsubsection{SRAM (Static Random Access Memory)}
+				Speichert Bits durch Transistorlogik \newline
+					\begin{itemize}
+						\item Vorteil: Schneller als DRAM und beim Lesen geht der Wert nicht verloren
+						\item Nachteil: Deutlich größerer Platzverbrauch als DRAM (teuer)
+					\end{itemize}
+	\subsection{(Burst-)Zugriffe}
+		DDR-SDRAM ist intern normalerweise in zweidimensionalen Speichermatrizen organisiert, wodurch man die Adressen mit Zeilen- und Spaltennummern adressieren muss. \newline \newline
+		Ein Lesezugriff durchläuft dabei 4 Phasen: \newline
+		\begin{itemize}
+		  \item Precharge: DRAM wird auf Zugriff vorbereitet 
+		  \item Row Addres Strobe (RAS): Zeile wird ausgelesen
+		  \item Column Adress Strobe (CAS): Spalte wird ausgelesen
+		  \item Data Read: Daten stehen zum Abholen durch den Bus bereit
+		\end{itemize}
+		\subsubsection{Burstzugriff}
+			Du erinnerst dich an räumliche Lokalität: Oft werden nach dem Zugriff auf eine Adresse X kurz darauf die Nachbardaten an den Adressen X+1, X+2, X+3, ... benötigt. Im Arbeitsspeicher liegen Nachbardaten normalerweise in der selben Zeile. Der Arbeitsspeicher kann nun also intern, um nacheinander die Nachbarn auszulesen, die Zeile 1x lesen (Precharge + RAS) und dann mehrmals einen Column Address Strobe (CAS) durchführen, um mehrere Spalten nacheinander auszulesen. Dadurch spart man sich viel Latenz. Dieses Vorgehen nennt sich Burstzugriff.
+
+				

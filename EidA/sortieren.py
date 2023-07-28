@@ -103,12 +103,10 @@ def selection_sort(list: List[int], n) -> List[int]:
     return list
 
 
-# TODO: heap sort
 def heap_sort(list: List[int], n) -> List[int]:
     pass
 
 
-# TODO: pivot functions
 def quick_sort(list: List[int], pivot_func):
     l, p, r = partition(list, pivot_func(list))
 
@@ -171,7 +169,7 @@ def counting_sort(list: List[int], len_list, highest_element) -> List[int]:
     return B
 
 
-# TODO: radix sort
+
 def radix_sort(list: List[int], n) -> List[int]:
     pass
 

@@ -50,7 +50,6 @@ def dfs(graph: list[list[int]], start: int) -> list[bool]:
     return visited
 
 
-# TODO: implement dijkstra
 def dijkstra(graph: list[list[int]], start: int) -> list[int]:
     queue = []
     for i in range(len(graph)):
@@ -74,12 +73,10 @@ def dijkstra(graph: list[list[int]], start: int) -> list[int]:
 
 
 
-# TODO: implement floyd_warshall
 def floyd_warshall(graph: list[list[int]]) -> list[list[int]]:
     pass
 
 
-# TODO: implement ford_fulkerson
 def ford_fulkerson(graph: list[list[int]], start: int, final: int) -> list[list[int]]:
     pass
 
@@ -136,12 +133,11 @@ def page_rank(graph: list[list[int]], probability: float, iterations: int) -> li
     return rank
 
 
-# TODO: implement kruskal
+
 def kruskal(graph: list[list[int]]) -> list[list[int]]:
     pass
 
 
-# TODO: implement prim
 def prim(graph: list[list[int]]) -> list[list[int]]:
     pass
 

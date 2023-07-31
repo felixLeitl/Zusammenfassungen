@@ -1,1 +1,51 @@
 \section{Speicherverwaltung}
+	\subsection{Virtuelle und physische Adressen}
+		\subsubsection{Physische}
+			Jedes Byte im physischen Arbeitsspeicher (d.h. im echten, vorhandenen Arbeitsspeicher) erhält in der Regel eine eigene Adresse, die sogenannte physische Adresse. Beim Starten des Rechners wird diese festgelegt und bleibt dann im laufenden Betrieb konstant. Anhand der physischen Adresse kann dann eindeutig bestimmt werden, in welcher Rank, Bank, Row und Column (Vgl. Tafelübung zu Arbeitsspeicher) sich ein bestimmtes Byte befindet
+		\subsubsection{Virtuelle}
+			Auf vielen Rechnern arbeiten Programme jedoch nicht mit den physischen, sondern mit sogenannten virtuellen Adressen. Würde ein Programm direkt mit physischen Adressen arbeiten, dann wären Konzepte wie Auslagerung (Swapping) oder Speicherschutz nicht mehr so einfach zu realisieren \newline \newline
+			Virtuelle Adressen können vom Programm quasi frei gewählt werden. Mehrere Programme können auch die gleichen virtuellen Adressen verwenden, und dann damit aber unterschiedliche physische Adressen (und daher unterschiedliche Daten) meinen \newline \newline
+			Virtuelle Adressen müssen, um physisch auf die Daten zugreifen zu können, in physische Adressen übersetzt werden. Das Festlegen von Übersetzungen verwaltet das Betriebssystem mittels sogenannter Übersetzungstabellen. Jeder Prozess bekommt eine eigene Übersetzungstabelle. Die Übersetzung - wenn eine festgelegt wurde - übernimmt in der Regel spezielle Hardware, die sogenannte Memory Management Unit (MMU). Diese liegt meistens direkt mit auf der CPU. Hierzu sagt das Betriebssystem der MMU, welcher Prozess gerade aktiv ist, indem die entsprechende Übersetzungstabelle als aktive Übersetzungstabelle festgelegt wird
+		\subsubsection{Auslagerung (Swapping)}
+			Bei der Auslagerung werden aktuell nicht benötigte Speicherbereiche vom Arbeitsspeicher auf die langsamere Festplatte verschoben. Dadurch schafft man neuen Platz im Arbeitsspeicher für aktive Prozesse, und hat somit quasi  mehr Arbeitsspeicher als eigentlich physisch vorhanden. Wenn auf die ausgelagerten Daten wieder zugegriffen werden soll, müssen diese erst wieder in den Arbeitsspeicher eingelagert und ggf. ein anderer Speicherbereich ausgelagert werden (tauschen => swapping). Dieser Vorgang ist langsam und daher ist es ratsamer, mehr physischen Arbeitsspeicher in den Rechner einzubauen, als den Arbeitsspeicher um die Festplatte zu erweitern
+	\subsection{Paging}
+		Bei Paging wird der Arbeitsspeicher in gleich große Bereiche (z.B. 4 KiB), sogenannte Pages, unterteilt. Pro Page, die verwendet werden soll, ist immer ein Eintrag in der Übersetzungstabelle (in diesem Kontext dann Page Table genannt) nötig \newline \newline
+		Wenn ein Prozess nun Daten ablegen möchte, dann reserviert das Betriebssystem automatisch immer gleich eine ganze Page für diesen Prozess. Selbst wenn er nur 4 Byte ablegen möchte, bekäme er z.B. trotzdem direkt 4 KiB an Speicherbereich zugewiesen. Dies führt zu sogenannter interner Fragmentierung: Dieser Begriff bezeichnet ungenutzten Speicher innerhalb einer Page, der zu viel reserviert wurde \newline \newline
+		\begin{center}
+			\begin{tabular}{|c|c|c|}
+				\hline
+				Virt. Adresse & Phys. Adresse & Valid \\
+				\hline
+				... & ... & ... \\
+				\hline 
+				0x3CF & 0x4000 & 1 \\
+				\hline
+				0x3D0 & 0x5000 & 1 \\
+				\hline 
+				... & ... & ... \\
+				\hline
+				0x400 & 0x2000 & 1 \\
+				\hline
+				0x401 & 0x8000 & 1 \\
+				\hline 
+				... & ... & ... \\
+				\hline
+				0xF00 & 0xF000 & 1 \\
+				\hline
+				... & ... & ... \\
+				\hline				
+			\end{tabular}
+		\end{center}
+		\subsubsection{Byte-Offset}
+			Bei einer 4KiB($2^{12}$ B) großen Page benötigt man 12 Bit um jedes Byte der Page zu adressieren. Demnach sind die letzten 3 Ziffern der virtuellen Adresse der Byte-Offset (0x 00 40 1\textbf{B 04}) und dieser muss anschließend auf die physische Adresse addiert werden (0x8\textbf{B 04})
+	\subsection{Segmentierung}
+		Bei der Segmentierung wird der Arbeitsspeicher - ähnlich wie bei Paging - in zusammenhängende Speicherbereiche aufgeteilt (sogenannte Segmente). Zusammenhängend bedeutet, dass Segmente nicht durchtrennt werden können; alle darin enthaltenen Bytes liegen sequentiell aufeinanderfolgend im Speicher \newline \newline
+		Im Gegensatz zu Pages sind diese Segmente aber dynamisch groß, abhängig davon, wie viel Speicher der Prozess tatsächlich benötigt. Würde ein Prozess beispielsweise 3 KiB benötigen, dann würde er ein 3 KiB großes Segment bekommen \newline \newline
+		Dies hat jedoch diverse Nachteile: 
+		\begin{enumerate}
+			\item Die Übersetzung (mittels der sogenannten Segment Tables) wird komplexer: Man muss bei jeder virtuellen Adresse prüfen, ob sie innerhalb eines dynamischen Bereichs liegt (definiert durch Startadresse + Größe des Segmentes). Dadurch ist das Segment nicht mehr berechenbar, sondern man muss es quasi suchen
+			\item Externe Fragmentierung: Wenn Speicher reserviert wird, und wieder freigegeben wird, dann können ungleich große Lücken zwischen Segmenten entstehen. Diese Lücken sind dann gegebenenfalls in der Summe groß genug für ein neues Segment, aber jedes einzelne ist nicht ausreichend groß. Da Segmente zusammenhängend sein müssen, kann man es nicht auf mehrere Lücken aufteilen
+			\item Verbunden damit ist auch eine allgemein komplexe Suche nach freiem Speicher. Da man nach möglichst ideal großen Lücken suchen muss, kann das Speicherreservieren länger dauern. Bei Paging hingegen sind ohnehin alle Pages gleich groß, also würde man hier die erste freie immer nehmen
+		\end{enumerate}
+	\subsection{Translation-Lookaside-Buffer (TLB)}
+		 Der TLB ist ein Spezialcache, der sich die letzten ca. 4 - 32 Adressübersetzungen merkt. Bei einer Adressübersetzung wird damit zuerst geprüft, ob die physische Adresse vielleicht bereits bekannt ist; und ansonsten wird die Übersetzung eben manuell über die Übersetzungstabellen durchgeführt und sich das Resultat davon gemerkt

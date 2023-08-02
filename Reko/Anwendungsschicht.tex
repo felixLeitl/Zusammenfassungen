@@ -222,7 +222,59 @@
 				\captionof{figure}{OID}
 			\end{center}
 	\subsection{Domain Name Service (DNS)}
-		
+		DNS bildet Domain-Name auf Werte ab und ist als verteilte Datenbank, bestehend aus vielen Name-Servern, repräsentiert
+		\subsubsection{Domain-Struktur}
+			DNS implementiert hierarchischen Namensraum für Internet-Objekte
+		\subsubsection{Hierachie von Name-Servern}
+			\begin{itemize}
+				\item \textbf{Root Name Server}: weltweit
+				\item \textbf{Top-level Domain-Server} für com, org, net, ...
+				\item ...
+				\item \textbf{autoritativer Name-Server}: unterste Ebene für einzelne Organisationen
+			\end{itemize}
+		\subsubsection{Ressource Records}
+			\begin{itemize}
+				\item \textbf{TTL}: Time to Live, Dauer der Gültigkeit
+				\item \textbf{Typ = A}:
+					\begin{itemize}
+						\item Wert = IPv4-Adresse
+						\item AAAA-Einträge für IPv6-Adressen
+					\end{itemize}
+				\item \textbf{Type = NS}:
+					\begin{itemize}
+						\item Wert = Domainname eines Hosts, auf dem ein Server läuft, der Namen in der Domain auflösen kann
+					\end{itemize}
+				\item \textbf{Type = CNAME}: (Canonical Name)
+					\begin{itemize}
+						\item Wert = kanonischer Name eines Hosts, ermöglicht Aliasnamen
+					\end{itemize}
+				\item \textbf{Type = MX}: (Mail Exchange)
+					\begin{itemize}
+						\item Wert = Domain-Name des Hosts, auf dem der Mail-Server läuft
+					\end{itemize}
+			\end{itemize}
+		\subsubsection{DNS-Protokoll}
+			\begin{center}
+				\includegraphics[scale=0.25]{DNS_Protokoll.png}
+				\captionof{figure}{DNS Protokoll}
+			\end{center}
+		\subsubsection{Anfragen}
+			iterativ:
+			\begin{itemize}
+				\item Antwort: anderer Server, der Name evtl. auflösen kann (oder keine Antwort)
+				\item NS- und A-Datensatz
+				\item Antwort wird sofort geliefert, es muss keine Information gespeichert werden, gut für hochfrequente Server
+			\end{itemize}
+			rekursiv:
+			\begin{itemize}
+				\item Antwort: Auflösung des Namens, die u.A. von anderen Servern geholt wird
+				\item A-Datensatz
+				\item bei Anfragen an einen anderen Server muss die Information gespeichert werden
+			\end{itemize}
+
+
+
+
 
 
 			

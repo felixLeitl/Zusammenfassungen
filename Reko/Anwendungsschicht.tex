@@ -35,6 +35,7 @@
 			\end{enumerate}
 		\subsubsection{Format der Anfragen}
 			\includegraphics[scale=0.25]{Anfragenachricht_HTTP.png}
+			\captionof{figure}{Anfrage}
 		\subsubsection{Anfragenachricht}
 			\begin{itemize}
 				\item Methoden: 
@@ -64,9 +65,11 @@
 					Accept-language: & de-de \\
 					\hline
 				\end{tabular}
+				\captionof{figure}{Anfragenachricht}
 			\end{center}
 		\subsubsection{Format der Antworten}
 			\includegraphics[scale=0.25]{Antwortnachricht_HTTP.png}
+			\captionof{figure}{HTTP Antworten}
 		\subsubsection{Antwortnachricht}
 			\begin{center}
 				\begin{tabular}{|cc|}
@@ -82,6 +85,7 @@
 					data & data \\
 					\hline
 				\end{tabular}
+				\captionof{figure}{Antwortnachricht}
 			\end{center}
 		\subsubsection{HTTP-Ablauf}
 			\textbf{Nicht-persistentes HTTP}: \newline
@@ -94,11 +98,12 @@
 			Basisseite: Aufbau der TCP-Verbindung (1x RTT) + Anfrage hin und Antwort zurück (1x RTT) $\Rarr$ 2RTT + Zeit zum Senden + weitere Wartezeiten durch TCP \newline
 			\begin{center}
 				\includegraphics[scale=0.25]{Antwortzeit_HTTP_Basis.png}	
+				\captionof{figure}{Antwortzeit}
 			\end{center}
 		\subsubsection{Dynamische Inhalte}
 			\textbf{Common Gate Interface (CGI)} verarbeitet als externer Prozess die Information und liefert neue HTML-Seite an Server \newline \newline
 			\includegraphics[scale=0.25]{CGI_HTML.png}
-			\newline
+			\captionof{figure}{CGI}
 			\textbf{Scripting:} Durch Interpretation von eingebetteten Skripten können dynamische Inhalte erzeugt werden.\newline \newline
 			Serverseitig: im HTML ist Code eingebettet, der vom Server interpretiert wird und dabei HTML erzeugt, z.B. PHP \newline \newline
 			Clientseitig: im HTML ist Code eingebettet, der vom Client interpretiert wird, z.B. JavaScript
@@ -106,6 +111,7 @@
 			Cache (Proxy Server) ist Server für Web-Browser und Client für Web-Server, der als Zwischenspeicher zur Verringerung der Wartezeit des Nutzers und des Netzverkehrs dient
 			\begin{center}
 				\includegraphics[scale=0.25]{Cache_Server_HTML.png}
+				\captionof{figure}{Cache Server}
 			\end{center}
 		\subsubsection{HTTP/2}
 			Wesentliche Elemente: 
@@ -126,6 +132,7 @@
 		\end{itemize}
 		\begin{center}
 			\includegraphics[scale=0.25]{FTP.png}
+			\captionof{figure}{FTP}
 		\end{center}
 	\subsection{Simple Mail Transfer Protocol (SMTP)}
 		\begin{itemize}
@@ -136,6 +143,7 @@
 		\end{itemize}
 		\begin{center}
 			\includegraphics[scale=0.25]{SMTP.png}
+			\captionof{figure}{SMTP}
 		\end{center}
 		\begin{itemize}
 			\item nutzt TCP (Port 25)
@@ -162,12 +170,61 @@
 			\end{enumerate}
 			\begin{center}
 				\includegraphics[scale=0.25]{Sicherheit_SMPT.png}
+				\captionof{figure}{Vertraulichkeit und Datenintegrität}
 			\end{center}
 
 	
 	\subsection{Netzwerkmanagement}
-							
-			
+		Überwachung und Verwaltung eines Netzes = komplexes HW/SW Gebilde \newline
+		FCAPS-Modell nach ISO:
+		\begin{itemize}
+			\item Fault Management: Monitoring, Dokumentation, Reaktionsmaßnahmen
+			\item Configuration Management: Übersicht über Geräte und deren HW/SW-Konfigurationen 
+			\item Accounting Management: Verwendung von Netzwerkressourcen, Festlegung, Kontrolle, Dokumentation des Zugangs von Benutzern und Geräten
+			\item Performance Management: Monitoring von Auslastung, Durchsatz, Antwortzeiten, Dokumentation, Reaktionsmaßnahmen
+			\item Security Management: Monitoring und Kontrolle des Zugangs, Schlüsselverwaltung, Firewalls, Intrusion Detection
+		\end{itemize}
+		\subsubsection{Simple Network Management Protocol (SNMP)}
+			Organisationsmodell: 
+			\begin{itemize}
+				\item Managing Entity: Prozess auf zentraler Management Station, Client
+				\item Managed Device
+				\item Managed Object: HW oder SW im Managed Device
+				\item Managed Agent: Prozess auf Managed Device, kann lokal ausgeführt werden
+				\item Anfrage/Antwort-Protokoll zwischen Manager und Agent über UDP
+				\item Manager basierend auf Regeln, was zu tun ist
+			\end{itemize}
+			\begin{center}
+				\includegraphics[scale=0.25]{SNMP.png}
+				\captionof{figure}{SNMP}
+			\end{center}
+			SNMP Messages:
+			\begin{itemize}
+				\item \textbf{Get}: Manager an Agent, um Daten von Agent zu erhalten
+				\item \textbf{Get-Next}: Manager an Agent, für nächsten Datensatz, Zugriff auf sequentielle Datensätze
+				\item \textbf{Get-Bulck}: Manager an Agent, für mehrere Datensätze auf einmal
+				\item \textbf{Set}: Manager an Agent, initialisiert oder ändert den Wert eines Datensatzes 
+				\item \textbf{Response}: Agent an Manager, Antwort auf Get- und Set-Nachrichten
+				\item \textbf{Trap}: Agent an Manager, unaufgeforderte Nachricht über Fehlersituation
+			\end{itemize}
+			\begin{center}
+				\includegraphics[scale=0.25]{SNMP_Nachrichten.png}
+				\captionof{figure}{Format von SNMP Nachrichten}
+			\end{center}
+		\subsubsection{Management Information Base (MIB)}
+			MIB-Module enthalten Datenstrukturen für die Managed Devices. Das genaue binäre Format der Übertragung wird mit Basic Encoding Rules (BER) festgestellt. Jedes MIB-Modul wird eindeutig durch die Objekt-Identifizierung (OID) der ASN.1 bezeichnet.
+			\begin{center}
+				\includegraphics[scale=0.25]{MIB.png}
+				\captionof{figure}{MIB-Modul}
+			\end{center}
+			\begin{center}
+				\includegraphics[scale=0.25]{OID.png}
+				\captionof{figure}{OID}
+			\end{center}
+	\subsection{Domain Name Service (DNS)}
+		
+
+
 			
 			
 			

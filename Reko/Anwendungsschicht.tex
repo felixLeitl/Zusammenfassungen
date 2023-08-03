@@ -271,7 +271,81 @@
 				\item A-Datensatz
 				\item bei Anfragen an einen anderen Server muss die Information gespeichert werden
 			\end{itemize}
+	\subsection{Content Distribution Network}
+		Ziel: massive gleichzeitige Nutzung einer Webseite mit mehreren Mbit/s pro User zu realisieren \newline \newline
+		Idee: sehr viele Spiegelserver geographisch verteilen und näher am Nutzer platzieren
+		\subsubsection{Verteilung der Anfragen}
+			\begin{itemize}
+				\item \textbf{Server-basierte HTTP Redirection}: Server liefert aufgrund der IP-Adresse des Clients einen geeigneten anderen Server, erfordert zusätzliche RTT, Server-Betreiber muss Verteilung des Inhalts kennen, nicht bewährt
+				\item \textbf{Client-nahe HTTP Redirection}: z.B. durch Web-Proxy, nicht bewährt
+				\item \textbf{URL Rewriting}: Server liefert Basisseite, die URLs der eingebetteten Objekte werden umgeschrieben, mit dem Domain-Namen eines geeigneten Servers
+				\item \textbf{DNS-basierte Redirection}: DNS-Server bilden Domain-Namen des Services auf Domain-Namen und zuletzt auf die IP-Adresse eines geeigneten Servers ab
+			\end{itemize}
 
+	\subsection{Socket-Programmierung}
+		\subsubsection{Socket-Schnittstelle}
+			\begin{itemize}
+				\item verbreitetes API für Transportdienste
+				\item Festlegung von TCP/UDP, IP-Adressen, Portnummern
+			\end{itemize}
+			\begin{center}
+				\includegraphics[scale=0.2]{Socket.png}
+				\captionof{figure}{Socket}
+			\end{center}
+	\subsection{Peer-to-Peer}
+		\textbf{Grundidee}: Inhalte nicht nur von zentralem Server, sondern auch von anderen Peers. Upload-Bitrate der Peers wird mitgenutzt
+		\subsubsection{Unstrukturiert}
+			\textbf{Zentralisiertes Verzeichnis}:
+			\begin{itemize}
+				\item Eintritt eines Peers: informiert zentralen Server über seine IP-Adresse und seine Inhalte
+				\item Suche nach Inhalt: über zentralen Server
+				\item Dateiübertragung: direkt zwischen Peers
+				\item zentraler Server: juristischer und leistungstechnischer Schwachpunkt
+			\end{itemize}
+			\textbf{Dezentralität durch Fluten von Anfragen}
+			\begin{itemize}
+				\item Peers bilden Overlay-Netzwerk über TCP-Verbindungen
+				\item anfragender Peer sendet Anfrage an alle seine Nachbarn im Overlay-Netzwerk
+				\item diese vergleichen Anfragen mit den von ihnen angebotenen Inhalten
+				\item wenn nicht gefunden werden die Anfragen an mehrere Nachbarn weitergeleitet
+				\item das Fluten wird durch einen maximalen Hopcount begrenzt
+				\item bei fund wird dem anfragendem Peer geantwortet (nicht dem ursprünglichen, womit seine Identität geheim bleibt)
+				\item Verbindung wird mittels HTTP zwischen Quelle und Ursprung hergestellt
+			\end{itemize}
+			\textbf{Hybrid} \newline \newline
+				Peers bilden Gruppen, einer ist Group-Leader, P2P-Netzwerke in Gruppen und zwischen Leadern $\Rarr$ besser skalierbar
+		\subsubsection{Strukturiert}
+			\textbf{Verteilte Hash-Tabllen}
+			\begin{itemize}
+  				\item Peers bilden ringförmiges Overlay-Netz
+  				\item jedem Peer wird ein zufälliger Bezeichner $p(0\leq p\leq 2^m-1)$ aus ringförmigen Bezeichnerraum mit m Bits zugewiesen
+  				\item jedem Datenelement wird mittels Hash-Funktion ein Schlüssel k ebenfalls aus diesem Raum zugewiesen
+  				\item Nachfolger von k:
+  					\begin{itemize}
+  						\item Datenelement mit Schlüssel k wird auf Nachfolger p von k gespeichert (Nachfolger darf Knoten k selbst sein)
+  						\item der nächste Peer im Ring, formal: Peer p mit dem kleinsten $a\geq0$, sodass $p=\texttt{succ}(k)=(k+a)\mod2^m$ existiert
+  						\item auslesen eines Datenelements mit Schlüssel k erfolgt auf Peer succ(k)
+					\end{itemize}
+			\end{itemize}
+		\subsubsection{Bittorrent}
+			\begin{itemize}
+				\item \textbf{Torrent}: Schwarm von Peers fu2r gleiche Datei
+				\item \textbf{Chunks}: Teile der zu verteilenden Datei
+				\item \textbf{Tracker}: Server, bei dem sich Peers registrieren
+				\item .torret-Datei mit Metadaten über zu verbelibende Datei und Tracker
+				\item neuer Peer tritt Schwarm bei:
+					\begin{itemize}
+						 \item A registriert sich bei Tracker und erhält IP-Adressen zufälliger anderer Peers des Schwarms
+						 \item A baut TCP-Verbindung zu einigen dieser Peers auf, fragt Liste der Chunks in ihrem Besitz nach und sendet Anfragen für Chunks
+						 \item Rarest First: A fragt die seltensten Chunks der Peers zuerst nach, dadurch gleichmäßige Verteilung
+						 \item Incentive Mechanismus (Tit-for-Tat): A misst Antwortrate der Peers und antwortet an diese in entsprechendem Anteil der Upload-Rate
+						 \item neue Nachbarn werden zufällig dazu genommen
+					\end{itemize}
+
+			\end{itemize}
+
+
+				
 
 
 

@@ -1,4 +1,5 @@
-% Satz von Weierstrass finden
+%TODO: Satz von Weierstrass finden
+%TODO: Eigenschaften & Bemerkungen
 \section{Stetige Funktionen}
 	\begin{definition}
 		Def: \newline
@@ -16,7 +17,7 @@
 	\end{itemize}
 	\subsection{$\Q$ ist dicht in $\R$}
 		\begin{Lemma}
-			Zu jeder reellen Zahl $r\in \R$ und jedem $\epsilon > 0$ exestiert eine rationale Zahl $q\in \Q$ mit $|r-q|<\epsilon$
+			Zu jeder reellen Zahl $r\in \R$ und jedem $\epsilon > 0$ existiert eine rationale Zahl $q\in \Q$ mit $|r-q|<\epsilon$
 		\end{Lemma}
 		\begin{Lemma}
 			Zu jeder reellen Zahl $r\in \R$und jedem $\epsilon>0$ existiert eine rationale Zahl $r\in\R\backslash\Q$ mit $|r-q|<\epsilon$
@@ -80,4 +81,33 @@
 			$$
 		\end{definition}
 	\subsection{Metrik in normierten Räumen}
-		
+		\begin{definition}
+			Ist $(V,||\cdot||)$ ein normierter Raum. Dann heißt die Abbildung
+			$$
+				d: V \times V \to \R, \quad d(x, y):=||x-y||
+			$$
+			die zur Norm $||\cdot||$ gehörige Metrik
+		\end{definition}
+	\subsection{$\epsilon$-Umgebung}
+		\begin{definition}
+			Sei $(V, ||\cdot||)$ ein normierter Raum. Für einen Punt $x\in V$ und $\epsilon>0$ heißt die Menge
+			$$
+				B_\epsilon(x):= \{d(x, y) < \epsilon\} = \{y\in V:||x-y||<\epsilon\}
+			$$
+			eine $\epsilon$-Umgebung von $x$. Man spricht von der offenen Kugel mit Radius $\epsilon$ um $x$
+		\end{definition}
+	\subsection{Umgebungen}
+		\begin{definition}
+			Sei $(V, ||\cdot||)$ ein normierter Raum und $x\in V$ ein Punkt in V. Dann heißt eine Teilmenge $U\subset V$ eine Umgebung von $x$, wenn sie eine $\epsilon$-Umgebung von $x$ enthält, d.h. wenn $\epsilon > 0$ existiert mit $B_\epsilon(x)\subset U$
+		\end{definition}
+	\subsection{Innere Punkte}
+		\begin{definition}
+			Sei $M\subset V$. Ein Punkt $x\in M$ heißt innerer Punkt von $M$, falls ein $\epsilon>0$ mit $B_\epsilon(x)\subset M$ existiert. \newline
+			Die Menge aller inneren Punkte von $M$ heißt das Innere von $M$ und wird mit $\mathring{M}$ bezeichnet
+		\end{definition}
+	\subsection{Randpunkte}
+		\begin{definition}
+			Sei $M\subset V$. Ein Punkt $x\in V$ heißt Randpunkt von $M$, falls in jeder Umgebung $B_\epsilon(x)$ ein Punkt aus $M$ und aus $V\backslash M$ ist. \newline
+			Die Menge aller Randpunkte von $M$ heißt der Rand von $M$ und wird mit $\partial M$ bezeichnet. \newline
+			Die Menge $\overline{M}:=M\cup\partial M$ heißt der Abschluss von $M$
+		\end{definition}

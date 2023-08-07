@@ -1,0 +1,83 @@
+% Satz von Weierstrass finden
+\section{Stetige Funktionen}
+	\begin{definition}
+		Def: \newline
+	Sei $I\subset \R$ ein Intervall und $f: I \to \R$ eine Funktion
+	\begin{itemize}
+		\item $f$ heißt stetig im Punkt $x\in I$, wenn gilt: \newline
+			Für jede Folge $(X_n)$ in $I$ mit $x_n\to x$ gilt auch $f(x_n)\to f(x)$
+		\item $f$ heißt stetig, wenn $f$ in jedem Punkt $x \in I$ stetig ist
+	\end{itemize}
+	\end{definition}
+	Anschaulich:
+	\begin{itemize}
+		\item \glqq{} $f$ stetig in $x$ \grqq{}  bedeutet, dass $f$ in $x$ nicht springt
+		\item \glqq{} $f$ stetig \grqq{} bedeutet, dass $f$ nirgendwo springt 
+	\end{itemize}
+	\subsection{$\Q$ ist dicht in $\R$}
+		\begin{Lemma}
+			Zu jeder reellen Zahl $r\in \R$ und jedem $\epsilon > 0$ exestiert eine rationale Zahl $q\in \Q$ mit $|r-q|<\epsilon$
+		\end{Lemma}
+		\begin{Lemma}
+			Zu jeder reellen Zahl $r\in \R$und jedem $\epsilon>0$ existiert eine rationale Zahl $r\in\R\backslash\Q$ mit $|r-q|<\epsilon$
+		\end{Lemma}
+		\begin{Lemma}
+			Zu jeder reellen Zahl $x\in\R$ existiert eine Folge $(x_n)$ in $\Q$ mit $x_n\to x$\newline
+			Zu jeder rationalen Zahl $x\in \Q$ existiert eine Folge $(x_n)$ in $\R\backslash\Q$ mit $x_n\to x$
+		\end{Lemma}
+	\subsection{Eigenschaften stetiger Funktionen}
+		\begin{Satz}
+			Sei $I$ ein Intervall, $x \in I$ und $f, g: I\to \R$ Funktionen, die stetig in $x$ sind. Dann gilt:
+			\begin{itemize}
+				\item $f+g$ ist stetig in $x$
+				\item $f-g$ ist stetig in $x$
+				\item $f\cdot g$ ist stetig in $x$
+				\item Falls $g(y)\not = 0, \forall y\in I$, so ist $\frac{f}{g}$ stetig in $x$
+			\end{itemize}
+		\end{Satz}
+	\subsection{Komposition stetig er Funktionen}
+		\begin{Satz}
+			Seien $I, J$ Intervalle, $f: I\to\R$ und $g: J\to \R$ und $f(I)\subset J$ \newline 
+			Ferner sei $f$ stetig in $x\in I$ und $g$ stetig in $y=f(x)$ \newline
+			Dann ist $g\circ f: I\to \R$ stetig in $x$
+		\end{Satz}
+	\subsection{Zwischenwertsatz}
+		\begin{Satz}
+			Sei $f:[a, b]\to\R$stetig auf dem abgeschlossenen Intervall $[a, b]$. Dann nimmt $f$ in $(a, b)$ jeden beliebigen Wert $y$ zwischen $f(a)$ und $f(b)$ an
+		\end{Satz}
+		\begin{Satz}
+			Sei $f:[a, b]\to \R$ stetig auf dem abgeschlossenen Intervall $[a, b]$. Dann nimmt $f$ in $[a, b]$ jeden beliebigen Wert
+			$$
+				y\in [\min_{x\in[a, b]}f(x), \max_{x\in[a, b]}f(x)]
+			$$
+			an
+		\end{Satz}
+	\subsection{Satz über Nullstellen}
+		\begin{Satz}
+			Sei $f:[a, b]\to \R$ stetig auf dem abgeschlossenen Intervall $[a, b]$ und es gelte $f(a)<0<f(b)$ oder $f(a) > 0 > f(b)$. Dann hat $f$ in $(a, b)$ mindestens eine Nullstelle, d.h. es existiert ein $x\in(a, b)$ mit $f(x)=0$
+		\end{Satz}
+	\subsection{Satz von Minimum und Maximum}
+		\begin{Satz}
+			Sei $f:[a, b]\to \R$ stetig auf dem abgeschlossenen Intervall $[a, b]$. Dann nimmt $f$ in $[a, b]$ Maximum und Minimum an, d.h. es existieren $x_{\min}
+			, x_{\max} \in [a, b]$ mit 
+			$$
+				f(x_{\min})\leq f(x) \leq f(x_{\max}, \quad \forall x\in [a, b]
+			$$
+		\end{Satz}
+		Insbesondere gilt für $x_{\min}$ und $x_{\max}$
+		\begin{align*}
+			f(x_{\min}) &= \inf_{x\in[a, b]} f(x) = \min_{x\in [a, b]} f(x) \\
+			f(x_{\max}) & = \sup_{x\in [a, b]} f(x) = \max_{x \in [a, b]} f(x)
+		\end{align*}
+		\begin{definition}
+			Sei $(x_n)$ eine reelle Folge. Wir schreiben $x_n\to\infty$, wenn gilt
+			$$
+				\forall C \in \R\exists n_0\in\N\forall n\geq n_0: x_n\geq C
+			$$
+			Analog schreiben wir $x_n\to -\infty$, wenn gilt
+			$$
+				\forall C \in\R\exists n_0\in\N\forall n\geq n_0:x_n\leq C
+			$$
+		\end{definition}
+	\subsection{Metrik in normierten Räumen}
+		

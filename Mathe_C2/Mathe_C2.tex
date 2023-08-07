@@ -1,0 +1,45 @@
+\documentclass[a4paper]{article}
+\usepackage{femape}
+\usepackage{mdframed}
+%TODO: fix mdframed especially color and corners 
+\newmdenv[
+	outerlinewidth = 2,
+	roundcorner = 10pt,
+	leftmargin = 40,
+	outerlinecolor = red,
+	rightmargin = 40,
+	backgroundcolor = yellow,
+	innertopmargin = \topskip,
+	splittopskip = \topskip,
+	]{definition}
+\newmdenv[
+	outerlinewidth = 2,
+	roundcorner = 10pt,
+	leftmargin = 40,
+	outerlinecolor = red,
+	rightmargin = 40,
+	backgroundcolor = green,
+	innertopmargin = \topskip,
+	splittopskip = \topskip,
+	]{Lemma}
+\newmdenv[
+	outerlinewidth = 2,
+	roundcorner = 10pt,
+	leftmargin = 40,
+	outerlinecolor = red,
+	rightmargin = 40,
+	backgroundcolor = red,
+	innertopmargin = \topskip,
+	splittopskip = \topskip,
+	]{Satz}
+\title{Mathe C2}
+\author{Felix Leitl}
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\newpage
+	\input{Stetige_Funktionen.tex}
+	\input{Differenzierbare_Funktionen.tex}
+	\input{Integration.tex}
+	\input{Folgen_und_Reihen.tex}
+\end{document}

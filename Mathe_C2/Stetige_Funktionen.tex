@@ -111,3 +111,103 @@
 			Die Menge aller Randpunkte von $M$ heißt der Rand von $M$ und wird mit $\partial M$ bezeichnet. \newline
 			Die Menge $\overline{M}:=M\cup\partial M$ heißt der Abschluss von $M$
 		\end{definition}
+	\subsection{Offene und abgeschlossene Mengen}
+		\begin{definition}
+			Eine Teilmenge $O\subset V$ heißt offen, wenn zu jedem $x\in O$ ein $\epsilon>0$ mit $B_\epsilon(x)\subset O$ existiert, d.h., wenn $O$ Umgebung aller ihrer Punkte $x\in O$ ist.
+		\end{definition}
+		\begin{definition}
+			Eine Teilmenge $A\subset V$ heißt abgeschlossen, wenn $V\backslash A$ offen ist
+		\end{definition}
+	\subsection{Konvergenz in $\R$}
+		\begin{definition}
+			Eine reelle Folge $(x_n)$ konvergiert gegen $x\in\R$, wenn gilt:
+			$$
+				\forall \epsilon > 0 \exists n_0 \in \N \forall n \geq n_0: \quad |x_n - x| < \epsilon
+			$$
+			Mit Hilfe der Metrik $d(x, y) = |x-y|$ können wir dies auch formulieren als
+			$$
+				\forall \epsilon > 0 \exists n_0 \in \N \forall n \geq n_0: \quad d(x_n, x) < \epsilon
+			$$
+			und mit $\epsilon$-Umgebung als
+			$$
+				\forall \epsilon > 0 \exists n_0 \in \N \forall n \geq n_0: \quad x_n \in B_\epsilon(x)
+			$$
+		\end{definition}
+	\subsection{Konvergenzkriterien}
+		\begin{Lemma}
+			Sei $(V, ||\cdot||)$ ein normierter Raum $(x_n)$ eine Folge in $V$ und $x \in V$. \newline
+			Dann sind äquivalent:
+			\begin{enumerate}
+				\item $(x_n)$ konvergiert gegen $x$, d.h. $x_n\to x$
+				\item $||x_n - x||$ ist Nullfolge, d.h. $||x_n - x||\to 0$
+				\item Es gilt $||x_n - x||\geq y_n$ für eine reelle Nullfolge $(y_n)$
+				\item Für jede Umgebung $U$ von $x$:
+					$$
+						\exists n_0 \in \N \forall n \geq n_0: \quad x_n \in U
+					$$
+			\end{enumerate}
+		\end{Lemma}
+	\subsection{Äquivalente Normen}
+		\begin{definition}
+			Sei $V$ ein $\mathbb{K}$-Vektorraum und $||\cdot||_\alpha$ und $||\cdot||_\beta$ zwei Normen auf $V$. Dann heißen $||\cdot||_\alpha$ und $||\cdot||_\beta$ äquivalent, wenn Konstanten $\alpha, \beta > 0$ existieren mit 
+			$$
+				\alpha||x||_\alpha \leq ||x||_\beta \leq \beta||x||_\alpha \quad \forall x \in V
+			$$
+		\end{definition}
+		\begin{Satz}
+			$||\cdot||_1, ||\cdot||_2, ||\cdot||_\infty$ sind äquivalent auf $\R^n$
+		\end{Satz}
+		\begin{Satz}
+			Sei $V$ ein endlichdimensionaler Vektorraum. Dann sind alle Normen auf $V$ äquivalent
+		\end{Satz}
+	\subsection{Äquivalente Normen und ihre Umgebungen}
+		\begin{Satz}
+			Sei $V, ||\cdot||_\alpha$ ein normierter Raum und $U \subset V$ eine Umgebung von $x$ bezüglich $||\cdot||_\alpha$. Dann ist $U$ auch Umgebung bezüglich jeder zu $||\cdot||_\alpha$ äquivalenten Norm $||\cdot||_\beta$
+		\end{Satz}
+	\subsection{Konvergenz ung äquivalente Normen}
+		\begin{Satz}
+			Sei $V$ ein $\mathbb{K}$-Vektorraum, $||\cdot||_\alpha $ und $||\cdot||_beta$ zwei äquivalente Normen. Dann sind für eine Folge $(x_n)$ in $V$ und $x \in V$ äquivalent:
+			\begin{itemize}
+				\item $(x_n)$ konvergiert gegen $x$ bezüglich $||\cdot||_\alpha$
+				\item $(x_n)$ konvergiert gegen $x$ bezüglich $||\cdot||_\beta$
+			\end{itemize}
+		\end{Satz}
+	\subsection{Konvergenz in $\R^n$}
+		\begin{Satz}
+			Sei $||\cdot||$ eine Norm auf $\R^n$, $(x^{(n)})_{n\in\N}$ eine Folge in $\R^m$ und $x\in\R^m$. Dann konvergiert $(x^{}(n))$ genau dann gegen $x$, wenn gilt
+			$$
+				x^{(n)}_k \xrightarrow[n\to\infin]{}x_k \quad k=1,...,m
+			$$
+		\end{Satz}
+	\subsection{Abgeschlossene Mengen und Konvergenz}
+		\begin{Satz}
+			Sei $A\subset V$ eine Teilmenge eines normierten Raums, dann sind äquivalent:
+			\begin{enumerate}
+				\item $A$ ist abgeschlossen
+				\item Für jede konvergente Folge $(x_n)$ mit $x_n \in A$ für alle $n$ gilt auch $\lim_{n\to\infty}x_n \in A$
+			\end{enumerate}
+		\end{Satz}
+	\subsection{Grenzwertsätze in normierten Räumen}
+		\begin{Satz}
+			Der Grenzwert einer in $V$ konvergenten Folge ist eindeutig bestimmt
+		\end{Satz}
+		\begin{Satz}
+			Konvergente Folgen sind beschränkt
+		\end{Satz}
+		\begin{Satz}
+			Sei $V$ ein normierter Raum, $(a_n)$ und $(b_n)$ Folgen in $V$ und $(\lambda_n)$ eine Folge in $\mathbb{K}$ mit 
+			$$
+				a_n\to a\in V, \quad b_n\to b \in V, \quad \lambda_n \to \lambda \in \mathbb{K}
+			$$ 
+			Dann gilt:
+			\begin{itemize}
+				\item $a_n + b_n \to a + b$
+				\item $a_n - b_n \to a - b$
+				\item $\lambda_n a_n \to \lambda a$
+			\end{itemize}
+
+		\end{Satz}
+		
+		
+		
+		

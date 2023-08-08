@@ -36,17 +36,17 @@
 				\item Falls $g(y)\not = 0, \forall y\in I$, so ist $\frac{f}{g}$ stetig in $x$
 			\end{itemize}
 		\end{Satz}
-	\subsection{Komposition stetig er Funktionen}
+	\subsection{Komposition stetiger Funktionen}
 		\begin{Satz} [ ]
 			Seien $I, J$ Intervalle, $f: I\to\R$ und $g: J\to \R$ und $f(I)\subset J$ \newline 
 			Ferner sei $f$ stetig in $x\in I$ und $g$ stetig in $y=f(x)$ \newline
 			Dann ist $g\circ f: I\to \R$ stetig in $x$
 		\end{Satz}
 	\subsection{Zwischenwertsatz}
-		\begin{Satz} [ ]
-			Sei $f:[a, b]\to\R$stetig auf dem abgeschlossenen Intervall $[a, b]$. Dann nimmt $f$ in $(a, b)$ jeden beliebigen Wert $y$ zwischen $f(a)$ und $f(b)$ an
+		\begin{Satz} [ Zwischenwertsatz]
+			Sei $f:[a, b]\to\R$ stetig auf dem abgeschlossenen Intervall $[a, b]$. Dann nimmt $f$ in $(a, b)$ jeden beliebigen Wert $y$ zwischen $f(a)$ und $f(b)$ an
 		\end{Satz}
-		\begin{Satz} [ ]
+		\begin{Satz} [ Variante des Zwischenwertsatz]
 			Sei $f:[a, b]\to \R$ stetig auf dem abgeschlossenen Intervall $[a, b]$. Dann nimmt $f$ in $[a, b]$ jeden beliebigen Wert
 			$$
 				y\in [\min_{x\in[a, b]}f(x), \max_{x\in[a, b]}f(x)]
@@ -54,11 +54,11 @@
 			an
 		\end{Satz}
 	\subsection{Satz über Nullstellen}
-		\begin{Satz} [ ]
+		\begin{Satz} [ Nullstellen]
 			Sei $f:[a, b]\to \R$ stetig auf dem abgeschlossenen Intervall $[a, b]$ und es gelte $f(a)<0<f(b)$ oder $f(a) > 0 > f(b)$. Dann hat $f$ in $(a, b)$ mindestens eine Nullstelle, d.h. es existiert ein $x\in(a, b)$ mit $f(x)=0$
 		\end{Satz}
 	\subsection{Satz von Minimum und Maximum}
-		\begin{Satz} [ ]
+		\begin{Satz} [ Minimum und Maximum]
 			Sei $f:[a, b]\to \R$ stetig auf dem abgeschlossenen Intervall $[a, b]$. Dann nimmt $f$ in $[a, b]$ Maximum und Minimum an, d.h. es existieren $x_{\min}
 			, x_{\max} \in [a, b]$ mit 
 			$$
@@ -70,7 +70,7 @@
 			f(x_{\min}) &= \inf_{x\in[a, b]} f(x) = \min_{x\in [a, b]} f(x) \\
 			f(x_{\max}) & = \sup_{x\in [a, b]} f(x) = \max_{x \in [a, b]} f(x)
 		\end{align*}
-		\begin{Definition} [ ]
+		\begin{Definition} [ Schreibweisen]
 			Sei $(x_n)$ eine reelle Folge. Wir schreiben $x_n\to\infty$, wenn gilt
 			$$
 				\forall C \in \R\exists n_0\in\N\forall n\geq n_0: x_n\geq C
@@ -81,7 +81,7 @@
 			$$
 		\end{Definition}
 	\subsection{Metrik in normierten Räumen}
-		\begin{Definition} [ ]
+		\begin{Definition} [ Metrik]
 			Ist $(V,||\cdot||)$ ein normierter Raum. Dann heißt die Abbildung
 			$$
 				d: V \times V \to \R, \quad d(x, y):=||x-y||
@@ -89,7 +89,7 @@
 			die zur Norm $||\cdot||$ gehörige Metrik
 		\end{Definition}
 	\subsection{$\epsilon$-Umgebung}
-		\begin{Definition} [ ]
+		\begin{Definition} [ $\epsilon$-Umgebung ]
 			Sei $(V, ||\cdot||)$ ein normierter Raum. Für einen Punt $x\in V$ und $\epsilon>0$ heißt die Menge
 			$$
 				B_\epsilon(x):= \{d(x, y) < \epsilon\} = \{y\in V:||x-y||<\epsilon\}
@@ -97,29 +97,29 @@
 			eine $\epsilon$-Umgebung von $x$. Man spricht von der offenen Kugel mit Radius $\epsilon$ um $x$
 		\end{Definition}
 	\subsection{Umgebungen}
-		\begin{Definition} [ ]
+		\begin{Definition} [ Umgebung]
 			Sei $(V, ||\cdot||)$ ein normierter Raum und $x\in V$ ein Punkt in V. Dann heißt eine Teilmenge $U\subset V$ eine Umgebung von $x$, wenn sie eine $\epsilon$-Umgebung von $x$ enthält, d.h. wenn $\epsilon > 0$ existiert mit $B_\epsilon(x)\subset U$
 		\end{Definition}
 	\subsection{Innere Punkte}
-		\begin{Definition} [ ]
+		\begin{Definition} [ Innerer Punkt]
 			Sei $M\subset V$. Ein Punkt $x\in M$ heißt innerer Punkt von $M$, falls ein $\epsilon>0$ mit $B_\epsilon(x)\subset M$ existiert. \newline
 			Die Menge aller inneren Punkte von $M$ heißt das Innere von $M$ und wird mit $\mathring{M}$ bezeichnet
 		\end{Definition}
 	\subsection{Randpunkte}
-		\begin{Definition} [ ]
+		\begin{Definition} [ Randpunkt]
 			Sei $M\subset V$. Ein Punkt $x\in V$ heißt Randpunkt von $M$, falls in jeder Umgebung $B_\epsilon(x)$ ein Punkt aus $M$ und aus $V\backslash M$ ist. \newline
 			Die Menge aller Randpunkte von $M$ heißt der Rand von $M$ und wird mit $\partial M$ bezeichnet. \newline
 			Die Menge $\overline{M}:=M\cup\partial M$ heißt der Abschluss von $M$
 		\end{Definition}
 	\subsection{Offene und abgeschlossene Mengen}
-		\begin{Definition} [ ]
+		\begin{Definition} [ Offene Menge]
 			Eine Teilmenge $O\subset V$ heißt offen, wenn zu jedem $x\in O$ ein $\epsilon>0$ mit $B_\epsilon(x)\subset O$ existiert, d.h., wenn $O$ Umgebung aller ihrer Punkte $x\in O$ ist.
 		\end{Definition}
-		\begin{Definition} [ ]
+		\begin{Definition} [ Abgeschlossene Menge]
 			Eine Teilmenge $A\subset V$ heißt abgeschlossen, wenn $V\backslash A$ offen ist
 		\end{Definition}
 	\subsection{Konvergenz in $\R$}
-		\begin{Definition} [ ]
+		\begin{Definition} [ Konvergenz]
 			Eine reelle Folge $(x_n)$ konvergiert gegen $x\in\R$, wenn gilt:
 			$$
 				\forall \epsilon > 0 \exists n_0 \in \N \forall n \geq n_0: \quad |x_n - x| < \epsilon
@@ -148,7 +148,7 @@
 			\end{enumerate}
 		\end{Lemma}
 	\subsection{Äquivalente Normen}
-		\begin{Definition} [ ]
+		\begin{Definition} [ Äquivalente Normen]
 			Sei $V$ ein $\mathbb{K}$-Vektorraum und $||\cdot||_\alpha$ und $||\cdot||_\beta$ zwei Normen auf $V$. Dann heißen $||\cdot||_\alpha$ und $||\cdot||_\beta$ äquivalent, wenn Konstanten $\alpha, \beta > 0$ existieren mit 
 			$$
 				\alpha||x||_\alpha \leq ||x||_\beta \leq \beta||x||_\alpha \quad \forall x \in V
@@ -164,7 +164,7 @@
 		\begin{Satz} [ ]
 			Sei $V, ||\cdot||_\alpha$ ein normierter Raum und $U \subset V$ eine Umgebung von $x$ bezüglich $||\cdot||_\alpha$. Dann ist $U$ auch Umgebung bezüglich jeder zu $||\cdot||_\alpha$ äquivalenten Norm $||\cdot||_\beta$
 		\end{Satz}
-	\subsection{Konvergenz ung äquivalente Normen}
+	\subsection{Konvergenz und äquivalente Normen}
 		\begin{Satz} [ ]
 			Sei $V$ ein $\mathbb{K}$-Vektorraum, $||\cdot||_\alpha $ und $||\cdot||_beta$ zwei äquivalente Normen. Dann sind für eine Folge $(x_n)$ in $V$ und $x \in V$ äquivalent:
 			\begin{itemize}
@@ -205,7 +205,6 @@
 				\item $a_n - b_n \to a - b$
 				\item $\lambda_n a_n \to \lambda a$
 			\end{itemize}
-
 		\end{Satz}
 		
 		

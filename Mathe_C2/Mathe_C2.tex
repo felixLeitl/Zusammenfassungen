@@ -1,37 +1,108 @@
 \documentclass[a4paper]{article}
 \usepackage{femape}
 \usepackage{mdframed}
+\usepackage{tikz}
 %TODO: fix mdframed especially color and corners 
-\newmdenv[
-	outerlinewidth = 2,
-	roundcorner = 10pt,
-	leftmargin = 40,
-	outerlinecolor = red,
-	rightmargin = 40,
-	backgroundcolor = yellow,
-	innertopmargin = \topskip,
-	splittopskip = \topskip,
-	]{definition}
-\newmdenv[
-	outerlinewidth = 2,
-	roundcorner = 10pt,
-	leftmargin = 40,
-	outerlinecolor = red,
-	rightmargin = 40,
-	backgroundcolor = green,
-	innertopmargin = \topskip,
-	splittopskip = \topskip,
-	]{Lemma}
-\newmdenv[
-	outerlinewidth = 2,
-	roundcorner = 10pt,
-	leftmargin = 40,
-	outerlinecolor = red,
-	rightmargin = 40,
-	backgroundcolor = red,
-	innertopmargin = \topskip,
-	splittopskip = \topskip,
-	]{Satz}
+%\newmdenv[
+%	outerlinewidth = 2,
+%	roundcorner = 10pt,
+%	leftmargin = 40,
+%	outerlinecolor = red,
+%	rightmargin = 40,
+%	backgroundcolor = yellow,
+%	innertopmargin = \topskip,
+%	splittopskip = \topskip,
+%	]{Definition}
+%\newmdenv[
+%	outerlinewidth = 2,
+%	roundcorner = 10pt,
+%	leftmargin = 40,
+%	outerlinecolor = red,
+%	rightmargin = 40,
+%	backgroundcolor = green,
+%	innertopmargin = \topskip,
+%	splittopskip = \topskip,
+%	]{Lemma}
+
+%\newmdenv[
+%	outerlinewidth = 2,
+%	roundcorner = 10pt,
+%	leftmargin = 40,
+%	outerlinecolor = red,
+%	rightmargin = 40,
+%	backgroundcolor = red,
+%	innertopmargin = \topskip,
+%	splittopskip = \topskip,
+%	]{Satz}
+
+\newcounter{Satz}[section]
+\newenvironment{Satz}[1][]{
+	\stepcounter{Satz}
+		\ifstrempty{#1}
+		{\mdfsetup{
+			frametitle={
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=blue!20]
+				{\strut Satz\theSatz};}}
+		}
+		{\mdfsetup{
+			frametitle={
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=blue!20]
+				{\strut Satz \theSatz:#1};}}
+		}
+		\mdfsetup{innermargin=10pt,linecolor=blue!20,
+					linewidth=2pt,topline=true,
+					frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}
+		\begin{mdframed}[]\relax
+		}{\end{mdframed}}
+
+\newcounter{Lemma}[section]
+\newenvironment{Lemma}[1][]{
+	\stepcounter{Lemma}
+		\ifstrempty{#1}
+		{\mdfsetup{
+			frametitle={
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=blue!20]
+				{\strut Lemma\theLemma};}}
+		}
+		{\mdfsetup{
+			frametitle={
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=blue!20]
+				{\strut Lemma \theLemma:#1};}}
+		}
+		\mdfsetup{innermargin=10pt,linecolor=blue!20,
+					linewidth=2pt,topline=true,
+					frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}
+		\begin{mdframed}[]\relax
+		}{\end{mdframed}}
+	
+
+\newcounter{Definition}[section]
+\newenvironment{Definition}[1][]{
+	\stepcounter{Definition}
+		\ifstrempty{#1}
+		{\mdfsetup{
+			frametitle={
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=blue!20]
+				{\strut Definition\theDefinition};}}
+		}
+		{\mdfsetup{
+			frametitle={
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=blue!20]
+				{\strut Definition \theDefinition:#1};}}
+		}
+		\mdfsetup{innermargin=10pt,linecolor=blue!20,
+					linewidth=2pt,topline=true,
+					frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}
+		\begin{mdframed}[]\relax
+		}{\end{mdframed}}
+	
+
 \title{Mathe C2}
 \author{Felix Leitl}
 \begin{document}

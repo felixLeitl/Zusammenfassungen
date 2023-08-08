@@ -1,7 +1,7 @@
 %TODO: Satz von Weierstrass finden
 %TODO: Eigenschaften & Bemerkungen
 \section{Stetige Funktionen}
-	\begin{definition}
+	\begin{Definition}[ Stetig]
 		Def: \newline
 	Sei $I\subset \R$ ein Intervall und $f: I \to \R$ eine Funktion
 	\begin{itemize}
@@ -9,25 +9,25 @@
 			Für jede Folge $(X_n)$ in $I$ mit $x_n\to x$ gilt auch $f(x_n)\to f(x)$
 		\item $f$ heißt stetig, wenn $f$ in jedem Punkt $x \in I$ stetig ist
 	\end{itemize}
-	\end{definition}
+	\end{Definition}
 	Anschaulich:
 	\begin{itemize}
 		\item \glqq{} $f$ stetig in $x$ \grqq{}  bedeutet, dass $f$ in $x$ nicht springt
 		\item \glqq{} $f$ stetig \grqq{} bedeutet, dass $f$ nirgendwo springt 
 	\end{itemize}
 	\subsection{$\Q$ ist dicht in $\R$}
-		\begin{Lemma}
+		\begin{Lemma}[ ]
 			Zu jeder reellen Zahl $r\in \R$ und jedem $\epsilon > 0$ existiert eine rationale Zahl $q\in \Q$ mit $|r-q|<\epsilon$
 		\end{Lemma}
-		\begin{Lemma}
+		\begin{Lemma} [ ]
 			Zu jeder reellen Zahl $r\in \R$und jedem $\epsilon>0$ existiert eine rationale Zahl $r\in\R\backslash\Q$ mit $|r-q|<\epsilon$
 		\end{Lemma}
-		\begin{Lemma}
+		\begin{Lemma} [ ]
 			Zu jeder reellen Zahl $x\in\R$ existiert eine Folge $(x_n)$ in $\Q$ mit $x_n\to x$\newline
 			Zu jeder rationalen Zahl $x\in \Q$ existiert eine Folge $(x_n)$ in $\R\backslash\Q$ mit $x_n\to x$
 		\end{Lemma}
 	\subsection{Eigenschaften stetiger Funktionen}
-		\begin{Satz}
+		\begin{Satz} [ ]
 			Sei $I$ ein Intervall, $x \in I$ und $f, g: I\to \R$ Funktionen, die stetig in $x$ sind. Dann gilt:
 			\begin{itemize}
 				\item $f+g$ ist stetig in $x$
@@ -37,16 +37,16 @@
 			\end{itemize}
 		\end{Satz}
 	\subsection{Komposition stetig er Funktionen}
-		\begin{Satz}
+		\begin{Satz} [ ]
 			Seien $I, J$ Intervalle, $f: I\to\R$ und $g: J\to \R$ und $f(I)\subset J$ \newline 
 			Ferner sei $f$ stetig in $x\in I$ und $g$ stetig in $y=f(x)$ \newline
 			Dann ist $g\circ f: I\to \R$ stetig in $x$
 		\end{Satz}
 	\subsection{Zwischenwertsatz}
-		\begin{Satz}
+		\begin{Satz} [ ]
 			Sei $f:[a, b]\to\R$stetig auf dem abgeschlossenen Intervall $[a, b]$. Dann nimmt $f$ in $(a, b)$ jeden beliebigen Wert $y$ zwischen $f(a)$ und $f(b)$ an
 		\end{Satz}
-		\begin{Satz}
+		\begin{Satz} [ ]
 			Sei $f:[a, b]\to \R$ stetig auf dem abgeschlossenen Intervall $[a, b]$. Dann nimmt $f$ in $[a, b]$ jeden beliebigen Wert
 			$$
 				y\in [\min_{x\in[a, b]}f(x), \max_{x\in[a, b]}f(x)]
@@ -54,11 +54,11 @@
 			an
 		\end{Satz}
 	\subsection{Satz über Nullstellen}
-		\begin{Satz}
+		\begin{Satz} [ ]
 			Sei $f:[a, b]\to \R$ stetig auf dem abgeschlossenen Intervall $[a, b]$ und es gelte $f(a)<0<f(b)$ oder $f(a) > 0 > f(b)$. Dann hat $f$ in $(a, b)$ mindestens eine Nullstelle, d.h. es existiert ein $x\in(a, b)$ mit $f(x)=0$
 		\end{Satz}
 	\subsection{Satz von Minimum und Maximum}
-		\begin{Satz}
+		\begin{Satz} [ ]
 			Sei $f:[a, b]\to \R$ stetig auf dem abgeschlossenen Intervall $[a, b]$. Dann nimmt $f$ in $[a, b]$ Maximum und Minimum an, d.h. es existieren $x_{\min}
 			, x_{\max} \in [a, b]$ mit 
 			$$
@@ -70,7 +70,7 @@
 			f(x_{\min}) &= \inf_{x\in[a, b]} f(x) = \min_{x\in [a, b]} f(x) \\
 			f(x_{\max}) & = \sup_{x\in [a, b]} f(x) = \max_{x \in [a, b]} f(x)
 		\end{align*}
-		\begin{definition}
+		\begin{Definition} [ ]
 			Sei $(x_n)$ eine reelle Folge. Wir schreiben $x_n\to\infty$, wenn gilt
 			$$
 				\forall C \in \R\exists n_0\in\N\forall n\geq n_0: x_n\geq C
@@ -79,47 +79,47 @@
 			$$
 				\forall C \in\R\exists n_0\in\N\forall n\geq n_0:x_n\leq C
 			$$
-		\end{definition}
+		\end{Definition}
 	\subsection{Metrik in normierten Räumen}
-		\begin{definition}
+		\begin{Definition} [ ]
 			Ist $(V,||\cdot||)$ ein normierter Raum. Dann heißt die Abbildung
 			$$
 				d: V \times V \to \R, \quad d(x, y):=||x-y||
 			$$
 			die zur Norm $||\cdot||$ gehörige Metrik
-		\end{definition}
+		\end{Definition}
 	\subsection{$\epsilon$-Umgebung}
-		\begin{definition}
+		\begin{Definition} [ ]
 			Sei $(V, ||\cdot||)$ ein normierter Raum. Für einen Punt $x\in V$ und $\epsilon>0$ heißt die Menge
 			$$
 				B_\epsilon(x):= \{d(x, y) < \epsilon\} = \{y\in V:||x-y||<\epsilon\}
 			$$
 			eine $\epsilon$-Umgebung von $x$. Man spricht von der offenen Kugel mit Radius $\epsilon$ um $x$
-		\end{definition}
+		\end{Definition}
 	\subsection{Umgebungen}
-		\begin{definition}
+		\begin{Definition} [ ]
 			Sei $(V, ||\cdot||)$ ein normierter Raum und $x\in V$ ein Punkt in V. Dann heißt eine Teilmenge $U\subset V$ eine Umgebung von $x$, wenn sie eine $\epsilon$-Umgebung von $x$ enthält, d.h. wenn $\epsilon > 0$ existiert mit $B_\epsilon(x)\subset U$
-		\end{definition}
+		\end{Definition}
 	\subsection{Innere Punkte}
-		\begin{definition}
+		\begin{Definition} [ ]
 			Sei $M\subset V$. Ein Punkt $x\in M$ heißt innerer Punkt von $M$, falls ein $\epsilon>0$ mit $B_\epsilon(x)\subset M$ existiert. \newline
 			Die Menge aller inneren Punkte von $M$ heißt das Innere von $M$ und wird mit $\mathring{M}$ bezeichnet
-		\end{definition}
+		\end{Definition}
 	\subsection{Randpunkte}
-		\begin{definition}
+		\begin{Definition} [ ]
 			Sei $M\subset V$. Ein Punkt $x\in V$ heißt Randpunkt von $M$, falls in jeder Umgebung $B_\epsilon(x)$ ein Punkt aus $M$ und aus $V\backslash M$ ist. \newline
 			Die Menge aller Randpunkte von $M$ heißt der Rand von $M$ und wird mit $\partial M$ bezeichnet. \newline
 			Die Menge $\overline{M}:=M\cup\partial M$ heißt der Abschluss von $M$
-		\end{definition}
+		\end{Definition}
 	\subsection{Offene und abgeschlossene Mengen}
-		\begin{definition}
+		\begin{Definition} [ ]
 			Eine Teilmenge $O\subset V$ heißt offen, wenn zu jedem $x\in O$ ein $\epsilon>0$ mit $B_\epsilon(x)\subset O$ existiert, d.h., wenn $O$ Umgebung aller ihrer Punkte $x\in O$ ist.
-		\end{definition}
-		\begin{definition}
+		\end{Definition}
+		\begin{Definition} [ ]
 			Eine Teilmenge $A\subset V$ heißt abgeschlossen, wenn $V\backslash A$ offen ist
-		\end{definition}
+		\end{Definition}
 	\subsection{Konvergenz in $\R$}
-		\begin{definition}
+		\begin{Definition} [ ]
 			Eine reelle Folge $(x_n)$ konvergiert gegen $x\in\R$, wenn gilt:
 			$$
 				\forall \epsilon > 0 \exists n_0 \in \N \forall n \geq n_0: \quad |x_n - x| < \epsilon
@@ -132,9 +132,9 @@
 			$$
 				\forall \epsilon > 0 \exists n_0 \in \N \forall n \geq n_0: \quad x_n \in B_\epsilon(x)
 			$$
-		\end{definition}
+		\end{Definition}
 	\subsection{Konvergenzkriterien}
-		\begin{Lemma}
+		\begin{Lemma} [ ]
 			Sei $(V, ||\cdot||)$ ein normierter Raum $(x_n)$ eine Folge in $V$ und $x \in V$. \newline
 			Dann sind äquivalent:
 			\begin{enumerate}
@@ -148,24 +148,24 @@
 			\end{enumerate}
 		\end{Lemma}
 	\subsection{Äquivalente Normen}
-		\begin{definition}
+		\begin{Definition} [ ]
 			Sei $V$ ein $\mathbb{K}$-Vektorraum und $||\cdot||_\alpha$ und $||\cdot||_\beta$ zwei Normen auf $V$. Dann heißen $||\cdot||_\alpha$ und $||\cdot||_\beta$ äquivalent, wenn Konstanten $\alpha, \beta > 0$ existieren mit 
 			$$
 				\alpha||x||_\alpha \leq ||x||_\beta \leq \beta||x||_\alpha \quad \forall x \in V
 			$$
-		\end{definition}
-		\begin{Satz}
+		\end{Definition}
+		\begin{Satz} [ ]
 			$||\cdot||_1, ||\cdot||_2, ||\cdot||_\infty$ sind äquivalent auf $\R^n$
 		\end{Satz}
-		\begin{Satz}
+		\begin{Satz} [ ]
 			Sei $V$ ein endlichdimensionaler Vektorraum. Dann sind alle Normen auf $V$ äquivalent
 		\end{Satz}
 	\subsection{Äquivalente Normen und ihre Umgebungen}
-		\begin{Satz}
+		\begin{Satz} [ ]
 			Sei $V, ||\cdot||_\alpha$ ein normierter Raum und $U \subset V$ eine Umgebung von $x$ bezüglich $||\cdot||_\alpha$. Dann ist $U$ auch Umgebung bezüglich jeder zu $||\cdot||_\alpha$ äquivalenten Norm $||\cdot||_\beta$
 		\end{Satz}
 	\subsection{Konvergenz ung äquivalente Normen}
-		\begin{Satz}
+		\begin{Satz} [ ]
 			Sei $V$ ein $\mathbb{K}$-Vektorraum, $||\cdot||_\alpha $ und $||\cdot||_beta$ zwei äquivalente Normen. Dann sind für eine Folge $(x_n)$ in $V$ und $x \in V$ äquivalent:
 			\begin{itemize}
 				\item $(x_n)$ konvergiert gegen $x$ bezüglich $||\cdot||_\alpha$
@@ -173,14 +173,14 @@
 			\end{itemize}
 		\end{Satz}
 	\subsection{Konvergenz in $\R^n$}
-		\begin{Satz}
+		\begin{Satz} [ ]
 			Sei $||\cdot||$ eine Norm auf $\R^n$, $(x^{(n)})_{n\in\N}$ eine Folge in $\R^m$ und $x\in\R^m$. Dann konvergiert $(x^{}(n))$ genau dann gegen $x$, wenn gilt
 			$$
 				x^{(n)}_k \xrightarrow[n\to\infin]{}x_k \quad k=1,...,m
 			$$
 		\end{Satz}
 	\subsection{Abgeschlossene Mengen und Konvergenz}
-		\begin{Satz}
+		\begin{Satz} [ ]
 			Sei $A\subset V$ eine Teilmenge eines normierten Raums, dann sind äquivalent:
 			\begin{enumerate}
 				\item $A$ ist abgeschlossen
@@ -188,13 +188,13 @@
 			\end{enumerate}
 		\end{Satz}
 	\subsection{Grenzwertsätze in normierten Räumen}
-		\begin{Satz}
+		\begin{Satz} [ ]
 			Der Grenzwert einer in $V$ konvergenten Folge ist eindeutig bestimmt
 		\end{Satz}
-		\begin{Satz}
+		\begin{Satz} [ ]
 			Konvergente Folgen sind beschränkt
 		\end{Satz}
-		\begin{Satz}
+		\begin{Satz} [ ]
 			Sei $V$ ein normierter Raum, $(a_n)$ und $(b_n)$ Folgen in $V$ und $(\lambda_n)$ eine Folge in $\mathbb{K}$ mit 
 			$$
 				a_n\to a\in V, \quad b_n\to b \in V, \quad \lambda_n \to \lambda \in \mathbb{K}

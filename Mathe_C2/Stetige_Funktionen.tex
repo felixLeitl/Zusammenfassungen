@@ -206,7 +206,70 @@
 				\item $\lambda_n a_n \to \lambda a$
 			\end{itemize}
 		\end{Satz}
-		
-		
-		
+	\subsection{Cauchey-Folgen}
+		\begin{Definition} [ Cauchey-Folge]
+			Eine Folge $(a_n)$ in $V$ heißt Cauchey-Folge, wenn gilt:
+			$$
+				\forall \epsilon \exists n_0 \in \N \forall n, m \geq n_0: \quad ||a_n - a_m|| < \epsilon
+			$$
+		\end{Definition}
+		\begin{Satz} [ ]
+			Jede Cauchey-Folge in $V$ ist beschränkt
+		\end{Satz}
+		\begin{Satz} [ ]
+			Jede konvergente Folge in $V$ ist eine Cauchey-Folge
+		\end{Satz}
+	\subsection{Konvergenz von Chauchey-Folgen}
+		\begin{Definition} [Vollständig]
+			Ein normierter Raum heißt vollständig, wenn jede Chauchey-Folge in $V$ konvergiert
+		\end{Definition}
+		\begin{Satz} [ ]
+			$\R$ ist vollständig
+		\end{Satz}
+		\begin{Satz} [ ]
+			Sei $V$ endlichdimensional. Dann ist $V$ vollständig
+		\end{Satz}
+	\subsection{Konvergenz und Teilfolgen}
+		\begin{Satz} [ ]
+			Eine Folge $(a_n)_{n\in \N}$ in $V$ konvergiert genau dann gegen $a$, wenn jede Teilfolge $(a_{n_k})_{k\in\N}$ gegen $a$ konvergiert
+		\end{Satz}
+		\begin{Satz} [ Bolzano-Weierstrass]
+			Sei $V$ endlichdimensional. Dann besitzt jede beschränkte Folge in $V$ eine konvergente Teilfolge
+		\end{Satz}
+	\subsection{Stetigkeit in normierten Räumen}
+		\begin{Satz} [ ]
+					Sind $f, g: D\to Y$ sowie $h: D\to \R$ für $D\subset Y$ stetig, dann sind auch $f + g: D\to Y, f-g: D\to Y$ und $hf: D\to Y$ stetig
+		\end{Satz}
+	\subsection{Stetigkeit auf Unterräumen}
+		\begin{Satz} [ ]
+			Sei $f: X\to Y$ stetig und $D \subset X$ eine Teilmenge von $X$. Dann sind auch die Einschränkungen $f|_D:D\to Y$ stetig
+		\end{Satz}
+	\subsection{$\epsilon$-$\delta$-Kriterium}
+		\begin{Satz} [ ]
+			Eine Funktion $f: D\to Y$ ist genau dann steig im Punkt $x/in D$, wenn gilt:
+			$$
+				\forall \epsilon > 0\exists\delta>0: \quad ||x-y||_X < \delta \Rarr ||f(x)-f(y)||_Y<\epsilon \quad \forall y\in D
+			$$
+		\end{Satz}
+	\subsection{Gleichmäßig stetig}
+		\begin{Definition} [ Gleichmäßigkeit]
+			Eine Funktion $f: D\to Y$ heißt gleichmäßig stetig, wenn gilt:
+			$$
+				\forall \epsilon > 0\exists\delta>0\forall x, y \in D: \quad ||x-y||_X < \delta \Rarr ||f(x)-f(y)||_Y<\epsilon \quad \forall y\in D
+			$$
+		\end{Definition}
+	\subsection{Lipschitz-Stetigkeit}
+		\begin{Definition} [ Lipschitz-stetig]
+			Eine Abbildung $f: D\to Y$ auf $D\subset X$ heißt Lipschitz-stetig, wenn ein $L\geq 0$ existiert mit 
+			$$
+				||f(x)-f(y)||_Y\leq L||x-y||_X \quad \forall x, y \in X
+			$$
+		\end{Definition}
+		\begin{Satz}[ ]
+			Jede Lipschitz-stetige Abbildung ist gleichmäßig stetig
+		\end{Satz}
+	\subsection{Stetigkeit linearer Abbildungen}
+		\begin{Satz} [ ]
+			Sei $A\in \R^{m\times n}$ und $f: \R^n\to \R^m$ mit $f(x)=Ax$. Dann ist $f$ Lipschitz-stetig und somit insbesondere gleichmäßig stetig und stetig
+		\end{Satz}
 		

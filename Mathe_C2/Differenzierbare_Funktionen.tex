@@ -1,1 +1,143 @@
 \section{Differenzierbare Funktionen}
+\subsection{Differenzierbarkeit}
+		\begin{Definition} [ Differenzierbar im Punkt]
+			Eine Funktion $f: (a, b)\to \R$ heißt differenzierbar im Punkt $x\in (a, b)$, wenn der Grenzwert
+			$$
+				\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}
+			$$
+			existiert. In diesem Fall nennen wir den Grenzwert die Ableitung von $f$ im Punkt $x$ und schreiben dafür $f'(x)$ 
+		\end{Definition}
+		\begin{Definition} [ Differenzierbar]
+			Eine Funktion $f: (a, b)\to \R$ heißt differenzierbar, wenn sie in allen Punkten $x\in(a, b)$ differenzierbar ist. In diesem Fall heißt die Funktion $f': (a, b) \to \R$ mit $x\mapsto f'(x)$ die Ableitung von $f$
+		\end{Definition}
+		\begin{Definition} [ Stetig differenzierbar]
+			Eine Funktion $f: (a, b)\to \R$ heißt stetig differenzierbar, wenn sie differenzierbar und die Ableitung $f': (a, b)\to\R$ stetig ist
+		\end{Definition}
+	\subsection{Stetigkeit und Differenzierbarkeit}
+		\begin{Satz} [ ]
+			Seien $f: U\to\R$ differenzierbar in $x\in U$. Dann ist $f$ auch stetig in $x$
+		\end{Satz}	
+		\begin{Satz} [ Linearität]
+				Seien $f: U\to \R$ und $g: U\to \R$ in $x\in U$ differenzierbar und $\lambda\in\R$. Dann gilt:
+				\begin{enumerate}
+						\item $\lambda f: U\to\R$ ist in $x$ differenzierbar mit $(\lambda f)'(x)=\lambda f'(x)$
+						\item $f+g: U\to \R$ ist in $x$ differenzierbar mit $(f+g)'(x)=f'(x)+g'(x)$
+				\end{enumerate}
+		\end{Satz}
+		\begin{Satz} [ Produktregel]
+			Seien $f: U\to\R$ und $g: U\to\R$ in $x\in U$ differenzierbar. Dann ist auch $fg: U\to \R$ in $x$ differenzierbar mit $(fg)'(x)=f'(x)g'(x)$
+		\end{Satz}
+		\begin{Satz} [ ]
+			Seien $p: \R \to \R$ ein Polynom vom Grad $n>0$, dann ist $p$ stetig differenzierbar und $p'$ ist ein Polynom vom Grad $n-1$. Insbesondere gilt:
+			$$
+				p(x)=\displaystyle\sum_{k=0}^na_kx^k \quad \Rarr \quad p'(x) = \displaystyle\sum _{k=1}^n a_kkx^{k-1}
+			$$
+		\end{Satz}
+		\begin{Satz} [ Quotientenregel]
+			Sieein $f: U\to \R$ und $g: U\to\R$ differenzierbar in $x\in. U$ und $g(x) \not = 0$. Dann gilt auch $\frac{f}{g}: U \to \R$ differenzierbar in $x$ mit
+			$$
+				(\frac{f}{g})'(x)=\frac{f'(x)g(x)-g'(x)f(x)}{g(x)^2}
+			$$
+		\end{Satz}
+		\begin{Satz} [ Kettenregel]
+			Seien $U, W \subset \R$ offen, $f: U \to\R$ differenzierbar in $x\in U$, $f(U)\subset W$ und $g: W \to \R$ differenzierbar in $y=f(x)\in W$. Dann ist auch $g \circ f : U \to \R$ differenzierbar in $x$ mit
+			$$
+				(g\circ f)'(x)=g'(f(x))f'(x)
+			$$
+		\end{Satz}
+	\subsection{Differenzierbarkeit und lineare Approximation}
+		\begin{Satz} [ ]
+			Eine Funktion $f: U \to \R$ ist genau dann differenzierbar in $x\in U$ mit Ableitung $f'(x)$, wenn
+			$$
+				f(x+h)=f(x)+hf'(x)+r(h)
+			$$
+			mit $\lim_{h\to0}\frac{r(h)}{h}=0$ gilt. (bzw. unter Verwendung der Landau-Symbole: $r\in o(h)$)
+		\end{Satz}
+		Differenzierbarkeit heißt, dass sich $f$ lokal gut durch eine lineare Funktion approximieren lässt
+	\subsection{Monotone Funktionen}
+		\begin{Definition} [ Monoton]
+			Sei $D\subset\R$ und $f: D\to \R$. Dann heißt $f$
+		\begin{itemize}
+			\item monoton wachsend, wenn $x\leq y \Rarr f(x)\leq f(y) \quad \forall x, y\in D $
+			\item monoton fallend, wenn $x\leq y \Rarr f(x)\geq f(y) \quad \forall x, y\in D $
+			\item streng monoton wachsend, wenn $x\leq y \Rarr f(x) < f(y) \quad \forall x, y\in D $
+			\item streng monoton fallend, wenn $x\leq y \Rarr f(x) > f(y) \quad \forall x, y\in D $
+		\end{itemize}
+		\end{Definition}
+		\begin{Satz} [ ]
+			Sei $f: D \to \R$ streng monoton. Dann ist $f: D\to W=f(D)$ invertierbar, d.h. es existiert eine Umkehrfunktion $f^{-1}:W \to \R$ mit 
+			$$
+				f^{-1}\circ f = Id: D \to D, \quad f \circ f^{-1} = Id: W \to W
+			$$
+		\end{Satz}
+	\subsection{Ableitung der Umkehrfunktion}
+		\begin{Satz} [ ]
+			Sei $f: U\to \R$ stetig und streng monoton. Ferner sei $f$ differenzierbar im Punkt $x\in U$ mit $f'(x)\not = 0$. Dann ist $f^{-1}: W = f(U)\to \R$ differenzierbar in $y=f(x)$ und es gilt:
+			$$
+				(f^{-1})(y)=\frac{1}{f'(x)}=\frac{1}{f'(f^{-1}(y))}
+			$$
+		\end{Satz}
+	\subsection{Globale und lokale Extrema}
+		\begin{Definition} [ Extrema]
+			Sei $f: D\to\R$ und $x\in D$. Dann hat $f$ in $x$ ein
+			\begin{itemize}
+				\item globales Minimum, wenn $f(x)\leq f(y) \quad \forall y\in D$
+				\item globales Maximum, wenn $f(x)\geq f(y) \quad \forall y\in D$
+				\item lokales Minimum, wenn ein $\epsilon > 0$ existiert mit $f(x)\leq f(y) \quad \forall y \in B_\epsilon(x) \cap D$
+				\item lokales Maximum, wenn ein $\epsilon > 0$ existiert mit $f(x)\geq f(y) \quad \forall y \in B_\epsilon(x) \cap D$
+			\end{itemize}
+		\end{Definition}
+	\subsection{Einseitige Funktionsgrenzen}
+		\begin{Definition} [ Einseitige Funktionsgrenzen]
+			Sei $D\subset \R$, $f:D \to Y$. Wir schreiben:
+			$$
+				f(y)\xrightarrow[y\searrow x]{} \text{ bzw. } \lim_{y\searrow x}f(y) = C
+			$$
+			wenn für jede Folge $x_n$ in $D$ mit $x_n > x$ gilt:
+			$$
+				x_n \xrightarrow[n\to\infty]{}x \quad \Rarr \quad f(x_n)\xrightarrow[n\to\infty]{}C
+			$$
+			Wir schreiben
+			$$
+				f(y)\xrightarrow[y\nearrow x]{}C \text{ bzw. } \lim_{y\nearrow x}f(y)=C
+			$$
+			wenn für jede Folge $(x_n)$ in $D$ mit $x_n < x$ gilt:
+			$$
+				x_n\xrightarrow[n\to\infty]{}x \quad \Rarr \quad f(x_n)\xrightarrow[n\to\infty]{}C
+			$$
+		\end{Definition}
+	\subsection{Optimalitätsbedingung}
+		\begin{Satz} [ ]
+			Sei $D\subset \R$ und $f: D \to \R$ und $x\in D$ ein innerer Punkt. Die Funktion $f$ habe ein lokales Extremum in $x$ und sei differenzierbar in $x$. Dann gilt $f'(x)=0$
+		\end{Satz}
+	\subsection{Satz von Rolle}
+		\begin{Satz} [ Rolle]
+			Sei $a < b$ und $f: [a, b]\to\R$ stetig mit $f(a) = f(b)$. Ferner sei $f$ differenzierbar in $(a, b)$. Dann existiert ein $\xi\in(a, b)$ mit $f'(\xi)=0$
+		\end{Satz}
+		Anschaulich: Wenn $f(a) = f(b)$, dann gibt es mindestens einen Punkt mit horizontaler Tangente		
+	\subsection{Mittelwertsatz}
+		\begin{Satz} [ Mittelwert]
+			Sei $a<b$, $f:[a, b]\to\R$ stetig und $f$ differenzierbar in $(a, b)$. Dann existiert ein $\xi\in(a, b)$ mit
+			$$
+				f'(\xi)\frac{f(b)-f(a)}{b - a}
+			$$
+		\end{Satz}
+		Anschaulich: es gibt mindestens einen Punkt bei dem die Tangentensteigung der Sekantensteigung auf $[a, b]$ entspricht
+		\subsubsection{Anwendung: Monotonie und Ableitung}
+			\begin{Satz} [ ]
+				Sei $f: (a, b)\to\R$ differenzierbar. Dann gilt:
+				\begin{enumerate}
+					\item $f'(x)\geq 0$ für alle $x\in(a, b) \quad \Rarr \quad f$ ist monoton wachsend
+					\item $f'(x)\leq 0$ für alle $x\in(a, b) \quad \Rarr \quad f$ ist monoton fallend
+					\item $f'(x) > 0$ für alle $x\in(a, b) \quad \Rarr \quad f$ ist streng monoton wachsend
+					\item $f'(x) < 0$ für alle $x\in(a, b) \quad \Rarr \quad f$ ist streng monoton fallend
+				\end{enumerate}
+			\end{Satz}
+		\subsubsection{Anwendung: Lipschitz-Stetigkeit und Ableitung}
+			\begin{Satz} [ ]
+				Sei $f(a, b)\to\R$ differenzierbar. Dann gilt
+				$$
+					|f(x)-f(y)|\leq L|x-y| \quad \forall x, y\in(a, b)
+				$$
+				mit $L=\sup_{\xi\in(a, b)}|f'(\xi)|$. Ferner ist dies das kleinste $L$, für das die Abschätzung gilt. Achtung: Es kann $L=\infty$ gelten
+			\end{Satz}

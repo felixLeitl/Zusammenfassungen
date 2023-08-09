@@ -110,6 +110,13 @@
 		\begin{Satz} [ ]
 			Sei $D\subset \R$ und $f: D \to \R$ und $x\in D$ ein innerer Punkt. Die Funktion $f$ habe ein lokales Extremum in $x$ und sei differenzierbar in $x$. Dann gilt $f'(x)=0$
 		\end{Satz}
+		\begin{Satz} [ ]
+			Sei $f:(a, b)\to\R$ differnzierbar und im Punkt $x\in(a, b)$ zweimal differenzierbar mit
+			$$
+				f'(x)=0 \text{ und } f''(x)>0\quad(\text{ bzw. }f''(x)<0)
+			$$
+			Dann nimmt $f$ in $x$ ein lokales Minimum (bzw. Maximum) an.
+		\end{Satz}
 	\subsection{Satz von Rolle}
 		\begin{Satz} [ Rolle]
 			Sei $a < b$ und $f: [a, b]\to\R$ stetig mit $f(a) = f(b)$. Ferner sei $f$ differenzierbar in $(a, b)$. Dann existiert ein $\xi\in(a, b)$ mit $f'(\xi)=0$
@@ -141,3 +148,73 @@
 				$$
 				mit $L=\sup_{\xi\in(a, b)}|f'(\xi)|$. Ferner ist dies das kleinste $L$, für das die Abschätzung gilt. Achtung: Es kann $L=\infty$ gelten
 			\end{Satz}
+	\subsection{Raum der stetig differenzierbaren Funktionen}
+		\begin{Definition} [ Fortsetzbar]
+			Wir sagen, dass eine Funktion $f: U\to\R$ stetig (auf $\overline U$) fortsetzbar ist, wenn eine stetige Funktion $\hat{f}: \overline{U}\to\R$ mit $\hat{f}|_U=f$ existiert
+ 		\end{Definition}
+ 		\begin{Satz} [ ]
+ 			Sei $U$ offen und beschränkt. Dann ist $C^1(\overline{U})$ ein Untervektorraum von $C(\overline{U})$ und ein vollständig normierter Raum mit der Norm
+ 			$$
+ 				||f||_{\infty, 1}:=||f||_\infty + ||f'||_\infty
+ 			$$
+ 		\end{Satz}
+ 		\begin{Satz} [ ]
+ 			Sei $f\in C^1([a, b])$ und $f'(x)= 0$ für alle $x\in(a, b)$. Dann ist $f$ konstant
+ 		\end{Satz}
+	\subsection{Höhere Ableitung}
+		\begin{Definition} [ Zweite Ableitung]
+			Eine Funktion $f:U\to\R$ heißt zweimal differenzierbar, wenn $f$ differenzierbar ist und auch $f':U\to\R$ differenzierbar ist. Dann heißt $f''=(f')':U\to\R$ die zweite Ableitung
+		\end{Definition}	
+		\begin{Definition} [ $k$-te Ableitung]
+			Allgemein heißt eine Funktion $f: U\to\R$ $k$-mal differenzierbar mit $k\geq 1$, wenn $f$ $(k-1)$-mal differenzierbar und die $(k-1)$-te Ableitung wieder differenzierbar ist. Wir schreiben dann $f^(k)$ für die $k$-te Ableitung von $f$
+		\end{Definition}
+	\subsection{Konvexität}
+		\begin{Definition} [ Konvex]
+			Eine Funktion $f:D\to\R$ heißt konvex, wenn
+			$$
+				f(\lambda x+(1-\lambda)y)\leq\lambda f(x)+(1-\lambda)f(y)
+			$$
+			für alle $x, y\in D$ und $\lambda\in(0,1)$ gilt. $f$ heißt strikt konvex, falls für $x\not =y$ sogar $<$ gilt
+		\end{Definition}
+		\begin{Satz} [ ]
+			Sei $f:(a, b)\to\R$ differenzierbar und konvex mit $f'(x)=0$ für ein $x\in (a, b)$. Dann nimmt $f$ in $x$ ein globales Minimum an
+		\end{Satz}
+		\begin{Lemma} [ ]
+			Sei $f:(a, b)\to\R$ differenzierbar und konvex. Dann gilt für alle $x, y\in(a, b)$
+			$$
+				f(x)+f'(x)(y-x)\leq f(y)
+			$$
+		\end{Lemma}
+		\begin{Satz} [ ]
+			Sei $f: (a, b)\to\R$ differenzierbar. Dann sind äquivalent:
+			\begin{itemize}
+				\item $f$ ist konvex
+				\item Für alle $x, y \in (a, b)$ gilt $f(x)+f'(x)(y-x)\leq f(y)$
+				\item $f'$ ist monoton wachsend
+			\end{itemize}
+		\end{Satz}
+	\subsection{Punktweise Konvergenz}
+		\begin{Definition} [ Punktweise Konvergenz]
+			Sei $(f_n)$ eine Folge von Funktionen $f_n:D\to\R$ auf dem gleichen Definitionsbereich $D$. Wir sagen $f_n$ konvergiert punktweise gegen $f: D\to\R$, wenn für jedes $x\in D$ gilt:
+			$$
+				f_n(x)\to f(x)
+			$$
+			Wir schreiben $f_n\xrightarrow[n\to\infty]{pw}f$
+		\end{Definition}
+	\subsection{Gleichmäßige Konvergenz}
+		\begin{Definition} [ Gleichmäßige Konvergenz]
+			Sei $(f_n)$ eine Folge von Funktionen $f_n: D\to\R$ auf dem gleichen Definitionsbereich $D$. Wir sagen $f_n$ konvergiert gleichmäßig, gegen $f: D\to\R$, wenn gilt;
+			$$
+				\forall \epsilon > 0\exists n_0\in\N\forall n\geq n_0\forall x \in D: |f_n(x)-f(x)|<\epsilon
+			$$
+			Wir schreiben dann $f_n\xrightarrow[n\to\infty]{glm}f$
+		\end{Definition}
+		\begin{Satz} [ ]
+			Sei $(f_n)$ eine Folge stetiger Funktionen, die gleichmäßig gegen $f$ konvergiert. Dann ist auch $f$ stetig
+		\end{Satz}
+
+		
+		
+		
+					
+			

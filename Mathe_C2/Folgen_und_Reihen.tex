@@ -1,1 +1,93 @@
 \section{Folgen und Reihen}
+	\subsection{Taylor-Formel}
+		\begin{Satz} [ ]
+			Sei $f:[a, b]\to\R$ $n$-mal stetig differenzierbar und $x\in[a, b]$. Dann gilt
+			$$
+				f(y)=T_n[f, x](y)+R_n(y-x)
+			$$
+			mit dem Taylor-Polynom
+			$$
+				T_n[f, x]=\displaystyle\sum_{k=0}^n\frac{f^{(k)}(x)}{k!}(y-x)^k
+			$$
+			und es gilt für das Restglied $R_n(h)\in o(h^n)$, d.h.
+			$$
+				\frac{R_n(h)}{h^n}\xrightarrow[h\to0]{}0
+			$$
+		\end{Satz}
+		\begin{Definition} [ Analytischer Punkt]
+			Falls für die Funktion $f$
+			$$
+				T_n[f, x(y)]=\displaystyle\sum_{k=0}^n \frac{f^{(k)}(x)}{k!}(y-k)^k=\xrightarrow[n\to\infty]{}f(y)
+			$$
+			in einer Umgebung $B_\epsilon(x)$ gilt, so heißt $f$ analytischer Punkt $x$
+		\end{Definition}
+		\begin{Satz} [ ]
+			Sei $f:(a, b)\to\R$ unendlich oft differenzierbar. Ferner existiert ein $C<\infty$ mit 
+			$$
+				||f^{(n)}||_\infty=\sup_{x\in(a, b)}|f^{(n)}(x)|\leq C \quad \forall n \in \N
+			$$
+			Dann ist $f$ in $(a, b)$ analytisch. Ist ferner das Intervall $(a, b)$ beschränkt, dann gilt $T_n[f, x]\xrightarrow[n\to\infty]{glm}f$ für jede festes $x\in(a, b)$
+		\end{Satz}
+	\subsection{Reihen}
+		\begin{Definition} [ Reihe]
+			Sei $(a_n)$ eine Folge in $\R$, dann nennen wir die Folge von endlichen Summen
+			$$
+				(s_n)_{n\in\N}=(\displaystyle\sum_{k=1}^na_k)_{n\in\N}
+			$$
+			die zu $(a_n)$ gehöhrige Reihe und die $s_n$ Partialsummen der Reihe. Für die Reihe schreiben wir auch $\displaystyle\sum_{n=1}^\infty a_n$. Der Startindex muss nicht immer $1$ sein. (Oft ist er $0$)
+		\end{Definition}
+	\subsection{Konvergenz von Reihen}
+		\begin{Definition} [ Konvergente Reihen]
+			Eine Reihe $\displaystyle\sum_{n=0}^\infty a_n$ heißt konvergent, wenn die Folge der Partialsummen konvergiert. In deisem Fall schreiben wir
+		$$
+			\displaystyle\sum_{n=0}^\infty=\lim_{n\to\infty}\displaystyle\sum_{k=0}^na_k
+		$$
+		\end{Definition}
+	\subsection{Geometrische Reihen}
+		\begin{Satz} [ ]
+			Für $q\in[0, 1)$ konvergiert die geometrische Reihe gegen
+			$$
+				\displaystyle\sum_{k=0}^\infty q^k=\frac{1}{1-q}
+			$$
+		\end{Satz}
+	\subsection{Absolute Konvergenz}
+		\begin{Definition} [ Absolute Konvergenz]
+			Eine Reihe $\displaystyle\sum_{n=0}^\infty a_n$ heißt absolut konvergent, wenn die Reihe $\displaystyle\sum_{n=0}^\infty|a_n|$ konvergent ist
+		\end{Definition}
+	\subsection{Reihen als unendliche Summen}
+		\begin{Definition} [ Umordnung]
+			Unter einer Umordnung einer Reihe $\displaystyle\sum_{n=0}^\infty a_n$ verstehen wir eine Reihe $\displaystyle\sum_{n=0}^\infty a_{\pi(n)}$ wobei $\pi: \N \to \N$ bijektiv ist
+		\end{Definition}
+		\begin{Satz} [ Umordnungssatz]
+			Für eine absolut konvergente Reihe konvergiert jede Umordnung gegen den gleichen Grenzwert
+		\end{Satz}
+		\begin{Satz} [ ]
+			Ist eine Reihe konvergent aber nicht absolut konvergent, so existiert zu jeder Zahl $z\in\R$ eine Umordnung, die gegen $z$ konvergiert. Ferner existierten Umordnungen die divergieren
+		\end{Satz}
+	\subsection{Cauchey-Kriterium}
+		\begin{Satz} [ Cauchey-Kriterium]
+				Eine Reihe $\displaystyle\sum_{n=0}^\infty$, konvergiert genau dann, wenn gilt
+				$$
+					\forall\epsilon > 0\exists n_0\in \N\forall n, m\geq n_0:\quad |\displaystyle\sum_{k=m}^na_k|<\epsilon
+				$$
+		\end{Satz}
+	\subsection{Beschränkungskriterium}
+		\begin{Satz} [ ]
+			Eine Reihe $\displaystyle\sum_{n=0}^\infty a_n$ mit $a_n\geq 0$ konvergiert genau dann, wenn die Folge $(s_n)$ der Partialsummen beschränkt ist
+		\end{Satz}
+	\subsection{Majorantenkriterium}
+		\begin{Satz} [ ]
+			Sei $\displaystyle\sum_{n=0}^\infty c_n$ eine konvergente Reihe mit $c:n \geq 0$ und $|a_n|\leq c_n \quad\forall n\in\N$. Dann konvergiert die Reihe $\displaystyle\sum_{n=0}^\infty a_n$ absolut
+		\end{Satz}
+	\subsection{Quotientenkriterium}
+		\begin{Satz} [ ]
+			Sei $\displaystyle\sum_{n=1}^\infty a_n$ eine Reihe. Es existiert $n_0\in\N$ und  $\theta\in(0, 1)$ mit
+			$$
+				a_n\not = \text{ und } |\frac{a_{n+1}}{a_n}|\leq \theta \quad \forall n\geq n_0
+			$$
+			Dann konvergiert die Reihe $\displaystyle\sum_{n=1}^\infty a_n$ absolut
+		\end{Satz}
+		
+		
+		
+		

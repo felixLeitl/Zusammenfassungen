@@ -87,7 +87,73 @@
 			$$
 			Dann konvergiert die Reihe $\displaystyle\sum_{n=1}^\infty a_n$ absolut
 		\end{Satz}
-		
-		
-		
-		
+	\subsection{Leibnitz-Kriterium}
+		\begin{Satz} [ ]
+			Sei $(a_n)$ eine monoton fallende oder monoton wachende Nullfolge. Dann konvergiert die alternierende Reihe
+			$$
+				\displaystyle\sum_{n=1}^\infty(-1)^na_n
+			$$
+		\end{Satz}
+	\subsection{Häufungspunkte}
+		\begin{Definition} [ Häufungspunkt]
+			Ein Punkt $a$ heißt Häufungspunkt einer Folge $(a_n)$, wenn eine Teilfolge $(a_{k_n})$ existiert, die gegen $a$ konvergiert 
+		\end{Definition}
+		\begin{Definition} [ Limes Superior und Inferior]
+			Der Limes Superior und Limes Inferior einer reellen Folge $(a_n)$ sind gegeben durch:
+			$$
+				\limsup_{n\to \infty} = \inf_{n\in\N}\sup_{k\geq
+				 n}a_k, \quad \liminf_{n\to\infty}=\sup_{n\in\N}\inf_{k\geq n}a_k 
+			$$
+		\end{Definition}
+	\subsection{Wurzelkriterium}
+		\begin{Satz}
+			Sei $\displaystyle\sum_{n=1}^\infty a_n$ und $C=\displaystyle\limsup_{n\to\infty}\sqrt[n]{|a_n|}$. Dann gilt:
+			\begin{itemize}
+				\item Falls $C<1$: Die Reihe konvergiert absolut
+				\item Falls $C>1$: Die Reihe divergiert
+				\item Falls $C=1$ und $\sqrt[n]{|a_n|}\geq1$ für alles bis auf endlich viele $n$: Die Reihe divergiert
+			\end{itemize}
+		\end{Satz}
+	\subsection{Potenzreihen}
+		\begin{Definition} [ Potenzreihen]
+			Eine Potenzreihe ist eine Reihe der Form
+			$$
+				\sum_{n=0}^\infty a_n(x-x_0)^n
+			$$
+			Im Folgenden sei $x_0\in\R$ fest gewählt und $R>0$ der Konvergenzradius der Potenzreihe.
+			\begin{itemize}
+				\item Für $|x-x_0|<R$ konvergiert die Reihe absolut
+				\item Für $|x-x_0|>R$ divergiert die Reihe
+				\item Für $|x-x_0|=R$ wissen wir nichts
+			\end{itemize}
+		\end{Definition}
+		\begin{Satz} [ ]
+			Die Potenzreihe
+			$$
+				f(x)=\sum_{n=0}^\infty a_n(x-x_0)^n=\lim_{n\to\infty}f_n(x) \text{ mit } f_n(x)=\sum_{k=0}^na_k(x-x_0)^k
+			$$
+			haben den Konvergenzradius $R>0$. Dann ist $f$ auf $I=(x_0-R,x_0+R)$ unendlich oft differenzierbar mit
+			\begin{align*}
+				f'(x)&=\lim_{n\to\infty}f'_n(x)=\sum_{n=1}^\infty na_n(x-x_0)^{n-1} \\
+				f^{(m)}(x)&=\lim_{n\to\infty}f_n^{(m)}(x)
+			\end{align*}
+			und die Potenzreihen der Ableitungen konvergieren ebenfalls in $I$ absolut sowie gleichmäßig auf $I_r=[x_0-e,x_0+r]$ für jedes $0<r<R$. Ferner stimmt die Potenzreihe mit der Taylor-Reihe überein
+		\end{Satz}
+	\subsection{Satz von de l'Hospital}
+		\begin{Satz} [ Regel von de l'Hospital]
+			Sei $I=(a,b)$ ein Intervall mit $-\infty\leq a < b \leq +\infty$ und $f, g: I\to\R$ zwei differenzierbare Funktionen. Ferner gelte $g'(x)\not=0$ für alle $x\in I$ und es existiere der Grenzwert
+			$$
+				\lim_{x\nearrow b}\frac{f'(x)}{g'(x)}\in\R
+			$$
+			\begin{enumerate}
+				\item  Fall: $\displaystyle\lim_{x\nearrow b}g(x)=0=\displaystyle\lim_{x\nearrow b}f(x)$. Dann gilt $g(x)\not = 0$ für alle $x\in I$ und
+				$$
+					\lim_{x\nearrow b}\frac{f(x)}{g(x)}=\lim_{x\nearrow b}\frac{f'(x)}{g'(x)}
+				$$
+				\item Fall: $\displaystyle\lim_{x\nearrow b}g(x)=\infty$. Dann gilt $g(x)\not=0$ für alle $x\geq x_0$ und $x_0\in I$ und
+				$$
+					\lim_{x\nearrow b}\frac{f(x)}{g(x)}=\lim_{x\nearrow b}\frac{f'(x)}{g'(x)}
+				$$
+			\end{enumerate}
+			Analoges gilt für $x\searrow a$ sowie $x\to\infty$ und $x\to-\infty$
+		\end{Satz}

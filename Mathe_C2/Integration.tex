@@ -1,1 +1,78 @@
 \section{Integration}
+	\subsection{Treppenfunktion}
+		\begin{Definition} [ Treppenfunktion]
+				Eine Funktion $f[a, b]\to\R$ heißt Treppenfunktion, wenn es eine Unterteilung
+				$$
+					a=t_0<t_1<...<t_n=b
+				$$
+				und Konstanten $c_1,...,c_n\in\R$ gibt mit $f(x)=c_k$ falls $x\in(t_{k-1},t_k)$ bzw.
+				$$
+					f|_{t_{k-1},t_k}=c_k\quad k=1,...,n
+				$$
+				Im Folgenden sei $\tau[a, b]$ die Menge aller Treppenfunktionen, d.h.
+				$$
+					\tau[a, b]:=\{f:[a, b]\to\R|f\text{ ist Treppenfunktion}\}
+				$$
+		\end{Definition}
+		\begin{Satz} [ ]
+			Die Menge aller Treppenfunktionen $\tau[a, b]$ ist ein Unterraum von $\R^{[a, b]}$
+		\end{Satz}
+		\begin{Satz} [ ]
+			Ein Integral einer Treppenfunktion ist unabhängig von der Unterteilung und damit wohldefiniert
+		\end{Satz}
+	\subsection{Eigenschaften des Integrals von Treppenfunktionen}
+		\begin{Satz} [ ]
+			Das Integral $\int_a^b(\cdot)dx:\tau[a, b]\to\R$ ist linear und monoton, d.h.
+			\begin{align*}
+				\int_a^b(f+g)(x)dx &=\int_a^bf(x)dx+\int_a^bg(x)dx & \forall f, g\in\tau[a, b] \\
+				\int_a^b(\lambda f)(x)dx &=\lambda\int_a^bf(x)dx & \forall f\in\tau[a, b],\lambda\in\R \\
+				\int_a^bf(x)dx &\leq\int_a^bg(x)dx & \forall f, g\in\tau[a, b] \text{ mit }f\leq g
+			\end{align*}
+		\end{Satz}
+	\subsection{Unter- und Obersumme}
+		\begin{Definition} [ Unter- und Obersumme]
+			Für beschränktes $f:[a, b]\to\R$ definieren wir die Unter- und Obersumme durch:
+			\begin{align*}
+				\int_{a*}^bf(x)dx&:=\sup\{\int_a^b\varphi(x)dx|\varphi\in\tau[a, b],\varphi\leq f\},\\
+				\int_a^{b*}f(x)dx&:=\inf\{\int_a^b\psi(x)dx|\psi\in\tau[a, b],f \leq\psi\}
+			\end{align*}
+		\end{Definition}
+	\subsection{Riemann-integrierabe Funktionen}
+		\begin{Definition} [ Riemann-integrierbar]
+			Eine beschränkte Funktion $f:[a, b]\to\R$ heißt Riemann-integrierbar, wenn Unter- und Obersummen übereinstimmen, d.h. wenn
+			$$
+				\int_{a*}^bf(x)dx=\int_a^{b*}f(x)dx
+			$$
+			gilt. In diesem Fall setzen wir
+			$$
+				\int_a^bf(x)dx:=\int_{a*}^bf(x)dx=\int_a^{b*}f(x)dx
+			$$
+		\end{Definition}
+	\subsection{Einschließung zwischen Treppenfunktionen}
+		\begin{Satz} [ ]
+			Eine Funktion $f:[a, b]\to \R$ ist genau dann Riemann-integrierbar, wenn zu jedem $\epsilon>0$ Treppenfunktionen $\varphi, \psi\in\tau[a, b]$ existieren mit
+			$$
+				\varphi\leq f\leq\psi \text{ und } \int_a^b\psi(x)dx-\int_a^b\varphi(x)dx\leq\epsilon
+			$$
+		\end{Satz}
+	\subsection{Integriebarkeit stetiger Funktionen}
+		\begin{Satz} [ ]
+			Jede stetige Funktion $f:[a, b]\to\R$ ist Riemannintegrierbar
+		\end{Satz}
+		\begin{Satz} [ ]
+			Sei $f: [a, b]\to\R$ gleichmäßig stetig. Dann existieren zu jedem $\epsilon>0$ Treppenfunktionen $\varphi,\psi\in\tau[a, b]$ mit
+			$$
+				\varphi\leq f\leq\psi \text{ und } ||\varphi-\psi||_\infty\leq\epsilon
+			$$
+		\end{Satz}
+		\begin{Satz} [ ]
+			Jede stetige Funktion $f:[a, b]\to\R$ auf einem kompakten Intervall $[a, b]$ ist gleichmäßig stetig
+		\end{Satz}
+
+		
+		
+		
+		
+		
+		
+		

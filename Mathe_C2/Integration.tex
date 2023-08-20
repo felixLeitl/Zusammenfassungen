@@ -68,7 +68,181 @@
 		\begin{Satz} [ ]
 			Jede stetige Funktion $f:[a, b]\to\R$ auf einem kompakten Intervall $[a, b]$ ist gleichmäßig stetig
 		\end{Satz}
-
+		Bemerkung:\newline
+		Eine monotone Funktion $f:[a, b]\to\R$ ist automatisch beschränkt
+		\begin{Satz} [ ]
+			Jede monotone Funktion $f:[a, b]\to\R$ ist Riemann-integrierbar
+		\end{Satz}
+	\subsection{Eigenschaften des Integrals I}
+		\begin{Satz} [ ]
+			Das Integral $\displaystyle\int_a^b(\cdot)dx$ ist linear und monoton. D.h. für jede integrierbare Funktionen $f, g:[a, b]\to\R$ und $\lambda\in\R$ gilt:
+			\begin{itemize}
+				\item $f+g:[a, b]\to\R$ ist integrierbar und es gilt
+					$$
+						\int_a^b(f+g)(x)dx=\int_a^bf(x)dx+\int_a^bg(x)dx
+					$$
+				\item $\lambda f:[a, b]\to\R$ ist integrierbar und es gilt
+					$$
+						\int_a^b(\lambda f)(x)dx=\lambda\int_a^bf(x)dx
+					$$
+				\item Aus $f\leq g$ folgt
+					$$
+						\int_a^bf(x)dx\leq\int_a^bg(x)dx
+					$$
+			\end{itemize}
+		\end{Satz}
+	\subsection{Eigenschaften des Integrals II}
+		\begin{Definition} [ $f_+, f_-,|f|$]
+			Für $f:[a, b]\to\R$ definieren wir $f_+, f_-, |f|:[a, b]\to\R$ durch
+			$$
+				f_+(x)=\begin{cases}
+					f(x) & \text{ falls } f(x)>0, \\
+					0 & \text{ falls } f(x)\leq0
+				\end{cases} \quad
+				f_-(x)=\begin{cases}
+					-f(x) & \text{ falls } f(x)<0, \\
+					0 & \text{ falls } f(x) \geq 0
+				\end{cases}
+			$$
+			sowie $|f|=f_++f_-$
+		\end{Definition}
+	\subsection{Stückweise Integration} 
+		\begin{Satz} [ ]
+			Sei $f:[a, b]\to\R$ und $a<c<b$. Dann gilt: $f$ ist genau dann integrierbar, wenn $f|_{[a, c]}$ integrierbar über $[a, c]$ und $f|_[c, b]$ integrierbar über $[c, b]$ ist. \newline
+			In diesem Fall gilt
+			$$
+				\int_a^bf(x)dx=\int_a^cf(x)dx+\int_c^bf(x)dx
+			$$
+		\end{Satz}
+	\subsection{Mittelwertsatz der Integralrechnung}
+		\begin{Satz} [ ]
+			Sei $f:[a, b]\to\R$ stetig und $\varphi:[a, b]\to\R_0^+$ integrierbar. Dann existiert ein $\xi\in[a, b]$ mit
+			$$
+				\int_a^bf(x)\varphi(x)dx=f(\xi)\int_a^b\varphi(x)dx
+			$$
+			Im Spezialfall $\varphi=1$ ergibt sich:
+			$$
+				\int_a^bf(x)dx=f(\xi)(b-a)
+			$$
+		\end{Satz}
+		\begin{Definition} [ Mittelwert]
+			Der Mittelwert einer integrierbaren Funktion $f:[a, b]\to\R$ ist $\frac{1}{b-a}\int_a^bf(x)dx$
+		\end{Definition}
+		Bemerkung:\newline
+		Der Mittelwert gilt nicht, wenn $f$ nur integrierbar, aber nicht stetig ist
+	\subsection{Stammfunktionen}
+		\begin{Satz} [ ]
+			Sei $I$ ein Intervall und $f:I\to\R$ stetig sowie $a\in I$ fest. Definiere $F:I\to\R$ durch
+			$$
+				F(x):=\int_a^xf(t)dt
+			$$
+			Dann ist $F:I\to\R$ differenzierbar und es gilt $F'=f$
+		\end{Satz}
+		\begin{Satz} [ Fundamentalsatz der Differential- und Integralrechnung]
+			Sei $f:I\to\R$ stetig und $F$ eine Stammfunktion von $f$. Dann gilt für alle $a, b\in I$
+			$$
+				\int_a^bf(x)dx=F(b)-F(a)
+			$$
+		\end{Satz}
+	\subsection{Partielle Integration}
+		\begin{Satz} [ ]
+			Seien, $f, g:[a, b]\to\R$ stetig differenzierbar. Dann gilt:
+			$$
+				\int_a^bf'(x)g(x)dx=[f(x)g(x)]_a^b-\int_a^bf(x)g'(x)dx
+			$$
+		\end{Satz}
+		Bemerkung: \newline
+		\begin{itemize}
+			\item Wir schieben eine Ableitung von $f$ auf $g$
+			\item Wir müssen eine Stammfunktion von $f'$ kennen
+			\item Das Integral auf der rechten Seite sollte \glqq{}einfacher\grqq{} sein
+			\item Achtung: Die Änderung des Vorzeichens beachten
+		\end{itemize}
+	\subsection{Substitutionsregel}
+		\begin{Satz} [ ]
+			Sei $I$ ein Intervall, $f:I\to\R$ stetig und $\varphi:[a, b]\to I$ stetig differenzierbar. Dann gilt
+			$$
+				\int_{\varphi(a)}^{\varphi(b)}f(x)dx=\int_a^bf(\varphi(t))\varphi'(t)dt
+			$$
+		\end{Satz}
+		Bemerkung: \newline
+		\begin{itemize}
+			\item Identifiziere den zu substituierenden Ausdruck
+			\item Benenne den Ausdruck $y=\varphi(x)$
+			\item Berechne die Ableitung
+				$$
+					\frac{dy}{dx}=\varphi'(x)
+				$$
+			\item Verwende $dy=\varphi'(x)dx$
+			\item Ersetze $dx=\frac{1}{\varphi'(x)}dy$
+			\item Ersetze in allen restlichen Ausdrücken $x$ durch $\varphi^{-1}(y)$
+		\end{itemize}
+	\subsection{Riemannsche Summen}
+		\begin{Definition} [ Unterteilung mit Feinheit]
+			Für ein Intervall $[a, b]$ heißt $a=t_0<t_1<...<t_n=b$ eine Unterteilung mit Feinheit $h=\max\{t_k-t_{k-1}|k=1,...,n\}$
+		\end{Definition}
+		\begin{Definition} [ Riemannsche Summe]
+			Sei $f:[a, b]\to\R$ integrierbar und $a=t_0<...<t_n=b$ eine Unterteilung mit Feinheit $h$. Sei ferner in jedem Teilintervall ein Punkt $\xi_k\in[t_{k-1},t_k]$ gegeben. Dann heißt
+			$$
+				S(f,(t_0,...,t_n),(\xi_0,...,\xi_n))=\sum_{k=1}^nf(\xi_k)(t_k-t_{k-1})
+			$$
+			eine Riemansche Summe der Feinheit $h$
+		\end{Definition}
+		\begin{Satz} [ ]
+			Sei $f:[a, b]\to\R$ integrierbar. Dann existiert zu jedem $\epsilon>0$ ein $h>0$, sodass für jede Riemannsche Summe $S(f)=S(f,(t_0,...,t_n),(\xi_1,...,\xi_n))$ mit Feinheit $\leq h$ gilt
+			$$
+				|\int_a^bf(x)dx-S(f)|\leq\epsilon
+			$$
+		\end{Satz}
+		\begin{Satz} [ ]
+			Sei $f:[a, b]\to\R$ integrierbar und $(s_n(f))_{n\in\N}$ eine Folge von Riemannschen Summen mit Feinheiten $(h_n)_{n\in\N}$. Dann gilt
+			$$
+				h_n	\xrightarrow[n\to\infty]{} \quad\Rarr\quad	 S_n(f)\xrightarrow[n\to\infty]{}\int_a^bf(x)dx
+			$$
+		\end{Satz}
+	\subsection{Quadraturformel}
+		\begin{Definition} [ Quadraturformel]
+			Sei $f:[a, b]\to\R$ integrierbar. Eine Quadraturformel ist eine Summe der Form
+			$$
+				S_n(f)=\sum_{k=1}^nf(\xi_k)\omega_k
+			$$
+			mit $\displaystyle\sum_{k=1}^n\omega_k=(b-a)$
+		\end{Definition}
+		\begin{Satz} [ ]
+			 Sei $f:[a, b]\to\R$ Lipschitz-stetig mit Lipschitz-Konstante $L$ (z.B. mit $L=||f'||_\infty$). Dann gilt für jede Riemannsche Summe $S_n(f)$ mit der Feinheit $\leq h$
+			 $$
+			 	|\int_a^bf(x)dx-S_n(f)|\leq hL(b-a)
+			 $$
+		\end{Satz}
+	\subsection{Quadraturformel mit höherer Ordnung}
+		\begin{Satz} [ Fehlerabschätzung]
+			Angenommen es gilt:
+			\begin{itemize}
+				\item Die Zerlegung in Teilintervalle het die Feinheit $\leq h$
+				\item $S_N(f)$ integriere in jedem Teilintervall Polynome vom Grad $p$ exakt
+				\item $f:[a, b]\to\R$ ist glatt genug
+			\end{itemize}
+			Dann gilt
+			$$
+				|\int_a^bf(x)dx-S_n(f)|\leq C(f)h^{p+1}
+			$$
+		\end{Satz}
+	\subsection{Integration und Grenzwertbildung}
+		\begin{Satz} [ ]
+			Sei $(f_n)$ eine Folge stetiger Funktionen $f_n:[a, b]\to\R$ die gleichmäßig gegen $f:[a, b]\to\R$ konvergiert. Dann gilt
+			$$
+				\int_a^bf(x)dx=\lim_{n\to\infty}\int_a^bf_n(x)dx
+			$$
+		\end{Satz}
+		Bemerkung: \newline
+		Der Satz gilt nicht für punktweise konvergente Funktionsfolgen
+		\begin{Satz} [ ]
+			Sei $(f_n)$ eine Folge stetig differenzierbarer Funktionen $f_n:[a, b]\to\R$ die punktweise gegen $f:[a, b]\to\R$ konvergiert. Außerdem konvergiere $f'_n:[a, b]\to\R$ gleichmäßig gegen $g:[a, b]\to\R$. Dann ist $f$ differenzierbar und es gilt $f'=g$, d.h.
+			$$
+				f'(x)=\lim_{n\to\infty} \quad \forall x \in [a, b]
+			$$
+		\end{Satz}
+		
 		
 		
 		

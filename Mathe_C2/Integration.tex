@@ -242,8 +242,122 @@
 				f'(x)=\lim_{n\to\infty} \quad \forall x \in [a, b]
 			$$
 		\end{Satz}
-		
-		
+		\begin{Satz} [ ]
+			Sei $f:[a, b]\to\R$ Riemann-integrierbar. Dann gilt
+			$$
+				\int_a^bf(x)dx=\lim_{z\to b}\int_a^zf(x)dx=\lim_{z\to a}\int_z^af(x)dx
+			$$
+		\end{Satz}
+	\subsection{Integration und gleichmäßige Konvergenz}
+		\begin{Satz} [ ]
+			Sei $(f_n)$ eine Folge stetiger Funktionen $f_n:[a, b]\to\R$ die gleichmäßig gegen $f:[a, b]\to\R$ konvergiert. Dann gilt
+			$$
+				\int_a^bf(x)dx=\lim_{n\to\infty}\int_a^bf_n(x)dx
+			$$
+		\end{Satz}
+		Bemerkung: \newline
+		Der Satz gilt nicht für punktweise konvergente Funktionsfolgen
+	\subsection{Differentation und gleichmäßige Konvergenz}
+		\begin{Satz} [ ]
+			Sei $(f_n)$ eine Folge stetig differenzierbarer Funktionen $f_n:[a, b]\to\R$ die punktweise gegen $f:[a, b]\to\R$ konvergiert. Außerdem konvergiere $f'_n:[a, b]\to\R$ gleichmäßig gegen $g:[a, b]\to\R$. Dann ist $f$ differenzierbar und es gilt $f'=g$, d.h.
+			$$
+				f'(x)=\lim_{n\to\infty}f'_n(x)\quad\forall x\in[a, b]
+			$$
+		\end{Satz}
+	\subsection{Uneigentliche Integrale auf unbeschränkten Intervallen}
+		\begin{Definition} [ Uneigentliche Integrale erster Art]
+			Sei $f:[a, \infty)\to\R$ integrierbar auf jedem Intervall $[a, r]$ mit $a<r<\infty$. Ferner existiere der Grenzwert
+			$$
+				\lim_{r\to\infty}\int_a^rf(x)dx\in\R
+			$$
+			Dann heißt das Integral $\displaystyle\int_a^\infty f(x)dx$ konvergent und wir nennen 
+			$$
+				\int_a^\infty f(x)dx:=\lim_{r\to\infty}\int_a^rf(x)dx
+			$$
+			das uneigentliche Integral von $f$
+		\end{Definition}
+		\begin{Definition} [ Uneigentliche Integrale zweiter Art]
+			Sei $f:[a, b)\to\R$ integrierbar auf jedem Intervall $[a, r]$ mit $a<r<b$. Ferner existiere der Grenzwert
+			$$
+				\lim_{r\to b}\int_a^rf(x)dx\in\R
+			$$
+			Dann heißt das Integral $\displaystyle\int_a^bf(x)dx$ konvergent und wir nenne
+			$$
+				\int_a^bf(x)dx:=\lim_{r\to b}\int_a^rf(x)dx
+			$$
+			das uneigentliche Integral von $f$
+		\end{Definition}
+	\subsection{Uneigentliche Integrale mit zwei kritischen Grenzen}
+		\begin{Definition} [ Uneigentliches Integral]
+			Sei $a\in\R\cup\{-\infty\},b\in\R\cup\{\infty\}$ und $a<b$. Die Funktion $f:(a, b)\to\R$ sei integrierbar auf jedem Intervall $[r, s]\subset(a, b)$. Für ein $c\in(a, b)$ seinen die uneigentlichen Integrale
+			$$
+				\int_a^cf(x)dx \text{ und } \int_c^bf(x)dx
+			$$
+			konvergent. Dann heißt das Integral $\displaystyle\int_a^bf(x)dx$ konvergent und wir nennen
+			$$
+				\int_a^bf(x)dx:=\int_a^cf(x)dx+\int_c^bf(x)dx
+			$$
+			das uneigentliche Integral von $f$
+		\end{Definition}
+	\subsection{Bestimmte Divergenz}
+		\begin{Definition} [ bestimmte Divergenz ($+/-$)]
+			Eine Folge $(a_n)$ divergiert bestimmt gegen $+\infty$ (bzw. $-\infty$), wenn gilt:
+			$$
+				\forall C\in\R\exists n_0\in\N\forall n\geq n_0:\quad a_n\geq C \text{ (bzw. } a_n\leq C \text{)}
+			$$
+			In diesem Fall schreiben wir $a_n\xrightarrow[n\to\infty]{}\infty$ (bzw. $-\infty$)
+		\end{Definition}
+		\begin{Definition} [ bestimmte Divergenz $\pm$]
+			Eine Funktion $f$ divergiert bestimmt gegen $\pm\infty$ für $x\to z\in\R\cup\{\infty,-\infty\}$, wenn für jede Folge $(x_n)$ mit $x_n\xrightarrow[n\to \infty]{}z$ gilt:
+			$$
+				f(x_n)\xrightarrow[n\to\infty]{} \pm\infty
+			$$
+			In diesem Fall schreiben wir $f(x)\xrightarrow[x\to z]{}\pm\infty$. (Analog für $x\searrow z$ und $x\nearrow z$)
+		\end{Definition}
+	\subsection{Nichtlineare Gleichungen}
+		\subsubsection{Bisektion}
+			Annahme: \newline
+			Sei $f:[a, b]\to\R$ stetig und $f(a)<0<f(b)$
+			\begin{enumerate}
+				\item Setze das Startintervall auf $[x_0, y_0]$
+				\item Für $k=0, ...$
+					\begin{enumerate}
+						\item Berechne $c_k=\frac{x_k+y_k}{2}$
+						\item Wenn $f(c_k)=0$: Fertig
+						\item Wenn $f(c_k)<0$: Setze $[x_{k+1},y_{k+1}]=[c_k,y_k]$
+						\item Wenn $f(c_k)>0$: Setze $[x_{k+1}, y_{k+1}]=[x_k,c_k]$
+					\end{enumerate}
+			\end{enumerate}
+			\begin{Satz} [ ]
+				Entweder der Algorithmus terminiert für ein $k$ mit $f(c_k)=0$ oder die Folgen $(x_k), (y_k), (c_k)$ konvergieren gegen eine Nullstelle $x\in[a, b]$. Insbesondere gelte die Fehlerabschätzung
+				\begin{align*}
+					|x-x_k|\leq|y_k-x_k|&=2^{-k}|b-a|\\
+					|x-c_k|\leq|y_k-x_k|&=2^{-k}|b-a|\\
+					|x-y_k|\leq|y_k-x_k|&=2^{-k}|b-a|\\
+				\end{align*}
+			\end{Satz}
+		\subsubsection{Fixpunktiteration}
+			Sei $f:I\to I$ gegeben. Finde $x\in I$ mit
+			$$
+				f(x)=x
+			$$
+			\begin{Satz} [ ]
+				Sei $I$ ein abgeschlossenes Intervall und $f:I\to I$ Lipschitz-stetig mit Lipschitz-Konstante $q<1$. Dann gilt:
+				\begin{enumerate}
+					\item Es existiert genau ein Fixpunkt $x\in I$ mit $f(x)=0$
+					\item Für jedes $x_0\in I$ konvergiert die Fixpunktiteration mit
+						$$
+							x_{k+1}=f(x_k)
+						$$
+						gegen $x$
+					\item Es gelten die Fehlerabschätzungen
+						$$
+							|x-x_k|\leq\frac{q}{1-q}|x_k-x_{k-1}|\leq\frac{q^k}{1-q}|x_1-x_0|
+						$$
+				\end{enumerate}
+
+			\end{Satz}
+
 		
 		
 		

@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage{femape}
+\title{Grundlagen der Logik}
+\author{Felix Leitl}
+\begin{document}
+	\maketitle
+	\newpage
+	\section{Aussagenlogische Konsequenz und Beweise}
+		\subsection{Wahrheitstafel}
+			\begin{center}
+				\begin{tabular}{c|c|c|c|c}
+					A & B & C & A \to B & ...\\
+					\hline
+					w & w & w & w & ...\\
+					\hline
+					w & w & f & w & ...\\
+					\hline
+					w & f & w & f & ...\\
+					\hline
+					w & f & f & f & ...\\
+					\hline
+					f & w & w & w & ...\\ 
+					\hline
+					f & w & f & w & ...\\
+					\hline
+					f & f & w & w & ...\\
+					\hline
+					f & f & f & w & ...
+				\end{tabular}
+			\end{center}
+		Formel ist eine aussagenlogische Konsequenz, wenn beide Spalten übereinstimmen
+		\subsection{Coq}
+	\section{Formalisierung in Prädikatenlogik}
+	\section{Unifikation}
+		\subsection{Regeln} % I hope this is correct
+			\begin{center}
+				\begin{tabular} {c|c|c}
+					Regel & Pre & After \\
+					\hline
+					decomp & $f(x)=f(y)$ & $x=y$ \\
+					\hline
+					delete & $f(x) = f(x)$ & \\
+					\hline
+					orient & $f(x) = y$ & $y = f(x)$ \\
+					\hline
+					elim & $f(x) = y \quad x = z$ & $f(z)= y \quad x = z$ \\
+					\hline
+					conflict & $f(x) = g(x)$ & \bot \\
+					\hline
+					occur & $f(x) = y \quad y = f(x)$ & \bot
+				\end{tabular}
+			\end{center}
+		\subsection{Algorithm}
+			Die Formel ist syntaktisch identisch, hat also einen most generic unifier (mgu), wenn der Algorithmus endet, ohne \bot. \newline
+			Bsp.: $x=h(h(w)) \quad z = h(w) \quad \Rarr \quad mgu = [\frac{h(h(w))}{x}, \frac{h(w)}{z}]$
+	\section{Prädikatenlogische Resolution}
+		\subsection{Kodierung von $\to$ durch $\lnot$ und $\lor$}
+			$A\to B \equiv \lnot A \lor B$
+		\subsection{Negationsnormalform}
+			$\lnot$ an innerste Stelle ziehen: \newline
+			$\forall y.\lnot(\lnot y \land \exists x. R(x))\equiv \forall y.y \lor \forall x \lnot R(x)$ \newline
+			Aus $\land$ wird $\lor$, aus $\forall$ wir $\exists$ und umgekehrt. 
+		\subsection{Pränexe Normalform}
+			Alle Quantoren nach vorne ziehen, bei Variablendopplung neue Variablen einführen
+		\subsection{Skolemform}
+			Nicht allquantorifizierte Variablen mittels Substitution durch Funktionen austauschen 
+			$\sigma[\frac{f(x)}{x}, \frac{h(x)}{y}]$
+		\subsection{Konjunktive Normalform (KNF)}
+			$(A\lor B)\land (C \lor A)$	
+		\subsection{Klauselform}
+			Klauseln entlang der KNF Konjunktionen brechen \newline
+			$\{A, B\}\{C, A\}$
+		\subsection{Unerfüllbarkeit durch Klauselmenge zeigen}
+			Idee: wenn man die leere Menge herleiten kann, dann ist die Formel unerfüllbar. \newline
+			Je zwei widersprüchliche Aussagen auslöschen und den Rest der zwei Klauseln zu einer neuen verschmelzen. Mittels Substitution Widersprüche aufzeigen. \newline
+			%Nachfolgende wahrscheinlich großer Blödsinn
+			Bei Beweis für Erfüllbarkeit, Klauselmenge um flache Aussage erweitern, wenn dann nicht erfüllbar, dann ist die Ursprungsformel erfüllbar
+	\section{Formale Deduktion}
+	\section{Induktion}
+\end{document}
+
+
+
+
+
+
+
+
+

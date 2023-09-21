@@ -1,5 +1,7 @@
 \documentclass{article}
 \usepackage{femape}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
 \title{Grundlagen der Logik}
 \author{Felix Leitl}
 \begin{document}
@@ -30,6 +32,35 @@
 			\end{center}
 		Formel ist eine aussagenlogische Konsequenz, wenn beide Spalten übereinstimmen
 		\subsection{Coq}
+			\begin{center}
+				\begin{tabular} {c|c|c|c}
+					$\land I$ & split. &  \\
+					\hline
+					$\land E_1$ & destruct H as [H0 \_]; exact H0. &  \\
+					\hline
+					$\land E_2$ & destruct H as [\_ H0]; exact H0. &  \\
+					\hline
+					$\lor I_1$ & left. &  \\
+					\hline
+					$\lor I_2$ & right. &  \\
+					\hline
+					$\lor E$ & destruct H as [L|R]. apply H0; exact L. apply H1; exact R. \\
+					\hline
+					$\to I$ & intro. & $A \to B$ & $A \quad B$ \\
+					\hline
+					$\to E$ & apply H; exact H0. &  \\
+					\hline
+					$\lnot I$ & intro. & & $\lnot A \quad \bot$ \\ 
+					\hline
+					$\lnot E$ & apply NNPP. & $\lnot\lnot A$ & $A$ \\
+					\hline
+					$\bot I$ & apply H & & \\
+					\hline
+					$\bot E$ & contradiction & & \\
+					\hline
+					& assert ($\lnot$ A) &  neu UZ -> alt An 
+				\end{tabular}
+			\end{center}
 	\section{Formalisierung in Prädikatenlogik}
 	\section{Unifikation}
 		\subsection{Regeln} % I hope this is correct
@@ -47,7 +78,7 @@
 					\hline
 					conflict & $f(x) = g(x)$ & \bot \\
 					\hline
-					occur & $f(x) = y \quad y = f(x)$ & \bot
+					occur & $f(x) = x $ & \bot
 				\end{tabular}
 			\end{center}
 		\subsection{Algorithm}
@@ -76,7 +107,27 @@
 			%Nachfolgende wahrscheinlich großer Blödsinn
 			Bei Beweis für Erfüllbarkeit, Klauselmenge um flache Aussage erweitern, wenn dann nicht erfüllbar, dann ist die Ursprungsformel erfüllbar
 	\section{Formale Deduktion}
+		\subsection{Fitch}
+			\includegraphics[scale=0.3]{IMG_0800.PNG}
 	\section{Induktion}
+		Geschlossene $\Sigma$-Terme werden durch die Grammatik $E::=zero/one/mult(E_1,E_2)$ dargestellt \newline
+		Induktion über $E$:
+			\begin{itemize}
+				\item $E=zero:\frak{m}\llbracket zero\rrbracket=0\in\{0, 1\}$
+				\item $E=one:\frak{m}\llbracket one\rrbracket=1\in\{0, 1\}$
+				\item $E=mult(E_1, E_2):$ Nach IV wissen wir $\frak{m}\llbracket E_1\rrbracket\in\{0, 1\}$ und $\frak{m}\llbracket E_2\rrbracket\in\{0, 1\}$ \newline
+					$\frak{m}\llbracket E\rrbracket=\frak{m}\llbracket mult(E_1, E_2)\rrbracket=\frak{m}\llbracket mult\rrbracket(\frak{m}\llbracket E_1\rrbracket, \frak{m}\llbracket E_2\rrbracket) = \frak{m}\llbracket E_1\rrbracket \cdot \frak{m}\llbracket E_2\rrbracket$	
+			\end{itemize}
+		Es ergeben sich 4 Fälle:
+			\begin{itemize}
+				\item $0 \cdot 0$
+				\item $0 \cdot 1$
+				\item $1 \cdot 0$
+				\item $1 \cdot 1$
+			\end{itemize}
+		$\Rarr$ $\frak{m}\llbracket E\rrbracket\in\{0, 1\}$ in allen Fällen
+		$\dreieck$
+
 \end{document}
 
 

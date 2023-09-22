@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[a4paper]{article}
 \usepackage{femape}
 \usepackage{graphicx}
 \usepackage{stmaryrd}
@@ -113,10 +113,10 @@
 		Geschlossene $\Sigma$-Terme werden durch die Grammatik $E::=zero/one/mult(E_1,E_2)$ dargestellt \newline
 		Induktion über $E$:
 			\begin{itemize}
-				\item $E=zero:\frak{m}\llbracket zero\rrbracket=0\in\{0, 1\}$
-				\item $E=one:\frak{m}\llbracket one\rrbracket=1\in\{0, 1\}$
-				\item $E=mult(E_1, E_2):$ Nach IV wissen wir $\frak{m}\llbracket E_1\rrbracket\in\{0, 1\}$ und $\frak{m}\llbracket E_2\rrbracket\in\{0, 1\}$ \newline
-					$\frak{m}\llbracket E\rrbracket=\frak{m}\llbracket mult(E_1, E_2)\rrbracket=\frak{m}\llbracket mult\rrbracket(\frak{m}\llbracket E_1\rrbracket, \frak{m}\llbracket E_2\rrbracket) = \frak{m}\llbracket E_1\rrbracket \cdot \frak{m}\llbracket E_2\rrbracket$	
+				\item $E=zero:\frak{m}\llbracket zero\rrbracket\frak{n}=\frak{n}(0)\in\{0, 1\}$
+				\item $E=one:\frak{m}\llbracket one\rrbracket\frak{n}=\frak{n}(1)\in\{0, 1\}$
+				\item $E=mult(E_1, E_2):$ Nach IV wissen wir $\frak{m}\llbracket E_1\rrbracket\frak{n}\in\{0, 1\}$ und $\frak{m}\llbracket E_2\rrbracket\frak{n}\in\{0, 1\}$ \newline
+					$\frak{m}\llbracket E\rrbracket\frak{n}=\frak{m}\llbracket mult(E_1, E_2)\rrbracket\frak{n}=\frak{m}\llbracket mult\rrbracket(\frak{m}\llbracket E_1\rrbracket\frak{n}, \frak{m}\llbracket E_2\rrbracket\frak{n}) = \frak{m}\llbracket E_1\rrbracket\frak{n} \cdot \frak{m}\llbracket E_2\rrbracket\frak{n}$	
 			\end{itemize}
 		Es ergeben sich 4 Fälle:
 			\begin{itemize}

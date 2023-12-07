@@ -9,7 +9,7 @@
 		\subsubsection{Cacheblöcke}
 			Caches werden in sogenannte Blöcke gleicher Größe unterteilt. Beispielsweise könnte ein insgesamt 32 Byte großer Cache in 4 x 8 Byte große Blöcke unterteilt werden. Der Cache lädt dann bei einem Arbeitsspeicherzugriff immer 8 benachbarte Byte in einen Block.
 			\newline \newline
-			Die zu ladenden Nachbarn sind dabei immer auf die Cacheblockgröße "aligned" (vgl. Lernmodul 07): Das heißt, wenn wir zum Beispiel 8 Byte große Cacheblöcke haben, wird aus dem Arbeitsspeicher immer ein Nachbarpaket der Größe 8 Byte geholt, beginnend an einer Adresse, die Modulo 8 == 0 ist. 
+			Die zu ladenden Nachbarn sind dabei immer auf die Cacheblockgröße \glqq aligned \grqq (vgl. Lernmodul 07): Das heißt, wenn wir zum Beispiel 8 Byte große Cacheblöcke haben, wird aus dem Arbeitsspeicher immer ein Nachbarpaket der Größe 8 Byte geholt, beginnend an einer Adresse, die Modulo 8 == 0 ist. 
 			\newline \newline
 			Das abgebildete Schaubild stellt das dar: Wir greifen auf das Byte der Adresse 0x19 (welches den Wert 0x30 hat) im Arbeitsspeicher zu, wodurch der ganze 8 Byte große Nachbarblock geladen wird. Die nähste, davor liegende Adresse, die Modulo 8 == 0 ist, ist die Adresse 0x18.
 		\subsubsection{Byteoffset}

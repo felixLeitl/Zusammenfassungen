@@ -1,6 +1,6 @@
 \section{Threadparallelismus}
 	\subsection{Grundlagen Multithreading}
-		Rechner können nur eine bestimmte Anzahl an Threads echt-parallel ausführen. Um dennoch "unendlich" viele Threads unterstützen zu können und es dem Benutzer gegenüber so aussehen zu lassen, als würden diese parallel ausgeführt werden, wird in schnellen Abständen zwischen den aktiven Threads gewechselt.
+		Rechner können nur eine bestimmte Anzahl an Threads echt-parallel ausführen. Um dennoch \glqq unendlich\grqq  viele Threads unterstützen zu können und es dem Benutzer gegenüber so aussehen zu lassen, als würden diese parallel ausgeführt werden, wird in schnellen Abständen zwischen den aktiven Threads gewechselt.
 		\subsubsection{Zeitscheiben Multithreading}
 			Jeder Thread bekommt immer eine fixe Zeit, die er aktiv rechnen darf, bevor er wieder ausgewechselt wird (z.B. alle 50ms wird gewechselt). Die CPU muss hierfür einen Hardwaretimer besitzen. Das Betriebsystem setzt den Hardwaretimer, lässt den Thread an die CPU, und nach Ablauf der Zeit wechselt die CPU automatisch durch ein sogenanntes Interruptsignal (Unterbrechungssignal) zum Betriebssystem zurück
 		\subsection{Ereignisgesteuertes Multithreading}

@@ -1,0 +1,140 @@
+\section{Grundlagen}
+\subsection{Terminologie}
+\begin{itemize}
+	\item Seiteneffekt
+	\item Werttreue: gleiche Eingabe ergibt gleiche Ausgabe
+	\item REPL: Read-Eval-Print-Loop
+	\item Objektorientiert: In Scala ist alles ein Objekt
+	\item statisch typisiert: Typen werden zur Übersetzung festgelegt
+	\item implizite Typinferenz
+	\item Funktionsabstraktion: Funktionsdefinition
+	\item Currying
+	\item Paradigmen: imperativ vs. deklarativ
+	\item Funktion höherer Ordnung: Parameter oder Rückgabewert sind Funktion
+	\item anonyme Funktion: kann einer Variable zugeordnet werden
+	\item n-stellige Funktion: n Parameterlisten
+	\item Lazy Evaluation: Berechnung erst bei Verwendung
+	\item LazyList: Unendlichkeit möglich
+\end{itemize}
+\section{Syntax}
+\subsection{List}
+\begin{minted}{scala}
+List(4,5,6): List[Int]
+List(42, 'a', false): List[Any] \\ mehrere Typen in Liste => Supertyp Any
+List.range(4,7) \\ 7 exclusiv
+4 to 6
+4::5::6::Nil \\ :: adds or removes the first element
+List(4,5):::List(6) \\ adds two Lists together
+List().length
+List().head \\ first element
+List().tail \\ List, without head
+List().drop(3) \\ drops the first n elements
+List().sum \\ adds all elements
+List().product
+List(4,5,6)(0) \\ returns first element
+List(4,5,6).take(2) \\ returns first n elements
+List().reverse
+List(1,2,3).zip(List(4,5,6,7)) \\ => List((1,4),(2,5),(3,6)) drops the tail
+ls.foldRight(Nil)((e, r) => if (r == Nil || e != r.head) e :: r else r)
+List(1,2,3).filter(_ == 3) \\ returns List without 3
+List(List(2), List(4,3)).flatten \\ returns List(2,3,4)
+List(1,2,3).equals(List(1,2,3))
+List().map(_ + 1) \\ increases every Element by one
+"Scala".toList
+List(1,2,3,4,5).takeWhile(_ < 3) \\ returns List(1,2)
+List().dropWhile(_ < 5)
+List('S', 'c', 'a').mkString
+List(2,4,6).forall(_ % 2 == 0) \\ returns true, when all are true
+List(2,3,4).exists(_ == 3) \\ returns true, when on is true
+\end{minted}
+\subsection{LazyList}
+\begin{minted}{scala}
+1#::LazyList()
+lazy val dikrim = b*b - 4  * a * c \\ calculation at first use
+LazyList.iterate(BigInt(2))(_ + 1) \\ LazyList form 2 to infinity
+\end{minted}
+\subsection{Tupel}
+\begin{minted}{scala}
+(false, 10): (Boolean, Int)
+(false, 10, 'a'): (Boolean, Int, Char)
+(false, 10)._1 \\ gives you the first element
+\end{minted}
+\subsection{Funktionen}
+\begin{minted}{scala}
+def foo: Boolean => Char = a => if a 'a' else 'b'
+def pair[A]: A => (A,A) = x => (x, x) \\ Generische Typparameter
+def addd: Int => Int => Int => Int = x => y => z => x + y + z \\ Currying
+def bar: List[Int] => Int = { \\ Mustervergleich
+  case a::as => 1 + bar(as)
+  case a => 0
+}
+def lol: Unit => Int = _ => 42 \\ Unit is nothing and _ ignores the constant
+val f = (x: Int) => x + 1 \\ anonymus function
+val f = _ + 1 \\ anonymus function
+\end{minted}
+\subsection{If-Else}
+\begin{minted}{scala}
+if n>2 then n else -n
+if (n>2) n else -n
+if n>2 then n
+else if n==2 then 2
+else -n
+case x if x > 2 \\ guard
+\end{minted}
+\subsection{For-comprehension}
+\begin{minted}{scala}
+for x <- List.range(1,10) yield x*x
+for x <- List.range(1,10) if x > 1 yield x*x
+for x <- List.range(1,5)
+    y <- List.range(x, 4) yield (x,y)
+ for xs <- xss; x <- xs yield x \\ flatten an list
+\end{minted}
+\subsection{Type Aliasing}
+\begin{minted}{scala}
+type Coordinate = (Int, Int)
+type Move = Coordinate => Coordinate \\ function typ
+def left: Move = {case (x, y) => (x-1, y)}
+type Pair[T] = (T,T)
+def mult: Pair[Int] => Int = (x, y) => x * y
+def copy[T]: Pair[T] => T = x => (x, x) \\ generic typing
+\end{minted}
+\subsection{Typverbund}
+\begin{minted}{scala}
+trait Shape \\ interface
+case class Circle(r: Double) extends Shape \\ constructor is r: Double
+case class Rect(l: Double, w: Double) extends Shape
+case object Dot extends Shape \\ Singlton
+def square: Double => Shape =
+    n => Rect(n, n)
+def area: Shape => Double ={
+    case Circle(r) => math.Pi * r * r
+    case Rect(l, w) => w * l
+\end{minted}
+\subsection{Enum}
+\begin{minted}{scala}
+enum Answer:
+	case Yes, No, Unknown
+\\ allows Yes instead of Answer.Yes
+import Answer._ 
+def flip: Answer => Answer = {
+    case Yes => No
+    case No => Yes
+    case Unknown => Unknwon
+\end{minted}
+\section{Parallelisierung}
+\subsection{.par}
+\begin{itemize}
+	\item Liefert Sicht auf Ursprüngliche Daten
+	\item Die Verarbeitungsoperationen der Sicht sind jedoch parallelisiert
+	\item Benötigt \verb|import scala.collections.parallel.CollectionConverters._|
+	\item Beispiele: \verb|List(1,2,3).par.map(_ + 1)|
+\end{itemize}
+\subsection{Future}
+\begin{itemize}
+	\item Einpacken einer Berechnung \verb|f| in ein Futur: \verb|val c = Future {f}|
+	\item Warten auf das Ergebnis: \verb|Await.result(c, Duration.Inf)|
+\end{itemize}
+\subsection{Akka-Aktoren}
+\begin{itemize}
+	\item externe Bibliothek
+\end{itemize}

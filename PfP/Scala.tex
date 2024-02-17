@@ -1,5 +1,6 @@
-\section{Grundlagen}
-\subsection{Terminologie}
+\section{Scala}
+\subsection{Grundlagen}
+\subsubsection{Terminologie}
 \begin{itemize}
 	\item Seiteneffekt
 	\item Werttreue: gleiche Eingabe ergibt gleiche Ausgabe
@@ -17,8 +18,8 @@
 	\item LazyList: Unendlichkeit möglich
 	\item Overhead: Mehrkosten durch Parallelisierung
 \end{itemize}
-\section{Syntax}
-\subsection{List}
+\subsection{Syntax}
+\subsubsection{List}
 \begin{minted}{scala}
 List(4,5,6): List[Int]
 List(42, 'a', false): List[Any] // mehrere Typen in Liste => Supertyp Any
@@ -37,7 +38,7 @@ List(4,5,6).take(2) // returns first n elements
 List().reverse
 List(1,2,3).zip(List(4,5,6,7)) // => List((1,4),(2,5),(3,6)) drops the tail
 ls.foldRight(Nil)((e, r) => if (r == Nil || e != r.head) e :: r else r)
-List(1,2,3).filter(_ == 3) // returns List without 3
+List(1,2,3).filter(_ == 3) // returns with only 3
 List(List(2), List(4,3)).flatten // returns List(2,3,4)
 List(1,2,3).equals(List(1,2,3))
 List().map(_ + 1) // increases every Element by one
@@ -48,19 +49,19 @@ List('S', 'c', 'a').mkString
 List(2,4,6).forall(_ % 2 == 0) // returns true, when all are true
 List(2,3,4).exists(_ == 3) // returns true, when on is true
 \end{minted}
-\subsection{LazyList}
+\subsubsection{LazyList}
 \begin{minted}{scala}
 1#::LazyList()
 lazy val dikrim = b*b - 4  * a * c // calculation at first use
 LazyList.iterate(BigInt(2))(_ + 1) // LazyList form 2 to infinity
 \end{minted}
-\subsection{Tupel}
+\subsubsection{Tupel}
 \begin{minted}{scala}
 (false, 10): (Boolean, Int)
 (false, 10, 'a'): (Boolean, Int, Char)
 (false, 10)._1 // gives you the first element
 \end{minted}
-\subsection{Funktionen}
+\subsubsection{Funktionen}
 \begin{minted}{scala}
 def foo: Boolean => Char = a => if a 'a' else 'b'
 def pair[A]: A => (A,A) = x => (x, x) // Generische Typparameter
@@ -73,7 +74,7 @@ def lol: Unit => Int = _ => 42 // Unit is nothing and _ ignores the constant
 val f = (x: Int) => x + 1 // anonymus function
 val f = _ + 1 // anonymus function
 \end{minted}
-\subsection{If-Else}
+\subsubsection{If-Else}
 \begin{minted}{scala}
 if n>2 then n else -n
 if (n>2) n else -n
@@ -82,7 +83,7 @@ else if n==2 then 2
 else -n
 case x if x > 2 // guard
 \end{minted}
-\subsection{For-comprehension}
+\subsubsection{For-comprehension}
 \begin{minted}{scala}
 for x <- List.range(1,10) yield x*x
 for x <- List.range(1,10) if x > 1 yield x*x
@@ -90,7 +91,7 @@ for x <- List.range(1,5)
     y <- List.range(x, 4) yield (x,y)
  for xs <- xss; x <- xs yield x // flatten an list
 \end{minted}
-\subsection{Type Aliasing}
+\subsubsection{Type Aliasing}
 \begin{minted}{scala}
 type Coordinate = (Int, Int)
 type Move = Coordinate => Coordinate // function typ
@@ -99,7 +100,7 @@ type Pair[T] = (T,T)
 def mult: Pair[Int] => Int = (x, y) => x * y
 def copy[T]: Pair[T] => T = x => (x, x) // generic typing
 \end{minted}
-\subsection{Typverbund}
+\subsubsection{Typverbund}
 \begin{minted}{scala}
 trait Shape // interface
 case class Circle(r: Double) extends Shape // constructor is r: Double
@@ -111,7 +112,7 @@ def area: Shape => Double ={
     case Circle(r) => math.Pi * r * r
     case Rect(l, w) => w * l
 \end{minted}
-\subsection{Enum}
+\subsubsection{Enum}
 \begin{minted}{scala}
 enum Answer:
 	case Yes, No, Unknown // allows Yes instead of Answer.Yes
@@ -121,7 +122,7 @@ def flip: Answer => Answer = {
     case No => Yes
     case Unknown => Unknwon
 \end{minted}
-\subsection{MapReduce}
+\subsubsection{MapReduce}
 \begin{minted}{scala}
 val Letters: List[Char] = List.range('a', ('z' + 1).toChar)
 def mapLetterCount: String => List[(Char, Int)] = 
@@ -131,28 +132,28 @@ def reduceLetterCount: ((Char, List[Int])) => (Char, Int) = {
 }
 mapReduce(mapLetterCount)(reduceLetterCount)(bsp1) // maps first, then reduces	
 \end{minted}
-\section{Parallelisierung}
-\subsection{Vorteeile}
+\subsection{Parallelisierung}
+\subsubsection{Vorteeile}
 Alle parallelisierbaren Operationen arbeiten wegen \glqq{}divide and conquer\grqq{} automatisch parallel \\
 Programmierende muss sich nicht um Lastverteilung/Synchronisierung kümmern \\
 Wird im Hintergrund mit einem schlafenden fork/join-Pool umgesetzt
-\subsection{.par}
+\subsubsection{.par}
 \begin{itemize}
 	\item Liefert Sicht auf Ursprüngliche Daten
 	\item Die Verarbeitungsoperationen der Sicht sind jedoch parallelisiert
 	\item Benötigt \verb|import scala.collections.parallel.CollectionConverters._|
 	\item Beispiele: \verb|List(1,2,3).par.map(_ + 1)|
 \end{itemize}
-\subsection{Future}
+\subsubsection{Future}
 \begin{itemize}
 	\item Einpacken einer Berechnung \verb|f| in ein Futur: \verb|val c = Future {f}|
 	\item Warten auf das Ergebnis: \verb|Await.result(c, Duration.Inf)|
 \end{itemize}
-\subsection{Akka-Aktoren}
+\subsubsection{Akka-Aktoren}
 \begin{itemize}
 	\item externe Bibliothek
 \end{itemize}
-\section{Datentypen}
+\subsection{Datentypen}
 \begin{itemize}
 	\item Boolean
 	\item Int
@@ -164,16 +165,16 @@ Wird im Hintergrund mit einem schlafenden fork/join-Pool umgesetzt
 	\item Any: Übertyp aller Typen
 	\item Nothing: Untertyp aller Typen
 \end{itemize}
-\subsection{ParVector}
+\subsubsection{ParVector}
 Ist die parallele Version der Liste
 \begin{minted}{scala}
 342 +: 42 +: ParVector.fill(10)(100)
 \end{minted}
-\subsection{ParRange}
+\subsubsection{ParRange}
 \begin{minted}{scala}
 ParRange(30, 47, 1, true) // == (30 to 47)
 \end{minted}
-\subsection{Future}
+\subsubsection{Future}
 \begin{minted}{scala}
 val a = Future(x*x)
 Await.result(a, Duration.Inf)

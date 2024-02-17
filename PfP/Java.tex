@@ -1,0 +1,176 @@
+\section{Java}
+\subsection{Grundlagen}
+\subsubsection{Terminologie}
+\begin{itemize}
+	\item kritischer Abschnitt
+	\item Verklemmung / Deadlock
+	\item intrinsic lock (Marke jedes Objekts)
+	\item Serialisierung (durch sycnchorized)
+	\item Speichermodell
+	\item Datensynchonisation: 
+		\begin{itemize} 
+			\item Koordination der Zugriffe
+			\item Kein gemeinsamer Zustand
+			\item Unveränderlichke Datenstrukturen
+		\end{itemize}
+	\item lokale Korrektheit: Eine Klasse C ist lokal korrekt, wenn keine Folge von Operationen zu einem nicht-spezifikationsgemäßen Zustand führen kann
+	\item thread-sicher:
+		\begin{itemize}
+			\item wenn sie lokal korrekt ist und
+			\item wenn bei beliebig verschränkten, nebenläufigen Ausführungen ihrer Methoden das Verhalten spezifikationsgemäß bezüglich der Pre- und Post-Bedingungen und der Klasseninvariante bleibt
+		\end{itemize}
+	\item wechselseitiger Ausschluss
+	\item Verhungerung
+\end{itemize}
+\subsubsection{Speedup}
+$$
+	S_p(n)=\frac{T^*(n)}{T_p(n)}
+$$
+\begin{itemize}
+	\item $T^*(n)$: ist die Laufzeit des schnellsten sequentiellen Algorithmus
+für das Problem bei Eingabegröße $n$
+	\item $T_p(n)$: ist die Laufzeit des parallelen Programms mit $p$
+Prozessoren (bei Eingabegröße $n$)
+\end{itemize}
+Idealer Speedup bedeutet, dass der Speedup eines
+Programms mit der Prozessorzahl übereinstimmt \\
+Gesetz von Amdahl:
+$$
+	S_p(n)=\frac{T^*(n)}{s(n)\cdot T^*(n) + \frac{p(n)}{p}\cdot T^*(n)}
+$$
+\begin{itemize}
+	\item in sequentielle Anteile $s(n)$, die nicht parallelisierbar sind
+	\item in parallele Anteile $p(n)$, die auf mehrere Threads verteilt werden können
+\end{itemize}
+\subsection{Parallelisierung}
+\subsubsection{Threads}
+\begin{minted}{Java}
+public static class InnerThread extends Thread{
+    private final int threadNumber:
+    public InnerThread(int threadNumber){
+        this.threadNumber = threadNumber;
+    }
+    public void run(){
+        Sytsem.out.println("Thread: " + threadNumber)
+    }
+}
+Thread[] innerThreads = new Thread[10];
+for(i=0; i < 10; i++){
+    innerThreads[i] = new InnerThread(i);
+    innerThreads[i].start();
+}
+for thread in innerThread{
+    try{
+        thread.join();
+    }catch(InterruptedExeption e){
+        System.out.println(e + " has been thrown")
+    }
+}
+\end{minted}
+\subsubsection{Runnabels}
+\begin{minted}{Java}
+public static class Runner implements Runnable{
+    private final int threadNumber;
+    public InnerThread(int threadNumber){
+    this.threadNumber = threadNumber;
+    }
+    public void run(){
+        System.out.println("Thread: " + i);
+    }
+}
+Thread[] threads = new Thread[10];
+for(i = 0; i < 10; i++){
+    threads[i] = new Thread(new Runner(i))
+    thread[i].start();
+}
+for thread in threads{
+    try{
+        thread.join();
+    }catch(InterruptedExeption e){
+        System.out.println(e + " has been thrown")
+    }
+}
+\end{minted}
+\subsubsection{ExecutorService}
+\begin{minted}{Java}
+public static class Executor implements Runnable{
+    private final int threadNumber;
+    public Executor(int threadNumber){
+        this.threadnumber = threadNumber;
+    }
+}
+ExecutorService pool = Executors.newFixedThreadPool(10); // allows 10 parallel Threads
+for(i = 0; i < 20; i++){
+	pool.execute(new Executor(i));
+}
+pool.shutDown();
+try{
+	pool.awaitTermination(60, TimeUnit.SECONDS);
+}catch(InterruptedExption e){
+	System.out.printl(e + " has been thrown")
+}	
+\end{minted}
+\subsection{Sicherung}
+\subsubsection{Synchronized}
+Synchronyzed garantiert nur bei Verwendungen der selben Marke, dass die Werte vor der Verwendung der Marke sichtbar werden
+\begin{minted}{Java}
+public synchronized void doSmth(){} // takes and gives intrinsic lock (this) back (atomic)
+synchronized(this){ // takes and gives intrinsic lock (this / Object) back (atomic)
+	// Do Something in here
+}
+\end{minted}
+\subsubsection{volatile}
+Zur Sicherstellung der Sichtbarkeit und um primitive Type atomar zu machen
+\begin{minted}{Java}
+private volatile int number; // primitive types are atomic in Java, when used with volatile
+\end{minted}
+\subsubsection{AtomicInteger}
+\begin{minted}{Java}
+int decrementAndGet();
+int incrementAndGet();
+int addAndGet(int delta);
+int getAndDecrement();
+int getAndIncrement();
+int getAndAdd(int delta);
+
+AtomicInteger number = new AtomicInteger(10);
+number.incermentAndGet(5);
+\end{minted}
+\subsubsection{ReentrantLock}
+\begin{minted}{Java}
+ReentrantLock lock = new ReentrantLock();
+lock.lock();
+try{
+}finally{ // error handling
+lock.unlock();
+}
+\end{minted}
+\subsubsection{CyclicBarrier}
+\begin{minted}{Java}
+CyclickBarrier barrier = new CyclicBarrier(3);
+barrier.await();
+barrier.await(60, timeUnit.SECONDS) // waits 60s
+\end{minted}
+\subsubsection{BlockingQueue}
+\begin{minted}{Java}
+LinkedBlockingQueue<Integer> queue = new LinkedBlockingQueue
+queue.put(10);
+queue.offer(10); // returns true on success
+queue.take(); // takes last element, when empty => blocks, till one element is in queue
+queue.poll(); // returns last element or null
+\end{minted}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -21,6 +21,9 @@
 		\end{itemize}
 	\item wechselseitiger Ausschluss
 	\item Verhungerung
+	\item Daten- / Task-paralleles Vorgehen
+	\item Lastbalance
+	\item Turnierverfahren: Prozessoren dazu bzw. abschalten, nach Stufe des Turniers
 \end{itemize}
 \subsubsection{Speedup}
 $$
@@ -42,6 +45,7 @@ $$
 	\item in sequentielle Anteile $s(n)$, die nicht parallelisierbar sind
 	\item in parallele Anteile $p(n)$, die auf mehrere Threads verteilt werden können
 \end{itemize}
+Lemma von Brent: Wenneseinenstatischen Algorithmus mit $T_p(n)=\BigO(t)$ gibt, bei dem alle Prozessoren zusammen $s$ Schritte ausführen, dann gibt es einen statischen Algorithmus mit $T_{s/t}(n)=\BigO(n)$
 \subsection{Parallelisierung}
 \subsubsection{Threads}
 \begin{minted}{Java}
@@ -158,6 +162,13 @@ queue.put(10);
 queue.offer(10); // returns true on success
 queue.take(); // takes last element, when empty => blocks, till one element is in queue
 queue.poll(); // returns last element or null
+\end{minted}
+\subsubsection{CountDownLatch}
+\begin{minted}{Java}
+CountDownLatch countDown = new CountDownLatch(10);
+countDown.countDown();
+countDown.getCount();
+countDown.await() // blocks till countdown.getCount==0
 \end{minted}
 
 

@@ -105,22 +105,24 @@ Die Nutzung von Prozess-Modellen führt zu:
 \end{itemize}
 \subsubsection{Wasserfallmodell}
 \begin{table}[H]
-\begin{tikzpicture}[main/.style={
-	node distance=10cm,
-	rectangle, minimum size=6mm, rounded corners=3mm,
-	very thick, draw=black!50,
-	top color=white, bottom color=black!20}, node distance=10cm]
-	\node[main] (0) {Requirements analyses \& specification};
-	\node[main, xshift=2cm, yshift=-1.5cm] (1) {System design \& software design};
-	\node[main, xshift=4cm, yshift=-3cm] (2) {Development \& testing};
-	\node[main, xshift=6cm, yshift=-4.5cm] (3) {Integration \& testing};
-	\node[main, xshift=8cm, yshift=-6cm] (4) {Release \& maintenance};
-	\draw[->]
-				(0) edge node[midway, right, xshift=0.5cm] {Specification sheet} (1)
-				(1) edge node[midway, right, xshift=0.5cm] {Software architecture} (2)
-				(2) edge node[midway, right, xshift=0.5cm] {Software} (3)
-				(3) edge (4);
-\end{tikzpicture} 	
+\caption{Waterfall model}
+%\begin{tikzpicture}[main/.style={
+%	node distance=10cm,
+%	rectangle, minimum size=6mm, rounded corners=3mm,
+%	very thick, draw=black!50,
+%	top color=white, bottom color=black!20}, node distance=10cm]
+%	\node[main] (0) {Requirements analyses \& specification};
+%	\node[main, xshift=2cm, yshift=-1.5cm] (1) {System design \& software design};
+%	\node[main, xshift=4cm, yshift=-3cm] (2) {Development \& testing};
+%	\node[main, xshift=6cm, yshift=-4.5cm] (3) {Integration \& testing};
+%	\node[main, xshift=8cm, yshift=-6cm] (4) {Release \& maintenance};
+%	\draw[->]
+%				(0) edge node[midway, right, xshift=0.5cm] {Specification sheet} (1)
+%				(1) edge node[midway, right, xshift=0.5cm] {Software architecture} (2)
+%				(2) edge node[midway, right, xshift=0.5cm] {Software} (3)
+%				(3) edge (4);
+%\end{tikzpicture} 	
+\includegraphics[scale=0.125]{waterfall-model.png}
 \end{table}
 $\bold{Requirements analyses}$ \& $\bold{specification}$: Projektmanagement beginnt, Probleme und Spezifikationen werden zusammengestellt, Anforderungen definiert und dokumentiert \newline
 $\bold{System}$ \& $\bold{software design}$: Entwürfe, Modelle und die Softwarearchitektur werden entwickelt \newline
@@ -147,51 +149,60 @@ $\bold{Cons}$:
 	\item Oft unpraktisch
 \end{itemize}
 \end{multicols}
-\subsubsection{Iterative Waterfall model}
+$\bold{Verwendung}$: \newline
+\begin{itemize}
+	\item Anforderungen sind einfach zu definieren und ändern sich nicht
+	\item Projekt, Budget und Prozess sind vorhersagbar
+	\item Strikter Prozess ist notwendig
+\end{itemize}
+\subsubsection{Improved Waterfall model}
 \begin{table}[H]
-\begin{tikzpicture}[main/.style={
-	node distance=10cm,
-	rectangle, minimum size=6mm, rounded corners=3mm,
-	very thick, draw=black!50,
-	top color=white, bottom color=black!20}, node distance=10cm]
-	\node[main] (0) {Requirements analyses \& specification};
-	\node[main, xshift=2cm, yshift=-1.5cm] (1) {System design \& software design};
-	\node[main, xshift=4cm, yshift=-3cm] (2) {Development \& testing};
-	\node[main, xshift=6cm, yshift=-4.5cm] (3) {Integration \& testing};
-	\node[main, xshift=8cm, yshift=-6cm] (4) {Release \& maintenance};
-	\draw[->]
-				(0) edge node[midway, right, xshift=0.5cm] {Specification sheet} (1)
-				(1) edge node[midway, right, xshift=0.5cm] {Software architecture} (2)
-				(2) edge node[midway, right, xshift=0.5cm] {Software} (3)
-				(3) edge (4)
-				(4) edge [bend left=100] (0)
-				(4) edge [bend left=90] (1)
-				(4) edge [bend left=80] (2)
-				(4) edge [bend left=70] (3);
-\end{tikzpicture} 	
+\caption{Iterative Waterfall model}
+%\begin{tikzpicture}[main/.style={
+%	node distance=10cm,
+%	rectangle, minimum size=6mm, rounded corners=3mm,
+%	very thick, draw=black!50,
+%	top color=white, bottom color=black!20}, node distance=10cm]
+%	\node[main] (0) {Requirements analyses \& specification};
+%	\node[main, xshift=2cm, yshift=-1.5cm] (1) {System design \& software design};
+%	\node[main, xshift=4cm, yshift=-3cm] (2) {Development \& testing};
+%	\node[main, xshift=6cm, yshift=-4.5cm] (3) {Integration \& testing};
+%	\node[main, xshift=8cm, yshift=-6cm] (4) {Release \& maintenance};
+%	\draw[->]
+%				(0) edge node[midway, right, xshift=0.5cm] {Specification sheet} (1)
+%				(1) edge node[midway, right, xshift=0.5cm] {Software architecture} (2)
+%				(2) edge node[midway, right, xshift=0.5cm] {Software} (3)
+%				(3) edge (4)
+%				(4) edge [bend left=100] (0)
+%				(4) edge [bend left=90] (1)
+%				(4) edge [bend left=80] (2)
+%				(4) edge [bend left=70] (3);
+%\end{tikzpicture}
+\includegraphics[scale=0.125]{iterative_waterfall-model.png}
 \end{table}
-\subsubsection{Incremental Waterfall model}
 \begin{table}[H]
-\begin{tikzpicture}[main/.style={
-	node distance=10cm,
-	rectangle, minimum size=6mm, rounded corners=3mm,
-	very thick, draw=black!50,
-	top color=white, bottom color=black!20}, node distance=10cm]
-	\node[main] (0) {Requirements analyses \& specification};
-	\node[main, xshift=2cm, yshift=-1.5cm] (1) {System design \& software design};
-	\node[main, xshift=4cm, yshift=-3cm] (2) {Development \& testing};
-	\node[main, xshift=6cm, yshift=-4.5cm] (3) {Integration \& testing};
-	\node[main, xshift=8cm, yshift=-6cm] (4) {Release \& maintenance};
-	\draw[->]
-				(0) edge node[midway, right, xshift=0.5cm] {Specification sheet} (1)
-				(1) edge node[midway, right, xshift=0.5cm] {Software architecture} (2)
-				(2) edge node[midway, right, xshift=0.5cm] {Software} (3)
-				(3) edge (4)
-				(4) edge [bend left=130] (3)
-				(3) edge [bend left=130] (2)
-				(2) edge [bend left=130] (1)
-				(1) edge [bend left=130] (0);
-\end{tikzpicture} 	
+\caption{Incremental Waterfall model}
+%\begin{tikzpicture}[main/.style={
+%	node distance=10cm,
+%	rectangle, minimum size=6mm, rounded corners=3mm,
+%	very thick, draw=black!50,
+%	top color=white, bottom color=black!20}, node distance=10cm]
+%	\node[main] (0) {Requirements analyses \& specification};
+%	\node[main, xshift=2cm, yshift=-1.5cm] (1) {System design \& software design};
+%	\node[main, xshift=4cm, yshift=-3cm] (2) {Development \& testing};
+%	\node[main, xshift=6cm, yshift=-4.5cm] (3) {Integration \& testing};
+%	\node[main, xshift=8cm, yshift=-6cm] (4) {Release \& maintenance};
+%	\draw[->]
+%				(0) edge node[midway, right, xshift=0.5cm] {Specification sheet} (1)
+%				(1) edge node[midway, right, xshift=0.5cm] {Software architecture} (2)
+%				(2) edge node[midway, right, xshift=0.5cm] {Software} (3)
+%				(3) edge (4)
+%				(4) edge [bend left=130] (3)
+%				(3) edge [bend left=130] (2)
+%				(2) edge [bend left=130] (1)
+%				(1) edge [bend left=130] (0);
+%\end{tikzpicture}
+\includegraphics[scale=0.125]{incremental_waterfall-model.png}
 \end{table}
 \begin{multicols}{2}
 $\bold{Pros}$:
@@ -213,6 +224,144 @@ $\bold{Cons}$:
 	\item Struktur tendiert abzubauen
 \end{itemize}
 \end{multicols}
+$\bold{Verwendung}$: \newline
+\begin{itemize}
+	\item Anforderungen sind einfach definiert
+	\item Nur kleine Änderungen können erscheinen und sind im Budget mit eingerechnet
+	\item Projekt, Budget und Prozess sind vorhersagbar
+	\item Strikter, aber leicht flexibler Prozess ist notwendig 
+\end{itemize}
+\subsubsection{V-Modell}
+\begin{table}[H]
+\caption{V-model}
+\includegraphics[scale=0.15]{v-model.png}
+\end{table}
+\begin{table}[H]
+\caption{V-model XT}
+\includegraphics[scale=0.125]{v-model_XT.png}
+Jedes Produkt geht durch vordefinierte Zustände
+\begin{center}
+\includegraphics[scale=0.125]{v-model_XT_states.png}	
+\end{center}
+\end{table}
+\begin{multicols}{2}
+$\bold{Pros}$:
+\begin{itemize}
+	\item Bei großen und komplexen Systemen anwendbar
+	\item detaillierte Spezifikationen, Rollendefinitionen und Ergebnisstrukturen
+	\item Qualitätsorietiert
+\end{itemize}
+\columnbreak
+$\bold{Cons}$:
+\begin{itemize}
+	\item Großer Overhead bei kleinen Projekten
+	\item Testphase begint relativ spät
+	\item Strikte Phasen
+	\item Teilnehmer müssen geschult sein, um Modell zu folgen
+\end{itemize}
+\end{multicols}
+$\bold{Verwendung}$: \newline
+\begin{itemize}
+	\item Softwareentwicklung in Behörden
+	\item Sicherheitsrelevante Projekte 
+\end{itemize}
+\subsubsection{Wiederverwendungsansatz}
+\begin{table}[H]
+\caption{Reuse-oriented approach}
+\includegraphics[scale=0.125]{reuse-oriented_approach.png}
+\end{table}
+\begin{multicols}{2}
+$\bold{Pros}$:
+\begin{itemize}
+	\item Reduziert Kosten und Risiken
+	\item Schnellere Verteilung
+\end{itemize}
+\columnbreak
+$\bold{Cons}$:
+\begin{itemize}
+	\item Kompromisse in den Anforderungen
+	\item System könnte echte Nutzerbedürfnisse nicht erfüllen
+	\item Kein oder limitierte Kontrolle über Systemevolution
+\end{itemize}
+\end{multicols}
+$\bold{Verwendung}$:
+\begin{itemize}
+	\item Webanwendungen
+	\item Collection of objects or packages
+	\item Konfigurierbare stand-alone Softwaresysteme
+\end{itemize}
+\subsubsection{Agiles Modell}
+\begin{table}[H]
+\caption{Agile model}
+\includegraphics[scale=0.125]{agile_model.png}
+\end{table}
+\begin{multicols}{2}
+$\bold{Pros}$:
+\begin{itemize}
+	\item Begrenzter bürokratischer Aufwand
+	\item Flexible Rollen
+	\item so wenig Dokumentation wie nötig
+	\item besseres Kosten/Nutzen Verhältnis
+	\item Bessere Code-Qualität
+\end{itemize}
+\columnbreak
+$\bold{Cons}$:
+\begin{itemize}
+	\item Ganzes Team muss den Regeln folgen
+	\item Projektergebnis nicht vorhersehbar
+\end{itemize}
+\end{multicols}
+$\bold{Verwendung}$:
+\begin{itemize}
+	\item Große, komplexe sowie kleine Systeme
+	\item Projekte die Prototypen erfordern 
+\end{itemize}
+\subsection{Change Management}
+\subsubsection{Prototyp}
+\begin{table}[H]
+\caption{Prototyping}
+\includegraphics[scale=0.125]{prototyping.png}
+\end{table}
+\begin{multicols}{2}
+$\bold{Pros}$:
+\begin{itemize}
+	\item Kunde gibt Priorität der Anwendung vor
+	\item Software kann sofort verwendet werden
+	\item Kunde erlangt Erfahrung mit dem System
+	\item Kunde kann Anforderungen für spätere Schritte abgeben
+	\item Veränderungen sind einfach umzusetzen
+	\item Die wichtigsten Systemteile werden am häufigsten gestet 
+\end{itemize}
+\columnbreak
+$\bold{Cons}$:
+\begin{itemize}
+	\item Softwarebasis kann ohne detaillierte Anforderungen nicht identifiziert werden
+	\item Kann mit organisatorischen Strukturen in Konflikt geraten (z.B. Verträge)
+	\item Unbrauchbar um existierende Systeme zu ersetzen
+\end{itemize}
+\end{multicols}
+\subsubsection{Schrittweise Veröffentlichung}
+\begin{table}[H]
+\caption{Incremental delivery}
+\includegraphics[scale=0.125]{incremental_delivery.png}
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -6,7 +6,7 @@ Pland-driven: \newline
 Agile: \newline
 \includegraphics[scale=0.125]{agile.png}
 \end{table}
-$\bold{Agile}$ $\bold{manifesto}$:
+\subsection{Agile manifesto}
 \begin{enumerate}
 	\item Individuen und Interaktionen über Prozessen und Werkzeugen
 	\item Funktionierende Software über akribischer Dokumentation
@@ -17,3 +17,86 @@ $\bold{Agile}$ $\bold{manifesto}$:
 \caption{Generic model}
 \includegraphics[scale=0.125]{generic_model.png}
 \end{table}
+\subsection{Rational Unified Process (RUP)}
+\subsubsection{Vier Phasen}
+\begin{itemize}
+	\item Inception: Beginn des Projekts, Business-Modell, grundsächliche Anforderungen und Bedingungen werden definiert
+	\item Elaboration: Anforderungen spezifizieren, Architektur, Design und Iterationen 
+	\item Construction: Komponenten werden entwickelt und getestet
+	\item Transition: Erschaffung von \glqq{}artifacts\grqq{} und Konfiguration, Veröffentlichung 
+\end{itemize}
+Jede Phase kann mehrfach Wiederholt werden, wird von einem Meilenstein abgeschlossen, liefert \glqq{}artifacts\grqq{}, welche Ergebnisse früher spezifizierter Aktivitäten sind und wird Wiederholt, wenn die \glqq{}artifacts\grqq{}  nicht ausgeliefert werden oder die Standards nicht erreichen \newline \newline
+\subsubsection{Disziplinen}
+Engineering Workflow
+\begin{itemize}
+	\item Business modeling:
+		\begin{itemize}
+			\item Allgemeines Verständnis aller \glqq{}stakeholders\grqq{} der Software
+			\item z.B. Komponenten-Diagramme, Use-Case-Diagramme, Klassen-Diagramme
+		\end{itemize}
+	\item Requirements: Detaillierte Spezifikation des initialen Use-Case und Buisnessmodelle
+	\item Analysis \& Design:
+		\begin{itemize}
+			\item Architektur des Systems wird aus Anforderungen  erarbeitet
+			\item Architektur-, Design- und Testdokumente
+			\item Klassen- und Zusammenhangsdiagramme
+		\end{itemize}
+	\item Implementation: Definiert, wie Komponenten implementiert, getestet und integriert werden
+	\item Test:
+		\begin{itemize}
+			\item Beginnt früh im Projekt
+			\item Erhöht Verständnis des Systems
+			\item Wird ausgeführt, sobald Komponenten, Subsysteme und System verfügbar ist 
+		\end{itemize}
+	\item Deployment: Finalisieren und veröffentlichen des Produkts
+\end{itemize}
+Supporting Workflow
+\begin{itemize}
+	\item Configuration \& change management:
+		\begin{itemize}
+			\item Organisiert Konfigurations- und Versionsmanagement
+			\item Versionsmanagement der Dokumentation
+		\end{itemize}
+	\item Project management: 
+		\begin{itemize}
+			\item Planung und Koordination des Projekts
+			\item Steuert Resourcen, Qualität und Quantität
+			\item Entscheidet, ob zusätzliche Wiederholungen notwendig sind
+		\end{itemize}
+	\item Environment: Definiert verfügbare Resourcen für die Entwicklungsteams 
+\end{itemize}
+\begin{multicols}{2}
+$\bold{Pros}$:
+\begin{itemize}
+	\item Definiert Produkt, Rollen und Aktivitäten
+	\item Für Großprojekte geeignet
+	\item Umfangreiche Nutzung der UML, um echte Szenarien zu modellieren
+\end{itemize}	
+\columnbreak
+$\bold{Cons}$:
+\begin{itemize}
+	\item Komplex
+	\item Nicht flexibel
+	\item Große Anzahl an Dokumenten
+\end{itemize}
+\end{multicols}
+\subsection{Kanban}
+Kanban verwendet eine visuelles, pull-basiertes System, um den Flow zu optimieren
+\subsubsection{Practices}
+\begin{itemize}
+	\item Workflow definieren und visualisieren
+	\item Aktiv Pakete im Workflow managen
+	\item Workflow verbessern
+\end{itemize}
+\begin{table}[H]
+\caption{Kanban board}
+\includegraphics[scale=0.125]{Kanban_board.png}
+\end{table}
+
+
+
+
+
+
+
+

@@ -92,10 +92,120 @@ Kanban verwendet eine visuelles, pull-basiertes System, um den Flow zu optimiere
 \caption{Kanban board}
 \includegraphics[scale=0.125]{Kanban_board.png}
 \end{table}
-
-
-
-
+Damit Kanban funktioniert muss ein einheitliches Verständnis des Workflows existieren ($\bold D$efinition $\bold o$f $\bold W$orkflow)
+\begin{itemize}
+	\item \glqq{}Work items\grqq{} definieren - individuelle Einheiten, welche durch den Workflow wandern
+	\item Definieren, wann \glqq{}work items\grqq{} beginnen und enden
+	\item Definieren, durch welche Zustände \glqq{}work items\grqq{} gehen
+	\item Definieren, wie \glqq{}$\bold W$ork $\bold I$n $\bold P$rogress\grqq{} kontrolliert wird
+	\item Explizite Richtlinien für die \glqq{}Wanderung\grqq{} durch die Zustände
+	\item Ein \glqq{}$\bold S$ervice $\bold L$evel $\bold E$xpectation\grqq{}: Erwartete Durchlaufzeit, jedes Itmes
+\end{itemize}
+Der Mindestsatz der Durchlaufmetriken besteht aus:
+\begin{itemize}
+	\item WIP: Anzahl der Items, die begonnen, aber nicht abgeschlossen wurden
+	\item Throughput: Anzahl der abgeschlossenen Items pro Zeiteinheit
+	\item Work Item Age: Deltazeit seit Bearbeitungsbeginn
+	\item Cycle Time: Deltazeit zwischen Bearbeitungsbeginn und Abschluss
+\end{itemize}
+\subsection{Extreme programming}
+\subsubsection{Core values}
+\begin{itemize}
+	\item Kommunikation
+	\item Einfachheit (Simplicity)
+	\item Feedback
+	\item Mut (Rewrites und ehrliche Kundenkommunikation)
+	\item Respekt
+\end{itemize}
+\subsubsection{Vier Aktivitäten}
+\begin{itemize}
+	\item Planning
+	\item Design
+	\item Implementation
+	\item Testing
+\end{itemize}
+\subsubsection{Planning}
+\begin{itemize}
+	\item $\bold{User}$ $\bold{Stories:}$
+		\begin{itemize}
+			\item Kurz beschreiben, was passieren soll
+			\item Wird für Risikoanalysen, Aufwandsschätzung und Wiederholungsplanung verwendet
+			\item Von Firmenseite entwickelt, mit Hilfe der Entwickler
+		\end{itemize}
+	\item $\bold{Planning}$ $\bold{Game:}$ 
+		\begin{itemize}
+			\item Endet in einem Veröffentlichungsplan
+			\item 4 Variablen: Umfang, Resourcen, Zeit und Qualität
+			\item User stories werden beauftragt, um ein Projektplan zu erstellen, der jeden zufrieden stimmt
+			\item Ein Veröffentlichungsplan besteht aus 80 $\pm$ 20 user stories
+		\end{itemize}
+	\item $\bold{Iteration}$ $\bold{Planning:}$
+		\begin{itemize}
+			\item Iterationen werden mit dem Kunden geplant
+			\item User stories werden ausgewählt
+			\item Implementierungsaufgaben und Testfälle werden den User stories entnommen
+		\end{itemize}
+	\item $\bold{Small}$ $\bold{releases}$: Schnelleres Feedback der Kunden, jedoch keine unnötigen Veröffentlichungen
+	\item $\bold{Stand-Up}$ $\bold{Meeting:}$ Kurzes Meeting, um Status, Probleme und Lösungen zu besprechen
+	\item $\bold{Measuring}$ $\bold{project}$ $\bold{progress}$
+	\item $\bold{Move}$ $\bold{People}$ $\bold{Around}$
+	\item $\bold{Fix}$ $\bold{XP}$ $\bold{when}$ $\bold{it}$ $\bold{breaks}$
+\end{itemize}
+\subsubsection{Design}
+\begin{itemize}
+	\item $\bold{Simplicity}$: Finales Design erst kurz vor Ende und Implementation nur wenn nötig
+	\item $\bold{Spike}$ $\bold{solutions}$: Aus Prototypen für Implementation Schlüsse ziehen
+	\item $\bold{Refactoring}$: Computer Aided Software Engineering
+	\item $\bold{CRC}$ $\bold{cards}$:
+		\begin{itemize}
+			\item Class, Responsibility and Collaboration
+			\item Beschreibe eine Klasse mit maximal 4 Sätzen
+			\item Ein Satz Klassen pro Wiederholung
+			\item Die Verbindung der Klassen bildet ein UML-Diagramm
+		\end{itemize}
+		\begin{multicols}{2}	
+		Front:
+		\begin{tabular}{|c|}
+			\hline
+			Class Name $\vert$ Superclass \\
+			\hline
+			Responsibility \\
+			\hline
+			Collaboration \\
+			\hline
+		\end{tabular}
+		\columnbreak
+		Back:
+		\begin{tabular}{|c|}
+			\hline
+			Operations \\
+			\hline 
+			Attributes \\
+			\hline
+		\end{tabular}
+		\end{multicols}
+\end{itemize}
+\subsubsection{Implementation}
+\begin{itemize}
+	\item $\bold{Customer}$ $\bold{availability}$
+	\item $\bold{Coding}$ $\bold{guidelines}$
+	\item $\bold{Test}$ $\bold{first}$: Schreibe die unit tests am Anfang jeder Wiederholung
+	\item $\bold{Pair}$ $\bold{Programming}$: Driver/Pilot und Observer
+	\item $\bold{Continuos}$ $\bold{Code}$ $\bold{Integration}$
+	\item $\bold{Collective}$ $\bold{Code}$ $\bold{Ownership}$: Jeder kann alles verändern
+	\item $\bold{Optimize}$ $\bold{last}$
+	\item $\bold{No}$ $\bold{Overtime}$
+\end{itemize}
+\subsubsection{Testing}
+\begin{itemize}
+	\item $\bold{Unit}$ $\bold{tests}$: Vor jeder Iteration, ersetzt Dokumentation
+	\item $\bold{Acceptance}$ $\bold{tests}$: Das ganze System gegen Spezifikationen testen 
+\end{itemize}
+\subsubsection{Timeline overview}
+\begin{table}[H]
+\caption{Timeline overview: XP}
+\includegraphics[scale=0.125]{Extreme_programming.png}	
+\end{table}
 
 
 

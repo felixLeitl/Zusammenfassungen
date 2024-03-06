@@ -255,7 +255,104 @@ $\bold{Cons}$:
 \end{itemize}
 \end{multicols}
 \subsection{Behavioural Patterns}
+Beschreibt, wie Objekte interagieren, um ein bestimmtes Verhalten zu erlangen
+\subsubsection{Command}
+\begin{table}[H]
+\caption{Command}
+\includegraphics[scale=0.25]{Command.png}
+\end{table}
+\begin{multicols}{2}
+$\bold{Pros}$:
+\begin{itemize}
+	\item Erzeugungszeit und Ausführungszeit sind unabhängig
+	\item Asynchroner Aufruf ist möglich
+	\item Invoker ist nur von abstrakter Klasse Command abhängig
+\end{itemize}
+\columnbreak
+$\bold{Cons}$:
+\begin{itemize}
+	\item Performanceverlust, wegen Kapselung
+	\item Sepsaate Klassen für jeden konkreten Command
+\end{itemize}
+\end{multicols}
+\subsubsection{Observer}
+Observable informiert Observer über Änderungen
+\begin{table}[H]
+\caption{Observer}
+\includegraphics[scale=0.25]{Observer.png}	
+\end{table}
+\begin{multicols}{2}
+$\bold{Pros}$:
+\begin{itemize}
+	\item Leicht gekoppelt, nur wenn Observer angemeldet, dann kommen automatische Benachrichtigungen
+	\item Während der Entwicklung muss die Menge an abhängigen Objekten nicht bekannt sein
+	\item Unabhängig Änderungen bei Observer und Observable 
+\end{itemize}
+\columnbreak
+$\bold{Cons}$:
+\begin{itemize}
+	\item Bei erhöhter Komplexität der Observables könnte es zu zu vielen Benachrichtigungen kommen
+	\item Konkrete Observer müssen sich irgendwann abmelden
+	\item Risiko von unendlichen Loops
+	\item Parallelisierung wird sehr komplex
+\end{itemize}
+\end{multicols}
+\subsubsection{Strategy}
+Anwendungen bieten verschiedene Strategien an, um ein Problem zu lösen, die Wahl der Strategie geschieht während der Laufzeit  
+\begin{table}[H]
+\caption{Strategy}
+\includegraphics[scale=0.25]{Strategy.png}
+\end{table}
+\begin{multicols}{2}
+$\bold{Pros}$:
+\begin{itemize}
+	\item Client ist nur von Abstraktion abhängig
+	\item Konkrete Strategien/Algorithmen werden zur Laufzeit spezifiziert
+\end{itemize}
+\columnbreak
+$\bold{Cons}$:
+\begin{itemize}
+	\item Clients müssen die verschiedenen Strategien kennen, um eine zu wählen
+	\item Ein Interface für alle kann bei bestimmten überflüssige Parameter haben
+\end{itemize}
+\end{multicols}
+\subsubsection{Template Method}
+\begin{table}[H]
+\caption{Template method}
+\includegraphics[scale=0.25]{Template_method.png}
+\end{table}
+\begin{multicols}{2}
+$\bold{Pros}$:
+\begin{itemize}
+	\item Unabhängig von den Subklassen
+	\item Basisklasse hat ein Skeleton ohne genaueres Wissen über den Algorithmus
+	\item Wiederverwendbarkeit der Spezifikationen, weil Subklassen tmeplateMethod() nicht selbst implementieren
+\end{itemize}	
+\end{multicols}
+\subsubsection{Visitor}
+\begin{table}[H]
+\caption{Visitor}
+\includegraphics[scale=0.25]{Visitor.png}
+\end{table}
+\begin{multicols}{2}
+$\bold{Pros}$:
+\begin{itemize}
+	\item Neue Operationen zu einem Objekt hinzufügen ist durch konkrete Visitors möglich
+	\item Code einer Operation ist in einer Klasse konzentriert
+	\item Man benötig kein allgemeines Interface außer VisitableElement
+\end{itemize}
+\columnbreak
+$\bold{Cons}$:
+\begin{itemize}
+	\item Enge Kupplung zwischen Visitor und Elementen der Objektstruktur
+	\item Hoher Aufwand das Pattern im Nachhinein einzuführen 
+\end{itemize}
+\end{multicols}
 
+
+
+
+ 
 
 
 

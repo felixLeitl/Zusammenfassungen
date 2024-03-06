@@ -317,9 +317,82 @@ $\bold{Verwendung}$
 	\item Komponenten ändern sich während der Laufzeit
 	\item Implementationsdetaills von Client und Server müssen verborgen bleiben
 \end{itemize}
-
-
-
+$\bold{Service-Oriented}$ $\bold{Architecture}$ $\bold{(SOA)}$
+\begin{table}[H]
+\caption{SOA}
+\includegraphics[scale=0.125]{SOA_1.png}
+\includegraphics[scale=0.125]{SOA_2.png}	
+\end{table}
+Eigenschaften
+\begin{itemize}
+	\item Verteilt
+	\item In sich geschlossen
+	\item Zustandslos
+	\item Leicht gekoppelt
+	\item Austauschbar
+	\item Ortstransparent
+	\item Platformunabhängig
+	\item Durch ein Interface erreichbar
+	\item Registriert in z.B. einem service directory 
+\end{itemize}
+\begin{multicols}{2}
+$\bold{Pros}$:
+\begin{itemize}
+	\item Use cases sind an Komponenten gebunden
+	\item Überblick über erforderliche Services und Interfaces
+	\item Komplexität ist für verteilte Systeme reduziert
+	\item Wiederverwendbarkeit
+	\item Hält veränderten Anforderungen stand
+\end{itemize}
+\columnbreak
+$\bold{Cons}$:
+\begin{itemize}
+	\item Feingrannulare Services führen zu komplexen Strukturen
+	\item Overhead für Kommunikation
+	\item Hohe Anforderungen für das Netzwerk
+	\item Nur effektiv bei klar definierten und dokumentierten use cases
+\end{itemize}
+\end{multicols}
+\subsubsection{Interactive Systems}
+$\bold{Model-View-Controller}$ $\bold{(MVC)}$
+\begin{itemize}
+	\item Model
+		\begin{itemize}
+			\item Speichert Systemdaten
+			\item Managed Interaktionen mit Systemdaten
+		\end{itemize}
+	\item View
+		\begin{itemize}
+			\item Definiert, wie Daten dargestellt werden
+			\item Managed Systemoutput
+		\end{itemize}
+	\item Controller
+		\begin{itemize}
+			\item Managed Input
+			\item Behandelt Nutzerinteraktionen
+		\end{itemize}
+\end{itemize}
+\begin{table}[H]
+\caption{Model-View-Controller}
+\includegraphics[scale=0.125]{MVC.png}
+\end{table}
+\begin{multicols}{2}
+$\bold{Pros}$:
+\begin{itemize}
+	\item Daten verändern sich unabhängig von der Repräsentation
+	\item Unterstützt mehrere Ansichten auf die gleichen Daten
+	\item Änderungen in einer Repräsentation werden in allen gesehen
+	\item Model kann unabhängig der UI entwickelt und getestet werden
+	\item UI kann einfach getauscht werden
+\end{itemize}
+\columnbreak
+$\bold{Cons}$:
+\begin{itemize}
+	\item Relativ großer Overhead für einfach Interaktionen
+	\item Abhängigkeiten zwischen View und Controller
+	\item Angestiegene Komplexität
+\end{itemize}
+\end{multicols}
 
 
 

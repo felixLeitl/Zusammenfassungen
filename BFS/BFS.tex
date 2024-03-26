@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{femape}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
 \title{Berechenbarkeit und formale Sprachen}
 \author{Felix Leitl}
 \begin{document}
@@ -107,6 +108,59 @@ Wir schreiben \glqq{}$L_1\leq L_2$\grqq{} und sagen \glqq{} $L_1$ wird auf $L_2$
 	\item $L_1$ unentscheidbar \Rightarrow $L_2$ unentscheidbar
 	\item $L_1$ nicht rekursiv aufzählbar \Rightarrow $L_2$ nicht rekursiv aufzählbar
 \end{itemize}
+\section{Nichtdeterministische Turingmaschine}
+Nichtdeterministische TM $M=\{Q, \Sigma, \Gamma, \delta, q_0, F\}$, wobei nur $\delta$ anderes ist, als bei einer deterministischen TM. $\delta: Q\times \Gamma \to P(Q\times, \Gamma \times \{R, N, L\})$
+\subsection{Begriffe}
+\begin{itemize}
+	\item akzeptieren: wenn es eine Rechnung $q_0x\vdash^*\alpha q\beta$ gibt
+\end{itemize}
+\subsection{P-NP}
+\begin{itemize}
+	\item $\text{DTIME}(t(n)):=\{L|\text{ Es gibt eine deterministische }\BigO(t(n)) \text{-zeitbeschränkte TM, die } L \text{ entscheidet}\}$
+	\item $\text{NTIME}(t(n)):=\{L|\text{ Es gibt eine nichtdeterministische }\BigO(t(n)) \text{-zeitbeschränkte TM, die } L \text{ akzeptiert}\}$
+\end{itemize}
+\subsection{Sprachprobleme}
+\subsubsection{Clique}
+\begin{align*}
+	\text{CLIQUE}:=\{&\langle G, k \rangle|k\in \N, G \text{ ist ein ungerichteter Graph} \\
+	&\text{der einen vollständigen Teilgraphen der Größe } k \text{ enthält}\}
+\end{align*}
+\subsubsection{Independent-Set}
+\begin{align*}
+	\text{IS}:=\{&\langle G, k \rangle|k\in \N, G = (V,E) \text{ ist ungerichteter Graph}, \\
+	&\exists U\subseteq V, |U|=k:\forall u, v\in U:\{u, v\}\notin E\}
+\end{align*}
+\subsubsection{Coloring}
+\begin{align*}
+	\text{COL}&:=\{\langle G, k\rangle|G \text{ ist ein ungerichteter Graph und } G \text{ ist } k\text{-färbbar}\} \\
+	\text{3COL}&:=\{\langle G \rangle|G \text{ ist ein ungerichteter Graph und } G \text{ ist 3-färbbar}\}
+\end{align*}
+\subsubsection{Traveling-Salesman}
+\begin{align*}
+	\text{TSP}:=\{&\langle G, c, k\rangle|\text{ der Graph } G \text{ mit Kantengewicht } c:E\to\R \\
+		& \text{enthält eine Rundreise mit Gewicht} \leq k\}
+\end{align*}
+\subsubsection{Vertex-Cover}
+\begin{align*}
+	\text{VC}:=\{&\langle G, k\rangle|k\in\N, G \text{ ist ein ungerichteter Graph} \\
+	&\text{und hat eine Knotenüberdeckung der Größe } k\}
+\end{align*}
+\subsubsection{Binary-Programming}
+\begin{align*}
+	\text{BP}:=\{&\langle A, \vec{b}\rangle|A \text{ ist eine } m\times n \text{-Matrix mit ganzzahligen Einträgen, }\vec{b} \text{ ist ein Vektor mit } m \\
+	&\text{ganzzahligen Einträgen und es gibt einen 0-1-Vektor } \vec{x}\in\{0,1\}^n \text{ mit } A\cdot\vec{x}\leq\vec{b}\}
+\end{align*}
+\subsection{Verifizierer}
+Eine deterministische Turingmaschine $V_L$ heißt $t(n)$-beschränkter Verifizierer für $L$, wenn gilt:
+\begin{enumerate}
+	\item Die Eingaben von $V_L$ sind von der Form $x\#w, w, x\in\{0,1\}^*$
+	\item Die Laufzeit ist in $\BigO(t(|x|))$
+	\item Für alle $x\in\{0,1\}^*$:
+		$$
+			x\in L\Leftrightarrow\exists w:|w|\leq t(|x|) \text{ und } V_L \text{ akzeptiert } x\#w
+		$$
+		Dieses heißt Zertifikat von w
+\end{enumerate}
 \end{document}
 
 

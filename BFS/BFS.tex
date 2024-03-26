@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage{femape}
+\title{Berechenbarkeit und formale Sprachen}
+\author{Felix Leitl}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\section{Turingmaschine}
+\subsection{1-Band TM}
+Turingmaschine $M=(Q, \Sigma, \Gamma, \delta, q_0, F)$:
+\begin{itemize}
+	\item $Q:$ endliche Zustandsmenge
+	\item $\Sigma:$ endliches Eingabealphabet
+	\item $\Gamma:$ endliches Bandalphabet $\Sigma \subsetneq \Gamma$
+	\item $B:$ Blank, $B\in\Gamma, B\notin\Sigma$
+	\item $q_0:$ $q_0\in Q$ Startzustand
+	\item $F:$ akzeptierende Endzustände, $F\subseteq Q$
+	\item das Programm $\delta:$ $Q\times\Gamma\to Q\times\Gamma\times\{R,L,N\}$ eine partielle Funktion, wobei es für Endzustände keine Übergänge geben soll
+	\item Zu Beginn steht der Lese-/Schreibkopf auf dem ersten Zeichen der Eingabe
+	\item Eingabe: $w=w_1w_2\dots w_n\in\Sigma^*$
+	\item $\epsilon:$ leeres Wort
+	\item $L\subseteq\Sigma^*$ ist Sprache über dem Alphabet $\Sigma$
+\end{itemize}
+\subsection{Deltatabelle}
+$Q=\{q_0, q_1\}, \Sigma = \{0, 1\}, \Gamma \{0, 1, B\}, F=\{q_1\}$ \newline \newline
+\begin{tabular}{c|c|c|c}
+	$\delta$ & 0 & 1 & $B$ \\
+	\hline
+	$q_0$ & $(q_0, 0, R)$ & $(q_1, 1, R)$ & - \\
+	\hline
+	$q_1$ & - & - & - 
+\end{tabular}
+\subsection{Konfiguration}
+TM $M$ ist in Konfiguration $K=\alpha q \beta$ $(\Gamma^*\times Q \times \Gamma^*)$, wobei der Schreib-/Lesekopf auf dem ersten Zeichen von $\beta$ steht. \newline
+Eine direkte Nachfolgekonfiguration von $\alpha q\beta$ ist: $\alpha q \beta \vdash \alpha'q'\beta'$ \newline
+$i-$te Nachfolgekonfiguration $\alpha q \beta \vdash K_1 \vdash \dots \vdash K_{i-1} \vdash \alpha'q'\beta'=\alpha q\beta \vdash^i\alpha q\beta$ \newline
+Nachfolgekonfiguration: $\alpha q \beta \vdash^* \alpha'q'\beta'$
+\subsection{Begriffe}
+\begin{itemize}
+	\item akzeptieren: Falls es $\alpha, \beta \in \Gamma^*$ und $q\in F$ gibt mit $q_0x\vdash^*\alpha q \beta$
+	\item L(M): Menge aller von M akzeptierter Eingaben $x\in\Sigma^*$
+	\item entscheidet: M hält mit Eingabe $x\in \Sigma^*$ nach endlich vielen Schritten 
+	\item rekursiv aufzählbar: 
+		\begin{itemize}
+			\item $L\subseteq \Sigma^*$ ist rekursiv aufzählbar, wenn es eine TM $M$ gibt mit $L(M)=L$
+			\item es gibt eine surjektive Funktion $g:{0, 1}^*\to L$
+		\end{itemize}
+	\item entscheidbar/rekursiv: 
+		\begin{itemize} 
+			\item wenn es eine deterministische 1-Band-TM $M$ gibt, die L entscheidet
+			\item $L$ und $\overline{L}$ sind rekursiv aufzählbar
+		\end{itemize}
+\end{itemize}
+\subsection{Programmiertechniken}
+\subsubsection{Endlicher Speicher}
+Man merkt sich die Zeichen im Zustand \newline
+$\Gamma=\Sigma\cup\{B\}, Q=(\{q_0\}\times\Sigma)\cup\{q_0, q_1\}, \text{ Startzustand } q_0, F=\{q_1\}$
+\subsubsection{Unterprogramme}
+Wenn man eine TM \glqq{}programmiert\grqq{}, kann man sagen: Man benutzt ein Unterprogramm um eine bestimmte Aufgabe zu lösen
+\subsubsection{Spurtechnik}
+\begin{tabular}{cc|c|c|c|cc}
+	\hline
+	&&U&N&I&&\\
+	\hline
+	&&E&R&L&&\\
+	\hline
+	&&N&B&G&&\\
+	\hline
+\end{tabular} \newline
+Das erste Zeichen wäre $\begin{pmatrix}
+	U\\
+	E\\
+	N
+\end{pmatrix}$
+\subsection{Gödelnummer}
+$\langle M\rangle$ ist die Gödelnummer (Bauplan von M). Sie ist die Repräsentation der TM $M$ als natürliche Zahl
+\subsubsection{Universelle TM}
+Eine TM $\tilde{M}$ hießt universell, wenn sie sich mit der Eingabe $\langle M \rangle x, x\in\{0, 1\}^*$ so verhält, wie $M$ gestartet mit $x$
+\subsection{Halteproblem}
+\subsubsection{Allgemeines Halteproblem}
+$$
+	H=\{\langle M\rangle|M \text{ ist deterministische 1-Band-TM, die, gestartet mit Eingabe } w, \text{ hält} \}
+$$
+\subsubsection{Initiales Halteproblem}
+$$
+	H_\epsilon=\{\langle M\rangle | M \text{ ist deterministische 1-Band-TM, die, gestartet mit Eingabe }\epsilon, \text{hält}\}
+$$
+\subsection{Reduktion}
+\begin{itemize}
+	\item Eine Funktion ist berechenbar, wenn es eine TM $M_f$ gibt, für die mit $x\in\{0,1\}^*$ gilt:
+		\begin{itemize}
+			\item Ist $f(x)$ definiert, so hält $M_f$ mit der Eingabe $x$ und $f(x)$ steht auf dem Band
+			\item Ist $f(x)$ undefiniert, so hält $M_f$ gestartet mit $x$ nicht
+		\end{itemize}
+	\item Eine Funktion ist total, wenn alle $x\in\{0,1\}^*$ definiert und berechenbar sind 
+\end{itemize}
+Eine Reduktion ist eine total berechenbare Funktion $f:\{0,1\}^*\to\{0,1^*\}$, für die gilt:
+$$
+	x\in L_1 \Leftrightarrow f(x)\in L_2
+$$ 
+Wir schreiben \glqq{}$L_1\leq L_2$\grqq{} und sagen \glqq{} $L_1$ wird auf $L_2$ reduziert\glqq{}
+\subsubsection{$L_1\leq L_2$}
+\begin{itemize}
+	\item $L_2$ entscheidbar \Rightarrow $L_1$ entscheidbar
+	\item $L_2$ rekursiv aufzählbar \Rightarrow $L_1$ rekursiv aufzählbar
+	\item $L_1$ unentscheidbar \Rightarrow $L_2$ unentscheidbar
+	\item $L_1$ nicht rekursiv aufzählbar \Rightarrow $L_2$ nicht rekursiv aufzählbar
+\end{itemize}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -120,6 +120,10 @@ Nichtdeterministische TM $M=\{Q, \Sigma, \Gamma, \delta, q_0, F\}$, wobei nur $\
 	\item $\text{NTIME}(t(n)):=\{L|\text{ Es gibt eine nichtdeterministische }\BigO(t(n)) \text{-zeitbeschränkte TM, die } L \text{ akzeptiert}\}$
 \end{itemize}
 \subsection{Sprachprobleme}
+\subsubsection{Satisfiability Problem}
+\begin{align*}
+	\text{SAT}:=\{\langle\Phi\rangle|\Phi\text{ ist eine erfüllbare }KNF\}
+\end{align*}
 \subsubsection{Clique}
 \begin{align*}
 	\text{CLIQUE}:=\{&\langle G, k \rangle|k\in \N, G \text{ ist ein ungerichteter Graph} \\
@@ -161,6 +165,82 @@ Eine deterministische Turingmaschine $V_L$ heißt $t(n)$-beschränkter Verifizie
 		$$
 		Dieses heißt Zertifikat von w
 \end{enumerate}
+$L\in NTIME(t(n))\Leftrightarrow\text{ es gibt einen } t(n)\text{-beschränkten Verifizierer } V_L \text{ für } L$ \newline
+$NP=\{L|\text{ es gibt einen polynomiellen Verifizierer für } L \}$
+\subsection{NP-Vollständig}
+\subsubsection{Polynomiell reduzierbar}
+Seien $L_1\subseteq\Sigma_1^*,L_2\subseteq\Sigma_2^*$. \newline
+$L_1$ ist genau dann polynomiell reduzierbar auf $L_2(L_1\leq_pL_2)$, wenn gilt: 
+\begin{enumerate}
+	\item $L_1\leq L_2$ mittels Reduktionsfunktion $f$
+	\item Die Laufzeit zur Berechnung von $f(x)$ ist $\BigO(|x|^k)$ für $k\in\N$
+\end{enumerate}
+\subsubsection{NP-schwer}
+$$
+	\forall L'\in NP:L'\leq_pL
+$$
+\subsubsection{NP-vollständig}
+\begin{enumerate}
+	\item $L\in NP$
+	\item $L$ ist $NP$-schwer
+\end{enumerate}
+\section{Formale Sprachen}
+Eine Grammatik $G$ vom Typ Chomsky-0 ist beschrieben durch ein 4-Tupel$(V,\Sigma,P,S)$ mit:
+\begin{itemize}
+	\item $V$: Endliche Menge an Variablen
+	\item $\Sigma$: Endliche Menge der Terminalsymbole
+	\item $S:S\in V$: Startsymbol
+	\item $P\subseteq((V\cup\Sigma)^+\backslash\Sigma^*)\times(V\cup\Sigma)^*$: Endliche Menge von Produktionen/Ableitungsregeln: $u\to v$
+\end{itemize}
+Die erzeugte Sprache:
+$$
+	L(G):=\{w|S\xrightarrow{*}w, w\in\Sigma^*\}
+$$
+\subsection{Chomsky-Grammatiken}
+%TODO: Definitionen einfügen
+\begin{tabular}{c|c|c|c}
+	Sprachtyp & Erzeuger & Erkenner & Definition \\
+	\hline
+	rekursiv aufzählbar & Chomsky-0 & Turingmachinen & \\
+	\hline
+	kontextsensitiv & Chomsky-1 & Linear beschränkte Turningmaschinen & $|u|\leq|v|$ \\
+	\hline
+	kontextfrei & Chomsky-2 & Kellerautomaten & $u\in V \& |u|=1$\\
+	\hline
+	regulär & Chomsky-3 & Automaten & $u\in V \& v\in\{\epsilon\}\cup\Sigma$ / $u\in V \& v\in\Sigma\circ V$
+\end{tabular}
+\subsection{Endliche Automaten}
+$A=(Q,\Sigma, \delta, q_0, F)$:
+\begin{itemize}
+	\item $Q$: Endliche Menge der Zustände
+	\item $\Sigma$: Endliches Alphabet, $Q\cap\Sigma=\emptyset$
+	\item $\delta$: $Q\times\Sigma\to Q$ Übergangsfunktion
+	\item $q_0$: Startzustand
+	\item $F$: $F\subseteq Q$, akzeptierende Endzustände
+\end{itemize}
+\begin{tabular}{c|c|c}
+	$\delta$ & 0 & 1\\
+	\hline
+	$q_0$ & $q_0$ & $q_0$\\
+	$q_1$ & $q_0$ & $q_1$ 
+\end{tabular}
+$\Rarr \delta(q_0, 001)= \delta(q_0, 01)=\delta(q_0, 1)=q_1$
+\subsection{Reguläre Pump-Eigenschaft}
+$\exists n_L\in\N\ \forall z\in L,|z|\geq n_L\ \exists u,v,w\in\Sigma^*:uvw=z$ und
+\begin{itemize}
+	\item $|uv|\leq n_L$
+	\item $v\not= \epsilon$
+	\item $\forall i\geq0:uv^iw\in L$
+\end{itemize}
+$\Rarr$ Die Sprache $L$ ist regulär
+\subsection{Kontextfreie Pum-Eigenschaft}
+$\exists n_L\in\N\ \forall z\in L,|z|\geq n_L\ \exists u,v,w,x,y\in\Sigma^*:uvwxy=z$ und
+\begin{itemize}
+	\item $|vwx|\leq n_L$
+	\item $vx\not= \epsilon$
+	\item $\forall i\geq0:uv^iwx^iy\in L$
+\end{itemize}
+$\Rarr$ Die Sprache $L$ ist kontextfrei
 \end{document}
 
 

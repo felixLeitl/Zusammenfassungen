@@ -1,1 +1,70 @@
 \section{Relationenmodell}
+\subsection{Bestandteile eines Datenmodells}
+\begin{itemize}
+	\item einfache Datentypen und Konstruktoren für zusammengesetzte Datentypen
+	\item Konsitenzregeln:
+		\begin{itemize}
+			\item inhärente Konsistenzregeln:
+					
+					gelten für ein Datenmodell per Konvenzion
+			\item explizite Konsistenzregeln:
+					
+					werden für eine Anwendung im Zuge der Datendefinition festgelegt 
+		\end{itemize}
+	\item Bennenungskonvention für die Bezeichnung von Datenbankelementen
+\end{itemize}
+
+\subsection{Begriffe}
+\begin{itemize}
+	\item Relation: Menge von gleichartig aufgebauten Tupeln
+	\item Tupel: Zeile einer Tabelle
+	\item Kardinalität: Anzahl der Tupel in einer Relation
+	\item Attribut: Spalte einer Tabelle
+	\item Grad: Anzahl der Attribute
+	\item Relationenschema: 
+			\begin{itemize}
+				\item Beschreibung einer Relation
+				\item besteht aus Relationennamen (z.B. \verb|Personen|)
+				\item und einer Menge von Attributen (z.B. \verb|{PNr, Vorname, Nachname}|)
+				\item Jedes Attribut wird definiert über einen Attributnamen und einen Wertebereich
+				\item z.B. \verb|Personen (PRn, Vorname, Nachname)| 
+			\end{itemize}
+	\item Relationales Datenbankschema: Menge von Relationalendatenbankschemata
+	\item Wertebereich: zulässige Attribute
+	\item Superschlüssel: definiert ein Tupel eindeutig
+	\item Schlüsselkandidat: Minimaler Superschlüssel
+	\item Primärschlüssel: Ausgewählter Schlüsselkandidat
+	\item Fremdschlüssel: Attribut, dass mit Primärschlüssel einer Tabelle auf ein bestimmtes Tupel verweist
+\end{itemize}
+\subsection{Erweiterte Atributdefinition}
+\begin{itemize}
+	\item NOT NULL
+	\item UNIQUE
+	\item PRIMARY KEY
+\end{itemize}
+\subsection{Sicherstellung der Referenziellen Integrität}
+\subsubsection{Löschen eines referenzierten Primärschlüssels}
+\begin{itemize}
+	\item RESTRICTED: ablehnen der Operation
+	\item CASCADES: Alle referenzierenden Tupel werden auch gelöscht
+	\item NULLIFIE: Referenzen werden auf NULL gesetzt
+	\item SET DEFAULT
+\end{itemize}
+\subsubsection{Ändern eines referenzierten Primärschlüssels}
+\begin{itemize}
+	\item RESTRICTED
+	\item CASCADES
+\end{itemize}
+
+\subsection{Integritätsbedingungen}
+\subsubsection{\glqq{}System-enforced Integrity\grqq{}}
+\begin{itemize}
+	\item Primärschlüsseleigenschaft
+	\item Referenzielle Integrität
+\end{itemize}
+\subsubsection{Benutzerdefinierte oder \glqq{}globale\grqq{} Integritätsbedingung}
+\begin{itemize}
+	\item Bedingungen aus der Anwendungsdomäne, die explizit formuliert werden müssen
+	\item Kontrolliert durch das DBMS
+	\item Operationen, die die Integritätsbedingungen verletzen werden abgelehnt
+\end{itemize}

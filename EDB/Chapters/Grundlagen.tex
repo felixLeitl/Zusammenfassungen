@@ -1,1 +1,125 @@
 \section{Grundlagen}
+\subsection{Modellierung}
+Ein Modell ist ein zweckgerichtetes Abbild der Wirklichkeit
+
+Zweck:
+\begin{itemize}
+	\item Spezifizieren
+	\item Konstruieren
+	\item Visualisieren
+	\item Dokumnetieren
+\end{itemize}
+
+\subsection{Warum Datenbanken}
+\begin{itemize}
+	\item Große Software-Systeme
+	\item Viele Anwendungen/Benutzer arbeiten mit den gleichen Daten
+	\item Daten sollen auch nach Ende eines Programms verfügbar bleiben
+	\item Daten sollen vor Verlust geschützt werden
+	\item Daten sollen konsistent bleiben 
+\end{itemize}
+
+\subsection{Vorteile einer Datenbank}
+\begin{itemize}
+	\item Anwendungsneutralität
+	\item Vermeidung redundanter Daten
+	\item Zentrale Kontrolle der Datenintegrität
+	\item Synchronisation im Mehrnutzerbetrieb
+	\item Fehlertoleranz
+	\item Perfomance
+	\item Skalierbarkeit
+	\item Verkürzte Entwicklungszeiten für Anwendungen
+	\item Umsetzung von Standarts 
+\end{itemize}
+
+\subsection{Nachteile}
+\begin{itemize}
+	\item Hohe initiale Kosten 
+	\item General purpose software
+	\item Signifikanter Overhead
+\end{itemize}
+
+\subsection{Begriffe}
+\subsubsection{Datenbank}
+Eine Datenbank ist eine Sammlung zusammenhängender Daten.
+\begin{itemize}
+	\item repräsentiert einen Ausschnitt der realen Welt (Miniwelt)
+	\item Logisch kohärente Sammlung von Daten
+	\item Hat definierten Zweck
+\end{itemize}
+\subsubsection{Datenbank-Management-System}
+Sammlung von Programmen zur Verwaltung einer Datenbank
+\begin{itemize}
+	\item Erzeugung von DB
+	\item Wartung von DB
+	\item Konsistenter Zugriff auf DB
+\end{itemize}
+\subsubsection{Datenbanksystem}
+\begin{itemize}
+	\item DB + DBMS
+\end{itemize}
+\subsubsection{Datenbankanwendung}
+\begin{itemize}
+	\item DBS + Anwendungsprogramme
+\end{itemize}
+\subsubsection{Datenmodell}
+\begin{itemize}
+	\item Strukturierungsvorschrift für Daten (z.B. Tabellenform)
+\end{itemize}
+\subsubsection{Datenbankschema}
+\begin{itemize}
+	\item Beschreibung einer konkreten Datenbank
+\end{itemize}
+\subsubsection{Nutzdaten}
+\begin{itemize}
+	\item Eigentliche Datenbank 
+\end{itemize}
+\subsubsection{Metadaten}
+\begin{itemize}
+	\item Struktur der DB
+	\item Information über Speicherungsstrukturen
+\end{itemize}
+\subsubsection{Konzeptionelles Schema}
+\begin{itemize}
+	\item Beschreibt sämtliche Daten auf logischer Ebene 
+	\item z.B. \verb|Patient (NR. Krankenkasse, Laborwerte)|
+\end{itemize}
+\subsubsection{Externes Schema}
+\begin{itemize}
+	\item Beschreibt den für die Anwendung relevanten Teil einer DB auf logischer Ebene
+	\item z.B. für den Artzt: \verb|Patient (Nr., Laborwerte)| und für die Verwaltung: \verb|Patient (Nr., Krankenkasse)|
+\end{itemize}
+\subsubsection{Internes Schema}
+\begin{itemize}
+	\item Beschreibt die interne Speicherungsstrukturen einer Datenbank
+	\item Unsichtbar für Anwendung
+	\item z.B. Index über Attribut \verb|Nr.| von \verb|Patient|
+\end{itemize}
+
+\subsection{Phasen des Datenbankentwurfs}
+\begin{itemize}
+	\item Konzeptioneller Entwurf
+		\begin{itemize}
+			\item Abbildung auf Semantisches Datenmodell (z.B. E/R-Modell)
+		\end{itemize}
+	\item Logischer Entwurf
+		\begin{itemize}
+			\item Abbildung auf Datenmodell
+		\end{itemize}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

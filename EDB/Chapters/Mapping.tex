@@ -1,1 +1,71 @@
 \section{Mapping}
+\subsection{Abbildungskonzepte}
+\begin{tabular}{c|c}
+	$\bold{ER}$-$\bold{Modell}$ & $\bold{Relationenmodell}$ \\
+	\hline
+	Entity-Typ & \glqq{}Entity\grqq{}-Relation \\
+	1:1- oder 1:N-Beziehungstyp & Fremdschlüssel oder \\
+	M:N-Beziehungstyp & Beziehungstabelle mit 2 FS \\
+	N-ärer Beziehungstyp & Beziehungstabelle mit N FS \\
+	Einfaches Attribut & Attribut \\
+	Zusammengesetztes Attribut & Menge von Attributen \\
+	Mehrwertiges Attribut & \glqq{}Attribut\grqq{}-Relation mit FS \\
+	Wertebereich & Wertebereich \\
+	Schlüsselattribut & Schlüsselkandidat $\to$ Primärschlüssel 
+\end{tabular}
+\subsection{Algorithmus}
+\subsubsection{Reguläre Entity-Typen}
+\begin{itemize}
+	\item Erzeuge eine Relation R, die alle einfachen Attribute von E umfasst
+		\begin{itemize}
+			\item Bei zusammengesetzten Attributen nur Komponenten als eigenständige Attribute 
+		\end{itemize}
+	\item Wähle aus Schlüsselkandidaten einen Primärschlüssel
+		\begin{itemize}
+			\item zusammengesetzt $\to$ Komponenten bilden zusammen den Primärschlüssel
+			\item Jeder Schlüsselkandidat, außer PS wird UNIQUE \& NOT NULL
+		\end{itemize}
+\end{itemize}
+\subsubsection{Schwache Entity-Typen}
+\begin{itemize}
+	\item Erzeuge eine Relation, die alle einfachen Attribute von W umfasst
+	\item Füge als Fremdschlüssel alle PS-Attribute der Owner-Typen ein
+	\item PS wird Kombination aller FSA, zusammen mit partiellem Schlüssel (falls vorhanden)
+\end{itemize}
+\subsubsection{M:N-Beziehungen}
+\begin{itemize}
+	\item Erzeuge Relation die alle einfachen Attribute von X umfasst
+	\item FS $\to$ PSA der beidem Relationen
+	\item PS ist Kombination der FSA
+\end{itemize}
+\subsubsection{N:1-Beziehungen}
+\begin{itemize}
+	\item identifiziere die Relation, die dem Entity-Typ E auf der N-Seite des Beziehungstyps entspricht
+	\item Füge den PS des anderen ET als FS in R ein
+	\item Füge alle einfachen Attribute des Beziehungstyps X als Attribute in R ein
+\end{itemize}
+\subsubsection{1:1-Beziehungen}
+\begin{itemize}
+	\item Identifiziere Relationen R \& S
+	\item Nehme den PS von S bzw. R als FS von R bzw. S auf UNIQUE
+	\item Füge alle einfachen Attribute in R bzw. S ein
+\end{itemize}
+\subsubsection{Mehrwertige Attribute}
+\begin{itemize}
+	\item Erzeuge Relation R mit folgenden Attributen:
+		\begin{itemize}
+			\item Ein Attribut A, dass dem abzubildenden Attribut A entspricht
+			\item Den PS K der Relation S, die zu E gehört, als FS auf S
+		\end{itemize}
+	\item Der PS der Relation R ist die Kombination von A \& K
+\end{itemize}
+\subsubsection{Mehrstellige Beziehungen}
+\begin{itemize}
+	\item Erzeuge Relation R, die alle einfachen Attribute von B umfasst
+	\item FS $\to$ PS aller Relationen
+	\item PS $\to$ Kombination aller FS
+\end{itemize}
+\subsubsection{Generalisierung/Spezialisierung}
+siehe VL
+\subsubsection{Kategorien}
+siehe VL

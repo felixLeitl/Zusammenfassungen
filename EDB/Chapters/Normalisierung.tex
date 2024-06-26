@@ -1,1 +1,40 @@
 \section{Normalisierung}
+\subsection{Anomalien}
+\begin{itemize}
+	\item Einfüge-Anomalie (ohne hinzufügen von Info B, geht Info A nicht)
+	\item Lösch-Anomalie
+	\item Änderungs-Anomaile
+\end{itemize}
+\subsection{Funktionale Abhänigkeit $X\to Y$}
+$Y$ ist funktional abhängig von $X$, wenn es keine Tupel geben darf, in denen für gleiche $X$-Werte verschiedene $Y$-Werte auftreten
+
+Linke Seite der FA wird \glqq{}Determinante\grqq{} genannt
+\subsubsection{Volle Funktionale Abhängigkeit}
+$Y$ ist voll funktional abhängig von $X$, wenn es keine echte Teilmenge $Z\subset X$ gibt, für die gilt $Z\to Y$
+
+\subsection{Normalformen}
+\subsubsection{Erst Normalform (1NF)}
+Eine Relation, die nur atomare Attributwerte besitzt (keine Mengen als Attributwert)
+\subsubsection{Zweite Normalform (2NF)}
+Eine Relation, in 1NF \& deren Nicht-Schlüsselattribute voll funktional von jedem Schlüsselkandidaten abhängen
+\subsubsection{Dritte Normalform (3NF)}
+Eine Relation, deren Nicht-Schlüsselkandidaten nicht transitiv abhängig von einem Schlüsselkandidaten sind
+\subsubsection{Boyce-Codd-Normalform (BCNF)}
+Eine Relation, bei welcher jede Determinante einer FA ein Superschlüssel ist
+\subsubsection{Vierte Normalform (4NF)}
+Eine Relation $R$ ist in 4NF, wenn für jede nicht-triviale mehrwertige Abhängigkeit $X \twoheadrightarrow A\in R$ gilt: $X$ ist Superschlüssel von $R$
+
+Eine mehrwerte Abhängigkeit gilt, wenn die Attributwerte von $C$ nur von $A$ und nicht von $B$ abhängig sind
+
+$A\twoheadrightarrow C$ ist trivial, wenn $C\in A$ oder $B=\emptyset$
+
+\subsection{Denormalisierung}
+Normalisierung kostet Zugriffszeit 
+
+\subsubsection{Wann ist eine Denormalisierung angebracht?}
+\begin{itemize}
+	\item Seltene Änderungen
+	\item Viele Joins
+\end{itemize}
+
+Bei weiteren Fragen Anhang VL\_06 lesen

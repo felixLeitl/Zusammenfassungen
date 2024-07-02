@@ -1,1 +1,59 @@
 \section{SVD}
+$$
+	A = U\Sigma V^T
+$$
+\begin{itemize}
+	\item $\Sigma$ ist Diagonalmatrix, $\sigma_{11}\geq\sigma_{22}\geq\dots\geq 0$
+	\item $U$ und $V$ sind orthogonal
+	\item Die Spalten von $U$ bzw. $V$ sind EV von $AA^T$ bzw. $A^TA$
+	\item $\sigma_{kk} = \sqrt{\lambda_k}$ von $A$
+	\item $U\in\R^{m\times m}, \Sigma\in\R^{m\times n}, V\in\R^{n\times n}$
+\end{itemize}
+\subsection{Informationen}
+rang$(A)=r$
+\subsubsection{Bild}
+im$(A)=<u_1, \dots, u_r>$
+\subsubsection{Kern}
+ker$(A)=<v_{r+1}, \dots, v_n>$
+\subsubsection{Norm}
+$|||A|||_2=\sigma_{11}$
+\subsection{Lösungstheorie}
+\begin{itemize}
+	\item $n=m$ und $\det(A) \not = 0$: eindeutige Lösung
+	\item $n=m$ und $\det(A) = 0$ oder $n\not = m$:
+		\begin{itemize}
+			\item nur lösbar, falls $b\in$ im$(A)$
+			\item alle Lösungen: $x_0 +$ ker$(A)$ wobei $x_0$ eine spezielle Lösung ist  
+		\end{itemize}
+\end{itemize}
+\subsubsection{Pseudo-Inverse}
+$$
+	A^{\sim1}=V\Sigma^{\sim1}U^T
+$$
+wobei
+$$
+	\Sigma^{\sim1}=\begin{pmatrix}
+		\frac{1}{\sigma_1} & \dots & 0 & \dots & 0 \\
+		\vdots & \ddots & \vdots & & \vdots \\
+		0 & \dots & \frac{1}{\sigma_r} & \dots & 0 \\
+		\vdots & &  \vdots & 0 & 0 \\
+		0 & \dots & 0 & 0 & 0
+	\end{pmatrix}
+$$
+\subsubsection{Lösen}
+\begin{itemize}
+	\item A hat maximalen Rang $($rank$(A) = \min\{n,m\})$ 
+		\begin{itemize}
+			\item überbestimmtes System $(n < m)$
+		
+			$x = A^{\sim1}b$ löst $||Ax-b||=\min$
+			\item unterbestimmtes System $(n > m)$
+			
+			$x = A^{\sim1}b$ löst $Ax=b$ und erfüllst $||x||_2=\min$
+		\end{itemize}
+	\item rank$(A)<\min\{n,m\}$
+		\begin{itemize}
+			\item $x = A^{\sim1}b$ minimiert $||Ax-b||_2=\min$ das Residuum und 
+			\item ist unter allen diesen Lösungen diejenige mit der kleinsten Norm $||x||_2=\min$
+		\end{itemize}
+\end{itemize}

@@ -12,3 +12,43 @@ Eine Matrix ist orthogonal, falls eine der Bedingungen erfüllt ist:
 $x\circ y=\displaystyle\Sigma_{i=1}^nx_iy_i$
 \subsection{Tridiagonalmatrix}
 Die inverse einer tridiagonalen Matrix ist in der Regel voll besetzt
+\subsection{Normen}
+Eigenschaften:
+\begin{itemize}
+	\item definit: $x\not= 0 \Rarr ||x|| > 0$
+	\item homogen: $||\lambda x|| = |\lambda|\cdot||x||$
+	\item sub-additiv: $||x+y|| \leq ||x|| + ||y||$
+\end{itemize}
+\subsubsection{Matrix-Norm bzw. Operator-Norm}
+Erfüllt Normeigenschaften und mehr:
+\begin{itemize}
+	\item $|||Id|||=1$
+	\item sub-multiplikativ: $|||AB|||\leq|||A|||\cdot|||B|||$
+	\item mit der Vektornorm kompatibel: $||Ax|| \leq |||A|||\cdot||x||$ 
+	\item $|||A|||\geq |\lambda|$
+\end{itemize}
+Beispiele:
+\begin{itemize}
+	\item Spalten-Summen-Norm: $|||A|||_1$
+		$$
+			|||A|||_1 = \max_j \{\Sigma_i|a_{ij}|\}
+		$$
+	\item Zeilen-Summen-Norm: $|||A|||_\infty$
+		$$
+			|||A|||_\infty = \max_i \{\Sigma_j|a_{ij}|\}
+		$$
+	\item Spektral-Norm: $|||A|||_2$
+		$$
+			|||A|||_2 = \sqrt{\lambda\max(A^TA)}
+		$$
+	\item Frobenius-Norm: $||A||_F$
+		$$
+			||A||_F = \sqrt{\Sigma_{i=1}^m\Sigma_{j=1}^na_{ij}^2}
+		$$
+\end{itemize}
+\subsubsection{Konditionszahl}
+$$
+	\kappa(A) = \frac{\max_{x\in\R^n, ||x||=1} ||Ax||}{\min_{x\in\R^n, ||x||=1} ||Ax||}
+$$
+\subsection{Spektralsatz}
+Es sei $A\in\R^{m\times m}$ eine reelle symmetrische Matrix. Dann gibt es eine Orthonomalbasis aus Eigenvektoren bzw. $A=VDV^T$, wobei $D$ die Diagonalmatrix aller EW ist und die Spalten von $V$ die normierten EV sind.

@@ -1,2 +1,104 @@
 \section{Direkte Verfahren}
-Direkte Verfahren Lösen ein Problem nach endlich vielen Schritten. 
+Direkte Verfahren Lösen ein Problem nach endlich vielen Schritten. Verwendung: kleine, vollbesetzte Matrizen.
+\subsection{LR-Zerlegung}
+\subsubsection{Ziel}
+\begin{align*}
+	A &= LR \\
+	\begin{pmatrix}
+		a_{11} & \dots & a_{1n} \\
+		\vdots & \ddots & \vdots \\
+		a_{n1} & \dots & a_{nn}
+	\end{pmatrix} &= \begin{pmatrix}
+		1 & 0 & \dots & 0 \\
+		* & 1 \\
+		\vdots &  & \ddots & \vdots\\
+		* & & \dots & 1
+	\end{pmatrix} \begin{pmatrix}
+		* & * & \dots & * \\
+		0 & * \\
+		\vdots &  & \ddots & \vdots\\
+		0 & & \dots & *
+	\end{pmatrix}
+\end{align*}
+\subsubsection{Algorithmus}
+\begin{enumerate}
+	\item $i$-te Zeile in R übertragen
+	\item $i$-te Spalte dividiert durch $a_{ii}$ in L über nehmen. Erstes Element der Spalte gleich 1 setzten 
+	\item Mit $i$-ter Zeile die $i$-te Spalte eliminieren 
+\end{enumerate}
+\subsubsection{Komplexität}
+$\BigO(n^3)$
+\subsubsection{Anwendung}
+\begin{itemize}
+	\item $\det(A)=\det(L)\times\det(R)=1\times\det(R)$
+	\item Lösen mehrerer GLS:
+		\begin{itemize}
+			\item $Ly=b$ mit Vorwärtssubstitution $\BigO(n^2)$
+			\item $Rx=y$ mit Rückwärtssubstitution $\BigO(n^2)$
+		\end{itemize}
+\end{itemize}
+%TODO: PLR-Zerlegung
+\subsubsection{LRP-Zerlegung}
+\begin{align*}
+	A &= PLR
+\end{align*}
+\subsection{QR-Zerlegung}
+\subsubsection{Ziel}
+\begin{align*}
+	A = QR
+\end{align*}
+\subsubsection{Housholder-Spiegelungen}
+%TODO: Householder-Spiegelungen
+Mit einer Housholder-Spiegelung in eriner Spalte Nullen einfügen (außer Diagonalelement)
+
+$\to$ nach $n-1$ Schritten erhält man die Dreiecksmatrix $R$
+
+\begin{align*}
+	R &= H_{n-1}\dots H_2H_1A \\
+	Q &= (H_{n-1}\dots H_2H_1)^{-1} = H_1 H_2 \dots H_{n-1}
+\end{align*}
+\subsubsection{Givens-Rotationen}
+Mit einer Givens-Rotation ein Element (unterhalb der Diagonalen) zu Null machen
+
+$\to$ nach $n(n-1)/2$ Schritten erhält man die Dreiecksmatrix $R$
+
+\begin{align*}
+	J_{ij}(\varphi)=\begin{pmatrix}
+		1 \\
+		& \ddots \\
+		& & c & &-s \\
+		& &  &\ddots \\
+		& & s & & c \\
+		& & & & & \ddots \\
+		& & & & & & 1
+	\end{pmatrix}
+\end{align*}
+Wobei $c_1$ an Position $jj$ ist und $c_2$ an Position $ii$
+\begin{align*}
+	c &= \cos(\varphi) = \frac{\sigma\cdot a_{jj}}{\sqrt{a^2_{jj}+a^2_{ij}}} \\
+	s &= \sin(\varphi)=\frac{-\sigma\cdot a_{ij}}{\sqrt{a^2_{jj}+a^2_{ij}}} \\
+	\sigma &= \text{sign}(a_{jj})
+\end{align*}
+Ergebnis:
+\begin{align*}
+	R &= J_{m,n^*}\dots J_{2,1}A \\
+	Q &= J_{2,1}^T\dots J_{m,n^*}^T \\
+	n^* &= \min\{m-1, n\}
+\end{align*}
+\subsection{Cholesky-Zerlegung}
+Wenn $A$ symmetrisch und positiv definit ist kann man A faktorisieren in 
+$$
+	A=LDL^T
+$$
+Wobei $L$ das $L$ der LR-Zerlegung ist und $D$ der Diagonalanteil von $R$
+
+
+
+
+
+
+
+
+
+
+

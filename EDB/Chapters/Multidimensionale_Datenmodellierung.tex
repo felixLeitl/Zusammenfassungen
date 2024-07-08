@@ -1,1 +1,212 @@
 \section{Multidimensionale Datenmodellierung}
+\subsection{OLTP vs. OLAP}
+\subsubsection{OLTP}
+Online Transaction Processing
+\subsubsection{OLAP}
+Online Analytical Processing
+\subsection{Relationenmodell vs. Multidimensionales Datenmodell}
+\subsubsection{Relationenmodell}
+\begin{itemize}
+	\item Einfach, wenige Modellierungskonstrukte
+	\item Anwendungsneutral
+	\item Keine \glqq{}eingebaute\grqq{} Anwendungssemantik
+\end{itemize} 
+$\Rightarrow$ Nützlich in beliebigen Domänen, manchmal etwas komplizierter in der Anwendung
+\subsubsection{Multidimensionales Datenmodell}
+\begin{itemize}
+	\item Komplexer, mehr Modellierungskonstruke
+	\item Speziell auf Anwendung zur Datenanalyse zugeschnitten
+\end{itemize}
+$\Rightarrow$ Nur nützlich für analytische Zwecke
+\subsection{Charakterisierung der Datenanalyse}
+\begin{itemize}
+	\item Qualifizierende und Quantifizierende Daten
+		\begin{itemize}
+			\item Spezielle funktionale Abhängigkeiten $\Rightarrow$ spezifische Repräsentation
+		\end{itemize}
+	\item Klassifikationshierachien
+		\begin{itemize}
+			\item Aggregierende Anfragen nutzen Hierarchien zu ihrem Vorteil
+		\end{itemize}
+	\item Stabile Daten
+		\begin{itemize}
+			\item Daten werden (fast) nie geändert
+			\item Nur neue Daten hinzugefügt
+		\end{itemize}
+	\item Zugriff auf materialisierte Sichten
+		\begin{itemize}
+			\item Voraggregierte Daten
+		\end{itemize}
+\end{itemize}
+\subsection{Mikro-, Makro- und Meta-Daten}
+\begin{itemize}
+	\item Mikro-Daten
+		\begin{itemize}
+			\item Einzelne Observationen, beschreiben Elementarereignisse
+			\item Ergebnis der Ladephase $\rightarrow$ Basisdaten
+		\end{itemize}
+	\item Makro-Daten
+		\begin{itemize}
+			\item Aggregierte Daten für die Datenanalyse
+			\item Ergebnis der Auswertungsphase $\rightarrow$ Data Warehouse, Data Mart
+		\end{itemize}
+	\item Meta-Daten
+		\begin{itemize}
+			\item Beschreibungsdaten
+			\item Beschreiben die Eigenschaften von Mikro-Daten und Makro-Daten
+			\item Beschreiben auch den Entstehungsprozess
+		\end{itemize}
+\end{itemize}
+\subsection{Anforderungen}
+\begin{itemize}
+	\item Datenwürfel soll flexibel durchsucht werden können
+	\item Qualifizierende Daten $\rightarrow$ Dimensionen des Würfels
+	\item Quantifizierende Daten $\rightarrow$ Fakten (Zellen des Würfels)
+	\item Dimensionen müssen unabhängig sein
+	\item Eindeutige Trennung von Fakten
+\end{itemize}
+\subsection{MD Entwurf}
+\begin{enumerate}
+  \item Benutzer-Anforderungen
+  \item Konzeptionelle Schema
+  	\begin{itemize}
+		\item semi-formal: mE/R, mUML
+	\end{itemize}
+  \item Logisches Schema
+  	\begin{itemize}
+		\item formal: Dimensionen, Cubes
+	\end{itemize}
+  \item Physisches Schema
+  	\begin{itemize}
+		\item Relationen, MD-Strukturen
+	\end{itemize}
+\end{enumerate}
+\subsection{Logisches Schema einer Dimension}
+\begin{itemize}
+	\item Partiell geordnete Menge D von Klassifikationsstufen
+	\item Partielle Ordnung erlaubt parallele Hierarchie: \glqq{}Pfade\grqq{}
+	\item Orthogonalität: Verschiedene Dimensionen sind unabhänig
+\end{itemize}
+\subsection{Instanz einer Dimension}
+\begin{itemize}
+	\item Funktionale Abhängigkeiten $\rightarrow$ Baumstruktur auf Instanzebene
+	\item Jeder Pfad im Schema einer Dimension definiert eine Klassenhierarchie
+	\item Klassenhierarchie ist ein balancierter Baum
+	\item Instanz einer Dimension ist die Menge aller Klassenhierarchien
+\end{itemize}
+\subsection{Schema eines Datenwürfels}
+\begin{itemize}
+	\item Definition: Schema eines Datenwürfels $C$
+		\begin{itemize}
+			\item Struktur: $C[G,M]$
+			\item Menge von Fakten: $M = (M_1,\dots , M_m)$
+			\item Granularität: $G = (G_1,\dots , G_n)$
+			\item Jedes $G_i$ ist ein dimensionales Attribut 
+		\end{itemize}
+	\item Bsp.:
+		\begin{itemize}
+			\item Sales und Turnover pro Article, Shop und Day
+				\begin{itemize}
+					\item $C_\text{sales}[(P.\text{Article}, S.\text{Shop}, T.\text{Day}), (\text{Sales}, \text{Turnover})]$
+				\end{itemize}
+		\end{itemize}
+	\item Fakten (Kenngrößen)
+		\begin{itemize}
+			\item können auch Eigenschaften zugesprochen werden
+			\item sind aber keine Datenstruktur an sich, eher analog zu einem Wertebereich
+		\end{itemize}
+	\item Aggregatstyp
+		\begin{itemize}
+			\item nicht-triviale Eigenschafen neben Name und Wertebereich $\rightarrow$ definiert, welche Aggregationsoperationen auf einer Kenngröße ausgeführt werden dürfen
+				\begin{enumerate}
+					  \item beliebig aggregierbar (Sales, Turnover, \dots): FLOW
+					  \item nicht temporal summierbar (Stock, Inventory, \dots): STOCK
+					  \item nicht summierbar (Preis, Steuer, i.Allg. Faktoren): VPU (Value per Unit)
+				\end{enumerate}
+			\item MIN, MAX \& AVG können immer durchgeführt werden
+		\end{itemize}
+\end{itemize}
+\subsection{Instanz eines Würfels}
+\begin{itemize}
+	\item Alle Zellen aus dem Definitionsbereich des Datenwürfels werden als existierend angenommen, egal ob ein Datensatz physisch vorhanden ist
+	\item Gegenüberstellung: Im relationalen Datenmodell herrscht eine andere Grundannahme vor ($\rightarrow$ \glqq{}closed world\grqq{}-Prinzip): Nichts wird angenommen, was nicht explizit als Datensatz vorhanden ist ($\rightarrow$ \glqq{}Intension vs. Extension\grqq{})
+\end{itemize}
+\subsection{Multidimensionale Operatoren}
+\begin{itemize}
+	\item Slice
+	\item Dice
+	\item Drill-Down: Abstieg in der Klassifikationshierarchie zu feinerem Granulat
+	\item Roll-Up: Aufstieg in der Klassifikationshierarchie hin zu gröberem Granulat
+	\item Drill-Across: Verknüpfung mehrerer Datenwürfel mit gemeinsamen Dimensionen
+	\item Drill-Through: Wechsel zu den Originaldaten
+	\item Pivotisierung: Wechsel der Darstellung in einer Pivottabelle, entspricht Drehen des Würfels
+\end{itemize}
+\subsection{Aggregation}
+\begin{itemize}
+	\item Zusammenfassen mehrerer Zellen
+	\item Notwendig beim Roll-Up
+	\item Bsp.: vom Tag zum Monat, vom Produkt zur Kategorie
+	\item Standart
+		\begin{itemize}
+			\item SUM
+			\item AVG
+			\item MIN
+			\item MAX
+			\item COUNT
+		\end{itemize}
+	\item Ordnungsbasiert
+		\begin{itemize}
+			\item cumulating
+			\item ranking
+		\end{itemize}
+\end{itemize}
+\subsection{MD Schemaentwurf (Kimball)}
+\begin{enumerate}
+  \item Auswahl eines Geschäftsprozesses \rightarrow Subjektorientierung
+  \item Auswahl der Erfassungsgranularität
+  \item Auswahl der Dimensionen
+  \item Auswahl der Kennziffern 
+\end{enumerate}
+\subsection{ROLAP}
+\begin{itemize}
+	\item Idee für die Speicherung multidimensionaler Daten
+		\begin{itemize}
+			\item Tabelle mit zusammengesetztem Primärschlüssel aus den Dimensionen
+			\item (Nur) für jede vorhandene Datenzelle wird ein Tupel abgespeichert
+		\end{itemize}
+	\item Trennung von Struktur und Inhalt führt zur Aufteilung in
+		\begin{itemize}
+			\item zentrale \glqq{}Fact Table\grqq{} und
+			\item Dimensionstabellen
+		\end{itemize}
+\end{itemize}
+\subsubsection{Star Schema}
+\begin{itemize}
+	\item Eine Tabelle für jede Dimension
+\end{itemize}
+\subsubsection{Snowflake Schema}
+\begin{itemize}
+	\item Normalisierung der Dimensionstabellen
+	\item Viele Tabellen je Dimension
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

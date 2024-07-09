@@ -1,1 +1,44 @@
 \section{Transaktionen}
+\subsection{Erwünschte Zustände auf einer Platte}
+\subsubsection{Physische Konsistenz}
+\begin{itemize}
+	\item Korrektheit der Speicherungskonstrukte
+	\item Alle Verweise und Adressen (TIDs) stimmen
+	\item Alle Indexe sind vollständig und stimmen mit Primärdaten überein
+\end{itemize}
+\subsubsection{Logische Konsistenz}
+\begin{itemize}
+	\item Korrektheit der Dateninhalte
+	\item Alle im Datenbankschema formulierten Integritätsbedingungen sind erfüllt
+\end{itemize}
+\subsubsection{Annahmen}
+\begin{itemize}
+	\item Alle vollständig ausgeführten DB-Operationen hinterlassen einen physisch konsistenten Zustand
+	\item Alle vollständig ausgeführten Anwendungsprogramme hinterlassen einen logisch konsistenten Zustand 
+\end{itemize}
+\subsubsection{Nach einem Fehler}
+\begin{itemize}
+	\item Die Daten sind i.Allg. weder physisch noch logisch konsistent 
+\end{itemize}
+\subsubsection{Systemunterstützung}
+\begin{itemize}
+	\item zur Wiederherstellung eines logischen und physischen konsistenten Zustands der Daten nach einem Fehlerfall
+\end{itemize}
+\subsubsection{Der herzustellende konsistente Zustand kann sein}
+\begin{itemize}
+	\item Vor Beginn der Änderungen eines unvollständig ausgeführten Programms
+		\begin{itemize}
+			\item Rückgängigmachen der bereits ausgeführten Änderungen
+		\end{itemize}
+	\item Nach Abschluss aller Änderungen eines Programms
+		\begin{itemize}
+			\item Komplettieren der unvollständigen Änderungen bzw. Wiederholen verlorengegangener Änderungen 
+		\end{itemize}
+\end{itemize}
+\subsubsection{Voraussetzungen}
+\begin{itemize}
+	\item Geeignete Sicherungs- und Protokollierungsmaßnahmen im laufenden Betrieb (Log)
+	\item Protokolldatei
+\end{itemize}
+
+

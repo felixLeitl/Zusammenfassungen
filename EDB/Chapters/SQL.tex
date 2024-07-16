@@ -1,6 +1,5 @@
 \section{SQL}
 \subsection{Grundstruktur}
-%TODO: Finish Grundstruktur
 \begin{minted}{sql}
 SELECT Personalnummer, Name
 FROM Mitarbeiter
@@ -149,6 +148,117 @@ HAVING MAX(Gehalt) > 100000 OR MIN(Gehalt) < 20000;
 	\item SELECT
 	\item ORDER BY
 \end{enumerate}
+\subsection{NULL}
+\begin{minted}{sql}
+SELECT Name
+FROM Mitarbeiter
+WHERE Gehalt ISNULL
+\end{minted}
+\subsection{CASE}
+\begin{minted}{sql}
+SELECT PerNr, Name, 
+CASE 
+		WHEN Gehalt > 100000 THEN 'Grossverdiener'
+		WHEN Quantity > 30000 THEN 'Normalo'
+		WHEN Gehalt ISNULL THEN 'unbekannt'
+		ELSE 'ARM'
+END AS Gehaltsklasse
+FROM Angestellte;
+\end{minted}
+\subsection{WITH}
+\begin{minted}{sql}
+WITH D AS (SELECT AVG(x.Gehalt) AS Durchschnitt FROM Angestellte x)
+SELECT m.Nachname, m.Nachname
+FROM Angestellte
+WHERE Gehalt > (SELECT Durchschnitt FROM D);
+\end{minted}
+\subsection{Änderungen in SQL}
+\subsubsection{Einfügen}
+\begin{minted}{sql}
+INSERT INTO Angestellte (PersNr, Nachname, AbtNr)
+VALUES (1467, 'Seiler', 505);
+
+CREATE TABLE Spitzenverdiener (
+	PersNr		INTEGER not null,
+	Nachname	VARCHAR(30),
+	Gehalt		INTEGER
+);
+INSERT INTO Spitzenverdiener
+(	SELECT PersNr, Nachname, Gehalt
+	FROM Angestellte
+	WHERE Gehalt > 100000 );
+\end{minted}
+\subsubsection{Löschen}
+\begin{minted}{sql}
+DELETE FROM Angestellte
+WHERE PerNr = 704;
+
+DELETE FROM Angestellte
+WHERE AbtNr IN (
+	SELECT AbtNr
+	FROM Abteilungen
+	WHERE Ort = 'Trotzdorf'
+);
+\end{minted}
+\subsubsection{Update}
+\begin{minted}{sql}
+UPDATE Angestellte SET AbtNr = 501
+WHERE AbtNr >= 502 AND AbtNr <= 505 AND Gehalt > 60000;
+
+UPDATE Angestellte SET Gehalt = Gehalt * 1.1
+WHERE AbtNr IN (
+	SELECT AbtNr
+	FROM Abteilungen
+	WHERE Ort = 'Nürnberg'
+)
+\end{minted}
+\subsection{Integritätsbedingungen}
+\begin{minted}{sql}
+CREATE TABLE Angestellte (
+	PersNr		INT,
+	Vorname 	VARCHAR(20),
+	Name		VARCHAR(30),
+	AbtNr		INT NOT NULL DEFAULT 1,
+	VorgesNr	INT,
+	CONSTRAINT	MitarbeiterPK
+		PRIMARY KEY (PerNr),
+	CONSTRAINT VorgesetzterFK
+		FOREIGN KEY (VorgesNr) REFERENCES Angestellte (PersNr)
+			ON DELETE SET NULL
+			ON UPDATE CASCADE,
+	CONSTRAINT AbteilungFK
+		FOREIGN KEY (AbtNr) REFERENCES Abteilungen (AbtNr)
+			ON DELETE SET DEFAULT
+			ON UPDATE CASCADE,
+);
+\end{minted}
+\subsection{VIEW}
+\begin{minted}{sql}
+CREATE VIEW Arme-Angestellte (PerNr, Nachname, Lohn) AS
+	SELECT PersNr, Nachname, Gehalt AS Lohn
+	FROM Angestellte
+	WHERER Gehalt < 400000;
+	
+SELECT AVG(Lohn)
+FROM Arme-Angestellte;
+\end{minted}
+\subsection{Zugangskontrolle}
+\begin{minted}{sql}
+GRANT SELECT (PersNr, Nachname, Gehalt), UPDATE (Gehalt)
+ON Angestellte TO Schmidt;
+
+REVOKE UPDATE (Gehalt)
+ON Angestellte FROM Schmidt
+\end{minted}
+\subsection{Alter Table}
+\begin{minted}{sql}
+ALTER TABLE flaeche
+ADD COLUMN anteilSportFreizeit REAL CHECK (anteilSportFreizeit >= 0 AND anteilSportFreizeit <= 100);
+
+ALTER TABLE flaeche
+ADD COLUMN anteilWald REAL CHECK (anteilWald >= 0 AND anteilWald <= 100);
+\end{minted}
+
 
 
 

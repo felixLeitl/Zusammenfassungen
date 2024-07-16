@@ -1,1 +1,83 @@
 \section{SQL}
+\subsection{Grundstruktur}
+\begin{minted}{sql}
+SELECT Personalnummer, Name
+FROM Mitarbeiter
+WHERE Name = 'Müller';
+\end{minted}
+\subsection{Neue Spalten}
+\begin{minted}{sql}
+SELECT MNR, Gehalt * 1.1 AS Gehaltsprognose
+FROM Angestellte;
+
+SELECT MNR, Gehalt + Werbeeinnahmen AS Einkünfte
+FROM Angestellte;
+
+(	SELECT Name, Vorname, Gehalt
+	FROM Angestellte)
+UNION
+(	SELECT Name, Vorname, NULL AS Gehalt
+	FROM Kunde);
+\end{minted}
+\subsection{Duplikate}
+\begin{minted}{sql}
+SELECT DISTINCT Wohnort
+FROM Angestellte;
+\end{minted}
+\subsection{IN}
+\begin{minted}{sql}
+SELECT * 
+FROM Angestellte
+WHERE AbtNr IN (6, 4, 2);
+
+SELECT Nachname
+FROM Angestellte
+WHERE AbtNr IN
+	(	
+		SELECT AbtNr
+		FROM Abteilungen
+		WEHRE Ort = 'Erlangen'
+	);
+\end{minted}
+\subsection{EXISTS}
+\begin{minted}{sql}
+SELECT * 
+FROM Angestellte
+WHERE EXISTS (SELECT * FROM Abteilungen WHERE Ort = 'Erlangen'); 
+\end{minted}
+Inner Anfrage muss Bezug zur äußeren Anfrage haben
+\subsection{Mengenvergleiche und Quantoren}
+\begin{minted}{sql}
+SELECT * 
+FROM Angestellte
+WHERE Wohnort = ANY (SELECT Ort FROM Abteilungen);
+
+SELECT * 
+FROM Angestellte
+WHERE Gehalt >= ALL (SELECT Gehalt FROM Angestellte);
+\end{minted}
+\subsection{Join}
+\subsubsection{FROM-Klausel}
+\begin{minted}{sql}
+SELECT PersNr, Wohnort, Bezeichnung
+FROM Angestellte, Abteilung
+WHERE Angestellte.AbtNr = Abteilung.AbtNr 
+	AND Gehalt > 30000
+	AND Ort = 'Nürnberg';
+\end{minted}
+\subsubsection{Auto-Join und Alias-Namen}
+\begin{minted}{sql}
+SELECT m.Nachname AS Mitarbeiter, v. Nachname AS Chef
+FROM Angestellte [AS] m, Angestellte [AS] v
+WHERE m.VorgesNr = v.PersNr
+AND m.Gehalt > v.gehalt;
+\end{minted}
+% TODO: Weitere Joins
+
+
+
+
+
+
+
+

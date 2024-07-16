@@ -1,9 +1,13 @@
 \section{SQL}
 \subsection{Grundstruktur}
+%TODO: Finish Grundstruktur
 \begin{minted}{sql}
 SELECT Personalnummer, Name
 FROM Mitarbeiter
-WHERE Name = 'Müller';
+WHERE Name = 'Müller'
+GROUP BY
+HAVING
+ORDER BY Geburtsdatum DESC;
 \end{minted}
 \subsection{Neue Spalten}
 \begin{minted}{sql}
@@ -72,7 +76,81 @@ FROM Angestellte [AS] m, Angestellte [AS] v
 WHERE m.VorgesNr = v.PersNr
 AND m.Gehalt > v.gehalt;
 \end{minted}
-% TODO: Weitere Joins
+\subsubsection{Cross Join}
+\begin{minted}{sql}
+SELECT * FROM Angestellte, Abteilung;
+SELECT * FROM Angestellte CROSS JOIN ABteilung
+\end{minted}
+\subsubsection{\Theta-Join}
+\begin{minted}{sql}
+	SELECT * FROM Angestellte, Abteilungen
+	WHERE Angestellte.AbtNr = Abteilungen.AbtNr;
+	SELECT * FROM Angestellte JOIN Abteilungen ON Angestellte.AbtNr = Abteilung.AbtNr;
+\end{minted}
+\subsubsection{Gleichverbund}
+\begin{minted}{sql}
+SELECT * FROM Angestellte JOIN Abteilung USING (AbtNr);
+\end{minted}
+\subsubsection{Natürlicher Verbund}
+\begin{minted}{sql}
+SELECT * FROM Angestellte NATURAL JOIN Abteilungen;
+\end{minted}
+\subsubsection{Äußerer Verbund}
+\begin{minted}{sql}
+SELECT * FROM Linke NATURAL LEFT OUTER JOIN Rechte;
+SELECT * FROM Linke LEFT JOIN Rechte USING (B);
+
+SELECT * FROM Linke RIGHT JOIN Rechte;
+
+SELECT * FROM Linke NATURAL FULL OUTER JOIN Rechte;
+\end{minted}
+\subsection{Sortierung}
+\begin{minted}{sql}
+SELECT *  FROM Angestellte
+WHERE AbtNr = 5
+ORDER BY Gehalt ASC, Nachname DESC;
+\end{minted}
+\subsection{Mengenoperationen}
+\subsubsection{AVG}
+\begin{minted}{sql}
+SELECT AVG(Gehalt) FROM Angestellte WHERE ABtNr = 505;
+\end{minted}
+\subsubsection{COUNT}
+\begin{minted}{sql}
+SELECT COUNT(DISTINCT Nachname) FROM Angestellte;
+SELECT COUNT(*) FROM Angestellte;
+\end{minted}
+\subsubsection{SUM}
+\begin{minted}{sql}
+SELECT SUM(Gehalt) FROM Angestellte;
+\end{minted}
+\subsection{GROUP BY}
+%TODO: Understand this
+Nötig, wenn man Aggregationen auf Teilmengen durchführt
+\begin{minted}{sql}
+SELECT AbtNr, AVG(Gehalt)
+FROM Angestellte
+GROUP BY AbtNr
+\end{minted}
+\subsection{HAVING}
+Einschränkungen nach der Gruppenbildung
+\begin{minted}{sql}
+SELECT AbtNr, SUM(Gehalt)
+FROM Angestellte
+GROUP BY AbtNr
+HAVING MAX(Gehalt) > 100000 OR MIN(Gehalt) < 20000;
+\end{minted}
+\subsection{Abarbeitung}
+\begin{enumerate}
+	\item FROM
+	\item WHERE
+	\item GROUP BY
+	\item HAVING
+	\item SELECT
+	\item ORDER BY
+\end{enumerate}
+
+
 
 
 

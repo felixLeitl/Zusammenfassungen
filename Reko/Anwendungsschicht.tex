@@ -341,9 +341,40 @@
 						 \item Incentive Mechanismus (Tit-for-Tat): A misst Antwortrate der Peers und antwortet an diese in entsprechendem Anteil der Upload-Rate
 						 \item neue Nachbarn werden zufällig dazu genommen
 					\end{itemize}
-
 			\end{itemize}
-
+		\subsubsection{Bitcoin}
+			\begin{itemize}
+				\item \textbf{Allgemein}
+					\begin{itemize}
+						\item Transaktionen an öffentliche Bitcoin-Adressen, digital signiert mit privatem Schlüssel, Versendung in unstrukturiertem P2P-Netzwerk
+						\item Miner sammeln Transaktionen in Blöcken und führen Proof-of-Work durch
+						\item Incentive bei erfolgreichem Schürfen eines Blocks
+						\item Blockchain ist verteilte Datenbank, auch distributed Ledger genannt, mit allen Transaktionen seit Beginn und erlaubt die Vermeidung von Double-Spending 
+					\end{itemize}
+				\item \textbf{Adressen}
+					\begin{itemize}
+						\item abgeleitet aus privaten und öffentlichen Schlüsseln, basierend auf elliptischen Kurven
+						\item Private Key: (256 Bits, hexa)
+						\item Public Key: (256 Bits, hexa), aus Private Key berechnet
+						\item Adresse: SHA-256 2x auf Public Key anwenden und mit Base58 (Alphabeth) kodieren
+						\item Wallet: Verwaltet die Schlüssel, welche aus einem Seed abgeleitet wurden
+					\end{itemize}
+				\item \textbf{Transaktionen}	
+					\begin{itemize}
+						\item Unspent Transaction Outputs (UTXO) werden zu andern Adressen transferiert
+						\item Input: UTXO + Unlocking-Script (privater Schlüssel, der Adresse)
+						\item Output: Transfer zu neuer Bitcoin-Adresse + Locking-Script (z.B. Adresse)
+						\item Fluten: An Peers versenden, diese verifizieren Transaktionen, überprüfen auf Double-Spending in Blockchain und senden weiter
+					\end{itemize}
+				\item \textbf{Blockchain}
+					\begin{itemize}
+						\item Miner erstellt Blöcke mit Transaktionen (1 MB)
+						\item Block-Header (80 Bytes)
+						\item Proof-of-Work: Berechnung von Hash (SHA-256) kleiner als Difficulty (führende Zahl von Nullen) Lösung durch ausprobieren
+						\item Wenn Block gefunden: Fluten, Peers verifizieren den Block und berechnen bei Akzeptanz nächsten Block, dadurch wächst die Blockchain im Mittel alle 10 min
+						\item ergibt ca. 7 Transaktionen pro Sekunde
+					\end{itemize}
+			\end{itemize}
 
 				
 

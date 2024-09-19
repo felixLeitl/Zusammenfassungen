@@ -127,6 +127,36 @@ Hinreichende Bedingungen: (m Werte, W Fenstergröße)
 	\includegraphics[scale=0.15]{images/TCP_Fehlerkontrolle_Empfaenger.png}	
 \end{center}
 \end{multicols}
+\subsubsection{Verbindungsaufbau}
+3-Wege-Handshake:
+\begin{enumerate}
+	\item SYN-Segment: Client sendet Segment mit SYN-Flag=1, zufälliger initialer Client-SQN (client\_isn), ohne Daten
+	\item Server sendet Segment mit SYN-Flag=Ack-Fag=1, zufälliger initialer Srever-SQN (server\_isn), ACK=client\_isn+1, ohne Daten; er legt Puffer und Variablen an
+	\item ACK-Segment: Client sendet Segment mit ACK-Flag=1; SQN=client\_isn+1, ACK=server\_isn+1 und ggf. Daten; er elgt Puffer uns Variablen an 
+\end{enumerate}
+Segmente mit SYN-Flag=1 oder FIN-Flag=1 dürfen keine Daten enthalten
+\subsubsection{Verbindungsabbau}
+\begin{itemize}
+	\item jede Seite kann Verbindungsabbau durch Segment mit FIN-Flag=1 veranlassen
+	\item die andere Seite bestätigt mit ACK-Flag=1
+	\item beide Seiten müssen ihre Hälfte der Verbindung schließen
+	\item hat eine Seite geschlossen, sendet sie keine Daten mehr, nimmt aber noch welche an
+	\item Time Wait: die Seite, die den Verbindungsabbruch veranlasst, wartet zum Schluss noch 2 Segmentlebensdauern, um alte Segmente zu empfangen 
+\end{itemize}
+\subsubsection{Flusskontrolle}
+\begin{center}
+	\includegraphics[scale=0.25]{images/TCP_Flusskontrolle.png}
+\end{center}
+\subsubsection{Überlastkontrolle}
+Slow Start:
+\begin{enumerate}
+	\item CongestionWindow = MSS setzten und bis 3 doppelte ACKs zurückkommen verdoppeln
+	\item CongestionWindow wird anschließend halbiert und wächst linear, bis 3 doppelte ACKs zurückkommen (AIMD [Additive Increase, Multiplicative Decrease])
+	\item wiederhole AIMD
+	\item konservative Reaktion nach Timeout: dann wird Slow Start bis zur hälfte des aktuellen CongestionWindows und danach AIMD durchgeführt
+\end{enumerate}
+
+
 
 
 

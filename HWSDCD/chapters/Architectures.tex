@@ -1,8 +1,9 @@
 \section{Architectures}
+See \cref{fig:Imp_Sty}
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.7\textwidth]{images/Implementaion_styles.png}
+		\includegraphics[width=0.5\textwidth]{images/Implementaion_styles.png}
 		\caption{Implementation Styles}
 		\label{fig:Imp_Sty}
 	\end{center}
@@ -133,7 +134,7 @@
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width=0.7\textwidth]{images/MAC.png}
+	\includegraphics[width=0.5\textwidth]{images/MAC.png}
 	\caption{Multiply \& accumulate}
 	\label{fig:MAC}
 \end{center}
@@ -210,19 +211,82 @@
 		\item smaller code images
 		\item lower power consumption 
 	\end{itemize}
-
-
 \end{itemize}
 
+\subsection{Integrated Circuit}
+\subsubsection{Phases of IC Design}
+\begin{enumerate}
+	\item Design
+	\begin{enumerate}
+		\item Modeling
+		\item Synthesis \& Optimization
+		\item Verification
+	\end{enumerate}
+	\item Fabrication
+	\begin{enumerate}
+		\item Masks
+		\item Wafer
+	\end{enumerate}
+	\item Testing
+	\item Packaging
+	\begin{enumerate}
+		\item Slicing
+		\item Packaging
+	\end{enumerate}	
+\end{enumerate}
 
+\subsubsection{Design Styles for ICs}
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{images/IC_Design_Styles.png}
+		\caption{Design Styles for ICs}
+		\label{fig:IC_Sty}
+	\end{center}
+\end{figure}
 
+\subsubsection{Comparison of Design Styles}
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{images/Comp_Des_Sty.png}
+		\caption{Comparison of Design Styles}
+		\label{fig:Comp_Des_Sty}
+	\end{center}
+\end{figure}
 
+\subsection{FPGA (field programmable gate arrays)}
+\begin{itemize}
+	\item Logic blocks
+	\item I/O-blocks
+	\item Interconnect
+\end{itemize}
 
+\subsubsection{FPGA Design Steps}
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{images/FPGA_Design.png}
+		\caption{FPGA design steps}
+		\label{fig:FPGA_Des}
+	\end{center}
+\end{figure}
 
-
-
-
-
+\subsubsection{FPGA - Application Areas}
+\begin{itemize}
+	\item Glue Logic
+	\item Rapid Prototyping, Emulation
+	\item Embedded Systems
+	\begin{itemize}
+		\item when when processors are too slow or too power-inefficient and
+		\begin{itemize}
+			\item flexibility is a must
+			\item the sale volumes are too low to afford ASIC
+		\end{itemize}
+	\end{itemize}
+	\item Custom Computing
+		\begin{itemize}
+			\item Goal: Combine flexibility of processors with efficient advantages of ASICs
+			\item e.g. Outsourcing a complex task from SW to HW 
+		\end{itemize}
+\end{itemize}
 
 
 

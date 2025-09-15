@@ -255,8 +255,144 @@ Goal: efficient instruction execution sequences, as short as possible, using few
 	\end{center}
 \end{figure}
 
+\subsubsection{Register allocation}
+\begin{itemize}
+	\item global register allocation
+\begin{itemize}
+	\item reserve a certain number of registers
+\begin{itemize}
+	\item for global variables
+	\item for loop variables
+	\item for variables in basic blocks
+\end{itemize}
+	\item user-defined register allocation
+\begin{itemize}
+	\item E.g. in programming language C: 
+	\begin{verbatim}register int i;\end{verbatim}
+\end{itemize}
+\end{itemize}
+	\item Usage counters
+	\item Register assignment through graph coloring
+\end{itemize}
+
+\subsubsection{Usage Counters}
+\begin{itemize}
+	\item Let a loop \verb|L| be composed of multiple basic blocks
+	\item In case a variable \verb|a| is kept in a register during execution of Loop \verb|L|, we obtain cost savings
+\begin{itemize}
+	\item 1 cost unit for each reference to \verb|a|
+\begin{itemize}
+	\item \verb|ADD R0, R1| (cost 1) instead of \verb|ADD a, R1| (cost 2)
+\end{itemize}
+	\item 2 cost units for each basic block, if \verb|a| is defined in the basic block and active still thereafter
+\begin{itemize}
+	\item no store necessary (\verb|MOV R0, a|)
+\end{itemize}
+\end{itemize}
+	\item Cost savings for the whole loop
+$$
+	\sum_{B\in L} (\text{verwendet}(a, B)+2\cdot \text{aktiv}(a, B))
+$$
+\begin{itemize}
+	\item verwendet($a, B$) denotes the number of uses of $a$ in basic block $B$ before potentially being defined therein 
+	\item aktiv($a, B$) equals $1$, if $a$ has been defined in $B$ and is active at the end of $B$; else $0$
+\end{itemize}
+	\item Approximation of cost savings for assumption that
+\begin{itemize}
+	\item all basic blocks are executed equally often
+	\item loop will be executed often
+\end{itemize}
+\end{itemize}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{images/Usage_counter.png}
+		\caption{
+			Usage Counter - Example \\
+			Variables in brackets are given. Start from bottom. Variables below basic block remain active. Basic block depends on variables above.  
+		}
+	\end{center}
+\end{figure}
+
+\subsubsection{Register Binding using Graph Coloring}
+\begin{itemize}
+	\item Flow
+\begin{enumerate}
+  \item Apply code generation assuming unbounded number of available registers, i.e. each variable is assigned to a unique symbolic register
+  \item Determine the life time of each variable 
+  \item Construct a conflict graph
+  \item Mapping of symbolic registers onto physical registers through graph coloring 
+\end{enumerate}
+\item Nodes represent the symbolic registers and edges represent conflict between variables 
+\item Heuristics: Is a graph $G$ colorable with $I$ colors?
+\begin{enumerate}
+  \item Determine a node $v_i \in G$ of degree Grad($v_i$)$<I$
+  \item Eliminate $v_i$ and all incident edges to obtain a graph $G'$
+  \item If $G'=\emptyset$:
+\begin{itemize}
+	\item $I$-coloring possible
+\end{itemize}
+  If all nodes in $G'$ have degree $\geq I$:
+  \begin{itemize}
+	\item $I$-coloring not possible
+\end{itemize}
+  $G=G'$ and goto 1
+\end{enumerate}
+
+\end{itemize}
+
+\begin{figure}[ht]
+	\begin{center}
+		\begin{subfigure}[b]{0.35\textwidth}
+			\includegraphics[width=\textwidth]{images/Register_conflict_graph_1.png}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.55\textwidth}
+			\includegraphics[width=\textwidth]{images/Register_conflict_graph_2.png}			
+		\end{subfigure}
+		\caption{Register conflict graph - Example}
+		\label{fig:register_conflict_graph}
+	\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+	\begin{center}
+		\begin{subfigure}[b]{0.5\textwidth}
+			\includegraphics[width=\textwidth]{images/Register_conflict_graph_3.png}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.4\textwidth}
+			\includegraphics[width=\textwidth]{images/Register_conflict_graph_4.png}	
+		\end{subfigure}
+		\caption{Graph coloring - Example}
+		\label{fig:graph_coloring}
+	\end{center}
+\end{figure}
+
+\subsection{Code Generation for DAGs}
+\begin{itemize}
+	\item The order of evaluation of the nodes pf a DAG may have a great influence on the number of required instructions
+	\item Heuristic for determination of a feasible evaluation order:
+\end{itemize}
+\begin{verbatim}
+	while there exists any non-ranked inner node do
+	    choose a node n whose parents have been ranked and rank it
+	    while the furthest left child m of n has no unranked parents and is no leaf do
+	        rank node m
+	        n <- m
+	    end while
+	 end while   
+\end{verbatim}  
+
 
 
  
+
+
+
+
+
+
+
 
 

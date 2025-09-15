@@ -384,6 +384,171 @@ $$
 	 end while   
 \end{verbatim}  
 
+\begin{itemize}
+	\item For a DAG with $n$ nodes that is a tree there is an algorithm that determines optimal code in time $\BigO(n)$
+	\item common subexpressions
+\begin{itemize}
+	\item If the DAG is not a tree $\rightarrow$ split the DAG at nodes that represent common subexpressions and generate optimal code for each part
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Dynamic Programming}
+\begin{itemize}
+	\item Machine model extended to more complex instructions
+\begin{itemize}
+	\item $n$ Register \verb|R0...Rn-1|
+	\item Instructions \verb|Ri:=E| \\
+			E is an arbitrary expression including registers and memory locations as operants
+	\item  In case E contains multiple registers, then Ri must be one of them
+	\item Load: \verb|Ri:=M|, Store: \verb|M:=Ri|, Move/Copy: \verb|Ri:=Rj|
+\end{itemize}
+	\item Examples
+\begin{itemize}
+	\item \verb|ADD R0, R1| $\rightarrow$ \verb|R1:=R1+R0|
+	\item \verb|ADD *R0, R1| $\rightarrow$ \verb|R1:=R1 + ind R0|
+	\item \verb|SUB a, R0| $\rightarrow$ \verb|R0:=R0-a|
+\end{itemize}
+	\item Optimal code for \verb|E=(T1 op T2)|:
+\begin{enumerate}
+	\item Optimal code for \verb|T1|, \verb|T2|
+	\item Either \verb|T1, T2, op| or \verb|T2, T1, op|
+\end{enumerate}
+	\item Method runs in 3 phases
+\begin{enumerate}
+    \item Computation of cost vectors
+    \item Determination of execution orders
+    \item Generation of target code
+\end{enumerate}
+	\item Determination of cost vectors for each node $n$ (bottom up)
+\begin{itemize}
+	\item $C[i]$ optimal cost for computing $n$ with $i$ available registers
+	\item $C[0]$ optimal cost for computing $n$ when result is stored in memory
+\end{itemize}
+\end{itemize}
+
+\subsection{Code Optimization}
+\begin{itemize}
+	\item Transformations possible on either intermediate code or on target code
+	\item Peephole Optimization
+\begin{itemize}
+	\item small window is moved over code
+	\item multiple runs, as one optimization may trigger anotherone
+\end{itemize}
+	\item Local Optimization
+\begin{itemize}
+	\item Transformation on basic blocks 
+\end{itemize}
+	\item Global Optimization
+\begin{itemize}
+	\item Transformations affecting multiple basic blocks
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Peephole Optimization}
+\begin{itemize}
+	\item Elimination of redundant assignments
+\begin{verbatim}
+(1) MOV R0, a
+(2) MOV a, R0
+\end{verbatim}
+\begin{center}$\downarrow$\end{center}
+\begin{verbatim}
+(1) MOV R0, a
+\end{verbatim}
+	\item Algebraic simplification \\
+\verb|x := y + 0 * a;| $\rightarrow$ \verb|x := y;|
+	\item Control flow optimization
+\begin{verbatim}
+	(1)     goto L1
+	(2) L2  goto L2
+\end{verbatim}
+\begin{center}$\downarrow$\end{center}
+\begin{verbatim}
+	(1)     goto L2
+	(2) L1  goto L2 
+\end{verbatim}
+	\item Operator (strength) reduction \\
+\verb|x := y*8;| $\rightarrow$ \verb|x := y << 3;| \\
+\verb|x := y**2;| $\rightarrow$ \verb|x := y*y;|
+	\item Common subexpression elimination
+\begin{verbatim}
+	(1) a := b + c
+	(2) b := a - d
+	(3) c := b + c
+	(4) d := a - d
+\end{verbatim} 
+\begin{center}$\downarrow$\end{center}
+\begin{verbatim}
+	(1) a := b + c
+	(2) b := a - d
+	(3) c := a
+	(4) d := b
+\end{verbatim}
+	\item Variable renaming \\
+\verb|t := b + c| $\rightarrow$ \verb|u := b + c|
+	\item Instruction interchange
+\begin{verbatim}
+	t1 := b + c
+	t2 := x + y
+\end{verbatim}
+\begin{center}$\downarrow$\end{center}
+\begin{verbatim}
+	t2 := x + y
+	t1 := b + c
+\end{verbatim}
+\end{itemize}
+
+\subsubsection{Global Optimization}
+\begin{itemize}
+	\item Passive code elimination
+\begin{itemize}
+	\item An assignment that defines x can be eliminated, if x is not used thereafter
+\end{itemize}
+	\item Copy propagation
+\begin{verbatim}
+	(1) x := t1
+	(2) a[t2] := t3
+	(3) a[t4] := x
+	(4) goto L
+\end{verbatim}
+\begin{center}$\downarrow$\end{center}
+\begin{verbatim}
+	(1) x := t1
+	(2) a[t2] := t3
+	(3) a[t4] := t1
+	(4) goto L
+\end{verbatim}
+	\item Code motion
+\begin{verbatim}
+	while (i <= limit*4+2) {...}
+\end{verbatim}
+\begin{center}$\downarrow$\end{center}
+\begin{verbatim}
+	t = limit*4+2;
+	while (i <= t)
+\end{verbatim}
+	\item Induced variables and operators
+\begin{verbatim}
+	     j := n
+	(1)  j := j - 1
+	(2) t4 := 4 * j
+	(3) t5 := a[t4]
+	(4) if t5 > v goto (1)
+\end{verbatim}
+\begin{center}$\downarrow$\end{center}
+\begin{verbatim}
+	     j := n
+	    t4 := 4 * j
+	(1)  j := j - 1
+	(2) t4 := t4 - 4
+	(3) t5 := a[t4]
+	(4) if t5 > v goto (1)	
+\end{verbatim}
+\end{itemize}
+
+
+
+
 
 
  

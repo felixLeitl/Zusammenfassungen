@@ -546,8 +546,99 @@ $$
 \end{verbatim}
 \end{itemize}
 
+\subsection{Code generation for special-purpose processors}
+\begin{itemize}
+	\item Software design for embedded systems
+\begin{itemize}
+	\item transition from assembly to High-Level Language programming
+\end{itemize}
+	\item Major requirements on code generation
+\begin{itemize}
+	\item correctness
+	\item speed of generation
+	\item compact code
+\end{itemize}
+	\item Further requirements on HLL and compiler
+\begin{itemize}
+	\item safety: formal verification of compiler
+	\item specification of real-time constrains
+	\item support for DSP algorithms/architectures
+	\item retargetablility: can the compiler be retargeted easily?  
+\end{itemize}
+	\item Non-homogeneous register architectures, irregular data paths
+\begin{itemize}
+	\item Tight coupling of the phases of register binding, code selection and scheduling
+\end{itemize}
+	\item Assignment of memory addresses and address registers
+\begin{itemize}
+	\item Efficient usage of address registers and specialized address generation units
+\end{itemize}
+	\item Code compression
+\begin{itemize}
+	\item Reduction of memory footprint, important in cost-sensitive applications
+\end{itemize}
+\end{itemize}
 
+\subsubsection{Register Transfer Graph}
+\begin{itemize}
+	\item Definition: The register transfer graph of a processor is a directed graph, in which each node corresponds to a location in the data path where data may be stored. An edge between two nodes $r_i$ and $r_j$ is labeled with those instructions that read from $r_i$ and write $r_j$
+\end{itemize}
 
+\subsubsection{RTG - Criterion}
+\begin{itemize}
+	\item Definition: The RTG criterion is satisfied, if for all nodes $r_1, r_2$ and $r_3$ of the RTG for which
+\begin{enumerate}
+  \item $r_3$ has incoming register nodes $r_1$ and $r_2$ with the same labeling
+  \item There exists at least a cycle between $r_1$ and $r_2$
+\end{enumerate}
+In any cycle including $r_1$ and $r_2$ exists a memory node \\
+$\rightarrow$ Processors satisfying the RTG criterion, an optimal schedule may be generated in $\BigO(n)$ ($n$ is the number of DAG nodes)
+\end{itemize}
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{images/RTG_criterrion.png}
+		\caption{RTG for TMS320C25}
+		\label{fig:RTG}
+	\end{center}
+\end{figure}
+
+\subsection{Retargetable compiler}
+\begin{itemize}
+	\item Machine-independent compiler (automatically retargetable)
+\begin{itemize}
+	\item Compiler has built-in code generators for multiple targets
+	\item Often used in parametric architecture 
+\end{itemize}
+	\item Compiler-Compiler (user retargetable)
+\begin{itemize}
+	\item Compiler is generated from a description of target architecture
+\end{itemize}
+	\item portable Compiler (developer retargetable)
+\end{itemize}
+
+\subsubsection{Processor Models}
+\begin{itemize}
+	\item Behavioral 
+\begin{itemize}
+	\item Describes the instruction set
+	\item Relatively fast simulation possible
+	\item Inaccuracy
+\end{itemize}
+	\item Structural
+\begin{itemize}
+	\item Describes the processor at RTL
+	\item Accurate
+	\item Simulation much slower
+	\item Not always available
+\end{itemize}
+	\item Mixed models
+\end{itemize}
+
+\subsubsection{Tree-translation schemes}
+\begin{itemize}
+	\item Rules for transforming a syntax tree (resp. DAG)
+\end{itemize}
 
 
 

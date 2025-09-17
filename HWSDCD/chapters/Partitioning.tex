@@ -5,7 +5,7 @@
 	\item Problem graph
 \begin{itemize}
 	\item Nodes: functional and communication task
-	\item Edges: dependecies
+	\item Edges: dependencies
 \end{itemize}
 	\item Architecture graph
 \begin{itemize}
@@ -134,8 +134,101 @@
 	\label{fig:hierarchical_clustering}
 \end{figure}
 
+\subsubsection{Kernighan-Lin Algorithm}
+\begin{itemize}
+	\item Creation of bi-partitions 
+\begin{itemize}
+	\item Group the object into the other group that causes the greatest decrease in cost
+	\item May escape local minima
+	\item As long as abetter partition is found
+\begin{itemize}
+	\item Tentatively group of the $n$ objects the "best", then from the $n-1$ remaining again, until each object has been re-grouped at least once
+	\item From these $n$ partitions, take the one with the minimal cost and perform the respective re-grouping
+	\item robust method, in $\BigO(n^2)$
+\end{itemize}
+	\item Partitioning into $m$ blocks: $\BigO(mn^2)$
+\end{itemize}
+\end{itemize}
 
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{images/Kernighan-Lin.png}
+		\caption{Kernighan-Lin Algorithm}
+		\label{fig:Kernighan-Lin}
+	\end{center}
+\end{figure}
 
+\subsubsection{Simulated Annealing}
+\begin{itemize}
+	\item Time complexity:
+\begin{itemize}
+	\item From exponential to constant, depending on the implementation of the functions \textbf{Equilibrium}, \textbf{DecreseTemp} and \textbf{Frozen}
+	\item The longer the executions times, the better the results
+	\item Goal: polynomial execution time
+\end{itemize}
+\begin{verbatim}
+	 (1)	temp <- temp_start
+	 (2) cost <- c(P)
+	 (3) while Frozen = false do
+	 (4)     while Equilibrium = false do
+	 (5)         P' <- RandomMove(P)
+	 (6)         cost' <- c(P')
+	 (7)         deltacost <- cost' - cost
+	 (8)         if Accept(deltacost, temp) > Random(0, 1) then
+	 (9)             P <- P'
+	(10)             cost <- cost'
+	(11)         end if
+	(12)     end while
+	(13)     temp <- DecreaseTemp(temp)
+	(14) end while
+\end{verbatim}
+\end{itemize}
+
+\subsubsection{Integer Linear Programs}
+\begin{itemize}
+	\item Conditions are modeled as constraints of the ILP \\
+			Example: maximum number $h_k$ of objects in block $p_k$
+			$$
+				\sum_{i=1}^nx_i,k\leq h_k\quad1\leq k\leq m
+			$$ 
+	\item ILP is an exact method, NP-complete
+	\item may be applied successfully for problems
+\begin{itemize}
+	\item Of small size
+	\item If objective function and constrains are linear
+\end{itemize}
+\end{itemize}
+
+\subsection{Algorithms for HW/SW-Partitioning}
+\begin{itemize}
+	\item The easiest problem instance is a bi-partitioning problem $P=\{p_{SW}, p_{HW}\}$
+	\item Software-oriented approach: $P=\{O, \emptyset\}$
+\begin{itemize}
+	\item Easy, as when starting with SW specification, all functions are implementable
+	\item Performance constrains may not be satisfied $\rightarrow$ Migration of objects to HW 
+\end{itemize}
+	\item Hardware-oriented approach: $P=\{\emptyset, O\}$
+\begin{itemize}
+	\item Performance certainly satisfied if all objects are initially implemented in HW
+	\item Cost constrains may not be satisfied $\rightarrow$ Migration of objects to SW
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Greedy Algorithms}
+\begin{itemize}
+	\item Migration of objects into the other block until no further improvements observable
+\begin{verbatim}
+	(1) repeat
+	(2)     P_old <- P
+	(3)     for i <- 1 to n do
+	(4)         if f(MOVE(P, o_i)) < f(P) then
+	(5)             P < MOVE(P, o_j)
+	(6)         end if
+	(7)     end for
+	(8) until P = P_old
+\end{verbatim}
+	\item \verb|f(x)| is cost function
+\end{itemize}
 
 
 

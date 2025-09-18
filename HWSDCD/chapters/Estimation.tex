@@ -170,3 +170,85 @@ $$
 		$$
 \end{itemize}
 
+\subsection{Estimation of Software}
+\begin{itemize}
+	\item Execution time
+\begin{itemize}
+	\item Profiling: compilation and many test runs $\rightarrow$ statistical properties
+	\item Estimation on the level of source-/intermediate-/target-code
+	\item Important for applications with hard real-time constrains $\rightarrow$ Worst-Case Execution Time (WCET)
+\end{itemize}
+	\item Memory requirements
+\begin{itemize}
+	\item Program memory: compilation, estimation
+	\item Data memory (only in case of static memory allocation)
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Worst-Case Execution Time (WCET)}
+\begin{itemize}
+	\item May not be determined by profiling
+	\item Estimation using program path analysis techniques
+\end{itemize}
+
+\subsubsection{Program Path Analysis}
+\begin{itemize}
+	\item Delivers a WCET estimation that is greater or equal to WECT, but a good estimation is close to real WCET
+	\item Processor model
+\begin{itemize}
+	\item Processor without interrupts and OS
+\end{itemize}
+	\item Programming model
+\begin{itemize}
+	\item No recursive function calls
+	\item No pointer operations
+	\item Loops musst have static bounds
+\end{itemize}
+\end{itemize}
+
+\subsubsection{WECT Computation}
+Let a program consist of $N$ basic blocks, each block $B_i$ having an execution time of $c_i$ and being executed $x_i$ times during program execution. Then, a WCET estimate may be calculated as
+$$
+	\text{WECT} = \max\{\sum_{i=1}^Nc_i\cdot x_i|\text{constraints}\}
+$$
+
+\subsubsection{Functional Constrains}
+\begin{itemize}
+	\item Defined by the programmer
+\begin{itemize}
+	\item Bounds of loop counter
+	\item Knowledge of program context
+\end{itemize}
+	\item May be complex
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
